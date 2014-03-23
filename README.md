@@ -9,6 +9,7 @@ A (hopefully) sensible collection of basic X<sub>E</sub>L<sub>A</sub>T<sub>E</su
 \usepackage{cxltx-styles-cjk}           % Chinese / Japanese / Korean
 \usepackage{cxltx-styles-accentbox}     % boxed accents as per http://www.eutypon.gr/eutypon/pdf/e2000-05/e05-a04.pdf
 \usepackage{cxltx-styles-smashbox}      % boxed contents to preserve lineheights
+\usepackage{cxltx-styles-multimulti}    % multiple columns and rows on pages and in tables
 ````
 
 
