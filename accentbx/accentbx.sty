@@ -497,29 +497,29 @@
     \@tempdimd=-0.5\dp\@tempboxb
 }
 
-%
-%  Commands for:
-%    \i  = dotless-i, \I  = dotless-I
-%    \ii = dotted-i,  \II = dotted-I
-%  which are sensitive to \uppercase and \lowercase
-%
-\edef\@tempa{\the\i} \chardef\idotless=\@tempa\relax
-\def\i{\ifnum`i=`\i \idotless \else I\fi}
-\def\I{\ifnum`I=`\I I\else \idotless \fi}
-\def\ii{\ifnum`i=`\i i\else \.I\fi}
-\def\II{\ifnum`I=`\I \.I\else i\fi}
+% %
+% %  Commands for:
+% %    \i  = dotless-i, \I  = dotless-I
+% %    \ii = dotted-i,  \II = dotted-I
+% %  which are sensitive to \uppercase and \lowercase
+% %
+% \edef\@tempa{\the\i} \chardef\idotless=\@tempa\relax
+% \def\i{\ifnum`i=`\i \idotless \else I\fi}
+% \def\I{\ifnum`I=`\I I\else \idotless \fi}
+% \def\ii{\ifnum`i=`\i i\else \.I\fi}
+% \def\II{\ifnum`I=`\I \.I\else i\fi}
 
-%
-%  Commands for:
-%    \j  = dotless-j, \J  = dotless-J
-%    \jj = dotted-j,  \JJ = dotted-J
-%  which are sensitive to \uppercase and \lowercase
-%
-\edef\@tempa{\the\j} \chardef\jdotless=\@tempa\relax
-\def\j{\ifnum`j=`\j \jdotless \else J\fi}
-\def\J{\ifnum`J=`\J J\else \jdotless \fi}
-\def\jj{\ifnum`j=`\j j\else \.J\fi}
-\def\JJ{\ifnum`J=`\J \.J\else j\fi}
+% %
+% %  Commands for:
+% %    \j  = dotless-j, \J  = dotless-J
+% %    \jj = dotted-j,  \JJ = dotted-J
+% %  which are sensitive to \uppercase and \lowercase
+% %
+% \edef\@tempa{\the\j} \chardef\jdotless=\@tempa\relax
+% \def\j{\ifnum`j=`\j \jdotless \else J\fi}
+% \def\J{\ifnum`J=`\J J\else \jdotless \fi}
+% \def\jj{\ifnum`j=`\j j\else \.J\fi}
+% \def\JJ{\ifnum`J=`\J \.J\else j\fi}
 
 %
 % Commands for invisible \vrule which has the height of
