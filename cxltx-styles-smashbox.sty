@@ -1,0 +1,35 @@
+
+
+\ProvidesPackage{cxltx-styles-base}
+
+
+% ----------------------------------------------------------------------------------------------------------
+\def\boxit#1#2{%
+  % Draw a box around the content. In some situations, `\hbox`ed content that would otherwise extend to the
+  % end of the line is collapsed to minimal length.
+  %
+  % From Raymond Seroul, Silvio Levy, "A Beginner's Book of TeX", 1991, p97
+  \hbox{\vrule
+    \vtop{%
+      \vbox{\hrule\kern#1%
+        \hbox{\kern#1#2\kern#1}}%
+      \kern#1\hrule}%
+    \vrule}}
+
+\def\BOX#1{\boxit{0pt}{#1}}
+
+% ----------------------------------------------------------------------------------------------------------
+\def\smash#1{%
+  % Make a box around the content and set its height and depth to zero, thereby preventing overly high or
+  % deep material to cause gaps between the lines. As a side effect, hyphenation and line breaking are also
+  % disabled.
+  %
+  % Example:
+  %
+  %   Jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba
+  %   A \smash{\Huge{smashing}} success.
+  %   Jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba jabba
+  %
+  % From Raymond Seroul, Silvio Levy, "A Beginner's Book of TeX", 1991, p91
+  \setbox0=\hbox{#1}\ht0=0pt\dp0=0pt\box0}
+

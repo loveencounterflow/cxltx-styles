@@ -14,3 +14,64 @@
 
 
 
+% ..........................................................................................................
+% \setCJKmainfont{Droid Sans Japanese}
+\setCJKmainfont{Sun-ExtA}
+% \setCJKmainfont[Path=/home/flow/own/resources/fonts/]{EBGaramond12-Regular.otf}
+% ..........................................................................................................
+\newCJKfontfamily\cjkIdeographFont[Scale=1.05,AutoFakeBold=2]{Sun-ExtA}
+\newCJKfontfamily\cjkxbIdeographFont[Scale=1.05,AutoFakeBold=1]{sunflower-u-cjk-xb}
+\newCJKfontfamily\cjkxcIdeographFont[Scale=1.05,AutoFakeBold=1]{BabelStone Han} % ??????????????????????
+\newCJKfontfamily\cjksymIdeographFont[Scale=1.05,AutoFakeBold=1]{HanaMinA}
+\newCJKfontfamily\cjkxdIdeographFont[Scale=1.05,AutoFakeBold=1]{BabelStone Han}
+\newfontfamily\jzrFont[Scale=1.05,AutoFakeBold=1]{jizura2}
+% \newfontfamily\pinyinFont[Scale=0.8,Path=/usr/share/fonts/truetype/ubuntu-font-family/]{Ubuntu-C.ttf}
+\newfontfamily\pinyinFont[Scale=0.8]{Ubuntu}
+\newfontfamily\pinyinItalicFont[Scale=0.8]{Ubuntu Italic}
+\newCJKfontfamily\katakanaFont[Scale=0.95,AutoFakeBold=0]{NanumMyeongjo}
+\newCJKfontfamily\hiraganaFont[Scale=0.95,AutoFakeBold=1]{NanumMyeongjo}
+\newCJKfontfamily\hangeulFont[Scale=1.05,AutoFakeBold=1]{NanumMyeongjo}
+\newfontfamily\glossFont[Mapping=tex-text]{EB Garamond 12 Regular}
+\newCJKfontfamily\missingFont[Scale=1.05,AutoFakeBold=1,Color=red]{Sun-ExtA}
+
+% ==========================================================================================================
+% Display Styles
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\cjkInterchrSpacing}{\hskip -0.4pt plus 3pt minus 1pt}
+% \newcommand{\adjustCjkIdeograph}[1]{\cjkInterchrSpacing\lower0.3ex\hbox{\textbf{#1}}}
+% \newcommand{\adjustKatakana}[1]{\cjkInterchrSpacing\lower0.5ex\hbox{\textbf{#1}}}
+% \newcommand{\adjustHiragana}[1]{\cjkInterchrSpacing\lower0.5ex\hbox{\textbf{#1}}}
+% \newcommand{\adjustHangeul}[1]{\cjkInterchrSpacing\lower0.3ex\hbox{\textbf{#1}}}
+\newcommand{\adjustCjkIdeograph}[1]{\cjkInterchrSpacing\lower0.3ex\hbox{#1}}
+\newcommand{\adjustKatakana}[1]{\cjkInterchrSpacing\lower0.3ex\hbox{#1}}
+\newcommand{\adjustHiragana}[1]{\cjkInterchrSpacing\lower0.3ex\hbox{#1}}
+\newcommand{\adjustHangeul}[1]{\cjkInterchrSpacing\lower0.3ex\hbox{#1}}
+% ..........................................................................................................
+\newcommand{\py}[1]{{\pinyinFont#1}}
+\newcommand{\gloss}[1]{{\glossFont#1}}
+\newcommand{\cn}[1]{\adjustCjkIdeograph{\cjkIdeographFont#1}}
+\newcommand{\cnxa}[1]{\adjustCjkIdeograph{\cjkIdeographFont#1}}
+\newcommand{\cnxb}[1]{\adjustCjkIdeograph{\cjkxbIdeographFont#1}}
+\newcommand{\cnxc}[1]{\adjustCjkIdeograph{\cjkxcIdeographFont#1}}
+\newcommand{\cnxd}[1]{\adjustCjkIdeograph{\cjkxdIdeographFont#1}}
+\newcommand{\cncone}[1]{\adjustCjkIdeograph{\cjkxcIdeographFont#1}}
+\newcommand{\cnctwo}[1]{\adjustCjkIdeograph{\cjkxcIdeographFont#1}}
+\newcommand{\cnrone}[1]{\adjustCjkIdeograph{\cjkIdeographFont#1}}
+\newcommand{\cnrtwo}[1]{\adjustCjkIdeograph{\cjkIdeographFont#1}}
+% \newcommand{\cnsym}[1]{\adjustCjkIdeograph{\cjkIdeographFont#1}}
+\newcommand{\cnsym}[1]{\adjustCjkIdeograph{\cjksymIdeographFont#1}}
+\newcommand{\cnstrk}[1]{\adjustCjkIdeograph{\cjkIdeographFont#1}}
+\newcommand{\cnjzr}[1]{\adjustCjkIdeograph{\jzrFont#1}}
+\newcommand{\cnextra}[1]{\adjustCjkIdeograph{\cjkxcIdeographFont#1}}
+\newcommand{\ka}[1]{\adjustKatakana{\katakanaFont#1}}
+\newcommand{\hi}[1]{\adjustHiragana{\hiraganaFont#1}}
+\newcommand{\hg}[1]{\adjustHangeul{\hangeulFont#1}}
+% ..........................................................................................................
+\newcommand{\missing}[1]{\missingFont#1}
+
+% ==========================================================================================================
+% Extras
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\hirabar}{\hskip0.4ex plus 0.2ex minus 0.2ex%
+	\vrule width 0.2mm height 0.7em depth 0.3em%
+	\hskip0.8ex plus 0.2ex minus 0.2ex}
