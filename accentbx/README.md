@@ -15,6 +15,6 @@ From the original repo:
 **Update** I patched `accentbx.sty` on lines 500 .. 522 to make the package load without error. If
 someone should need that dotless `i`, `j` facility, pls. issue a pull request. KTHXBY.
 
-**Update** Now avalailable as [CXLTX Style Module](../cxltx-styles).
+**Update** Now avalailable as [CXLTX Style Module](/loveencounterflow/cxltx-styles).
 
 
