@@ -1,0 +1,30 @@
+
+
+
+% ==========================================================================================================
+% Absolute Textpositioning
+% ----------------------------------------------------------------------------------------------------------
+% see http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
+\ProvidesPackage{cxltx-styles-position-absolute}
+\usepackage[absolute]{textpos}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+% \textblockorigin{hpos}{vpos} % upper left corner of main printing area
+
+% You may give a optional argument to the \Lenv{textblock}
+% environment, specifying which point in the box
+% is to be placed at the specified point:
+% \begin{quote}
+% \begin{raggedright}
+% \cmd|\begin{textblock}{<hsize>}[<ho>,<vo>](<hpos>,<vpos>)|\\
+% text...\\
+% |\end{textblock}|
+% \end{raggedright}
+% \end{quote}
+% The coordinates \meta{ho} and \meta{vo} are fractions of the
+% width and height of the text box, respectively, and state that the
+% box is to be placed so that the reference
+% point (\meta{ho},\meta{vo}) within the box is to be placed at the point
+% (\meta{hpos},\meta{vpos}) on the page.  The default specification is
+% [0,0], the top left of the box: [0,1] would be the bottom left, and
+% [0.5,0.5] the middle.
