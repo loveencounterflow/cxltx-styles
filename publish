@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo && \
+git add --all && \
+git commit -m "autocommit" && \
+git push -u origin master
+echo 'ok'
+echo ''
+
