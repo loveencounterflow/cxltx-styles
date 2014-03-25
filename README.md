@@ -34,6 +34,7 @@ then take that route (e.g. `/Users/$USER/Library/texmf`) and append `/tex/latex`
 that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 
 
+<!-- =================================================================================================== -->
 ### CXLTX Style: Position Absolute
 
 CXLTX Position Absolute (PA) essentially loads [textpos][1], configures it, and adds some useful commands;
@@ -59,13 +60,20 @@ uses `calc`).
 
 The 'badge' of this style is `Pa`; it defines the following items:
 
+<!-- ................................................................................................... -->
+#### PaGauge
+
+Use `\PaGauge{...}` like
+
     \PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!§\$}
 
-Use `\PaGauge{...}` in a suitable place of your document with a suitable sample of characters to have PA
-determine the dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
+in a suitable place of your document with a suitable sample of characters to have PA determine the
+dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
 
     \PaHeightDepthRatio = \PaStrutHeight / ( \PaStrutHeight + \PaStrutDepth )
 
+which it will use to determine where the baseline of the specific font lies. Needless to say that you should
+make sure that both your character sample
 
 
 
