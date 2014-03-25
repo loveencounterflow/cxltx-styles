@@ -73,7 +73,8 @@ dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
     \PaHeightDepthRatio = \PaStrutHeight / ( \PaStrutHeight + \PaStrutDepth )
 
 which it will use to determine where the baseline of the specific font lies. Needless to say that you should
-make sure that both your character sample
+make sure that both your character sample is representative and that the font that `\PaGauge` implicitly
+uses is the same that will appear in your positioned material. `\PaGauge` does not produce any output.
 
 
 

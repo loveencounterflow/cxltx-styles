@@ -45,6 +45,8 @@
   \FPeval{\PaHeightDepthRatio}{\number\PaStrutHeight/(\number\PaStrutHeight+\number\PaStrutDepth)}%
   }
 
+\PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!§\$}
+
 \newcommand{\PaLeft}[3]{{%
   \settowidth{\PaTextWidth}{#3{\PaStrut}}
   \begin{textblock*}{\PaTextWidth}[0,\PaHeightDepthRatio](#1,#2)%
