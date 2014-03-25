@@ -64,9 +64,8 @@ The 'badge' of this style is `Pa`; it defines the following items:
 Use `\PaGauge{...}` in a suitable place of your document with a suitable sample of characters to have PA
 determine the dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
 
-    \PaHeightDepthRatio = \ $
+    \PaHeightDepthRatio = \PaStrutHeight / ( \PaStrutHeight + \PaStrutDepth )
 
-$ 1 + 1 = 2 $
 
 
 
