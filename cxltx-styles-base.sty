@@ -8,44 +8,12 @@
 % Basics
 % ----------------------------------------------------------------------------------------------------------
 \usepackage{fontspec}
-\usepackage{leading}
-\usepackage{pbox}
-\usepackage{array}
 % \usepackage{leading}
+% \usepackage{pbox}
+% \usepackage{array}
 % \usepackage{fancyhdr}
 \usepackage{fixltx2e}
 \usepackage[usenames,dvipsnames,svgnames,table,x11names]{xcolor}
-
-
-% ==========================================================================================================
-% Nifty stuff
-% ----------------------------------------------------------------------------------------------------------
-\usepackage{float}
-\usepackage{wrapfig}
-\usepackage{enumitem}
-% \usepackage[protrusion=true,final]{/home/flow/own/tex-packages/microtype/microtype} % doesn't work yet
-% \usepackage[protrusion=true,final]{microtype} % doesn't work yet
-\newcommand{\insertblankpage}{\thispagestyle{empty}\mbox{}\newpage}
-
-% ==========================================================================================================
-% CJK Glyph Bullets
-% ----------------------------------------------------------------------------------------------------------
-
-\usepackage{tikz}
-\newcommand*\circled[1]{\tikz[baseline=(char.base),line width=0.25mm,blue]{
-            \node[shape=circle,draw,inner sep=0.25mm] (char) {#1};}}
-\usetikzlibrary{hobby}
-
-% ==========================================================================================================
-% Drop Caps
-% ----------------------------------------------------------------------------------------------------------
-\usepackage{lettrine}
-\setcounter{DefaultLines}{2}
-\renewcommand{\DefaultLoversize}{-0.0}
-\renewcommand{\DefaultLraise}{0.1}
-\renewcommand{\DefaultLhang}{0.07}
-\setlength{\DefaultFindent}{0.5em}
-\setlength{\DefaultNindent}{0.0em}
 
 % ==========================================================================================================
 % General Document Style
@@ -55,6 +23,38 @@
 \setdefaultlanguage{english}
 \setlength{\parskip}{\baselineskip}
 \setlength{\parindent}{0pt}
+
+
+% % ==========================================================================================================
+% % Nifty stuff
+% % ----------------------------------------------------------------------------------------------------------
+% \usepackage{float}
+% \usepackage{wrapfig}
+% \usepackage{enumitem}
+% % \usepackage[protrusion=true,final]{/home/flow/own/tex-packages/microtype/microtype} % doesn't work yet
+% % \usepackage[protrusion=true,final]{microtype} % doesn't work yet
+% \newcommand{\insertblankpage}{\thispagestyle{empty}\mbox{}\newpage}
+
+% % ==========================================================================================================
+% % CJK Glyph Bullets
+% % ----------------------------------------------------------------------------------------------------------
+
+% \usepackage{tikz}
+% \newcommand*\circled[1]{\tikz[baseline=(char.base),line width=0.25mm,blue]{
+%             \node[shape=circle,draw,inner sep=0.25mm] (char) {#1};}}
+% \usetikzlibrary{hobby}
+
+% % ==========================================================================================================
+% % Drop Caps
+% % ----------------------------------------------------------------------------------------------------------
+% \usepackage{lettrine}
+% \setcounter{DefaultLines}{2}
+% \renewcommand{\DefaultLoversize}{-0.0}
+% \renewcommand{\DefaultLraise}{0.1}
+% \renewcommand{\DefaultLhang}{0.07}
+% \setlength{\DefaultFindent}{0.5em}
+% \setlength{\DefaultNindent}{0.0em}
+
 
 % ==========================================================================================================
 % Font Usage
@@ -86,24 +86,24 @@
 
 
 
-% ==========================================================================================================
-% PAGE SIZE
-% ----------------------------------------------------------------------------------------------------------
-\usepackage[
-  left=20mm,
-  right=10mm,
-  top=8mm,
-  bottom=12mm,
-  headsep=1mm,
-  footskip=5mm,
-  marginparsep=1mm,
-  marginparwidth=14mm,
-  headheight=5mm,
-  includehead,
-  includefoot,
-  paperwidth=210mm,
-  paperheight=297mm]{geometry}
-\newcommand*{\mainentry}[1]{#1\markboth{#1}{#1}}
+% % ==========================================================================================================
+% % PAGE SIZE
+% % ----------------------------------------------------------------------------------------------------------
+% % \usepackage[
+% %   left=20mm,
+% %   right=10mm,
+% %   top=8mm,
+% %   bottom=12mm,
+% %   headsep=1mm,
+% %   footskip=5mm,
+% %   marginparsep=1mm,
+% %   marginparwidth=14mm,
+% %   headheight=5mm,
+% %   includehead,
+% %   includefoot,
+% %   paperwidth=210mm,
+% %   paperheight=297mm]{geometry}
+% % \newcommand*{\mainentry}[1]{#1\markboth{#1}{#1}}
 
 
 

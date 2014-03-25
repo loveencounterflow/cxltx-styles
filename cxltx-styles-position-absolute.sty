@@ -9,7 +9,42 @@
 \usepackage[absolute]{textpos}
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{1mm}
-% \textblockorigin{hpos}{vpos} % upper left corner of main printing area
+% set origin for absolutely positioned `textblock`s
+% (set to upper left corner of main printing area):
+\textblockorigin{0mm}{0mm}
+
+% struts
+\newdimen\textposstrutheight
+\newdimen\textposstrutwidth
+\newdimen\textposstrutdepth
+\newdimen\textposstrutlength
+% \nominalfontsize=4.5mm
+\textposstrutwidth=0.5mm
+\textposstrutheight=2.7mm
+\textposstrutdepth=2.8mm
+\textposstrutlength=\dimexpr\textposstrutheight+\textposstrutdepth
+\newcommand{\textposstrut}{{\color{blue}\vrule height\textposstrutheight width\textposstrutwidth depth\textposstrutdepth}}
+\newcommand{\textposnospacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
+
+\newcommand{\placeflushleft}[4]{%
+  \begin{textblock}{#1}[0,0.5](#2,#3)%
+  	\textposnospacing%
+  	\flushleft%
+  	#4%
+  	{\textposstrut}%
+  	\end{textblock}%
+  }
+
+\newcommand{\placeflushright}[4]{%
+  \begin{textblock}{#1}[1,0.5](#2,#3)%
+  	\textposnospacing%
+  	\flushright%
+  	{\textposstrut}%
+  	#4%
+  	\end{textblock}%
+  }
+
+
 
 % You may give a optional argument to the \Lenv{textblock}
 % environment, specifying which point in the box

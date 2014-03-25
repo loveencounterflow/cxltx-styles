@@ -32,6 +32,10 @@ then take that route (e.g. `/Users/$USER/Library/texmf`) and append `/tex/latex`
 that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 
 
+### CXLTX Style: Position Absolute
 
+This style essentially loads [textpos][1] and then does some configuration choices:
+
+[1]: http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
 
 
