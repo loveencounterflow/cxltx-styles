@@ -7,42 +7,64 @@
 % see http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
 \ProvidesPackage{cxltx-styles-position-absolute}
 \usepackage[absolute]{textpos}
+
+% Set Horizontal and vertical modules:
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{1mm}
+
 % set origin for absolutely positioned `textblock`s
 % (set to upper left corner of main printing area):
 \textblockorigin{0mm}{0mm}
 
-% struts
-\newdimen\textposstrutheight
-\newdimen\textposstrutwidth
-\newdimen\textposstrutdepth
-\newdimen\textposstrutlength
-% \nominalfontsize=4.5mm
-\textposstrutwidth=0.5mm
-\textposstrutheight=2.7mm
-\textposstrutdepth=2.8mm
-\textposstrutlength=\dimexpr\textposstrutheight+\textposstrutdepth
-\newcommand{\textposstrut}{{\color{blue}\vrule height\textposstrutheight width\textposstrutwidth depth\textposstrutdepth}}
-\newcommand{\textposnospacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
+% Define strut dimensions:
+\newdimen\PaStrutHeight
+\newdimen\PaStrutWidth
+\newdimen\PaStrutDepth
+\PaStrutWidth=0.5mm
+\PaStrutHeight=2.7mm
+\PaStrutDepth=2.8mm
 
-\newcommand{\placeflushleft}[4]{%
-  \begin{textblock}{#1}[0,0.5](#2,#3)%
-  	\textposnospacing%
-  	\flushleft%
-  	#4%
-  	{\textposstrut}%
-  	\end{textblock}%
-  }
+% Define text width variable:
+\newdimen\PaTextWidth
 
-\newcommand{\placeflushright}[4]{%
-  \begin{textblock}{#1}[1,0.5](#2,#3)%
-  	\textposnospacing%
-  	\flushright%
-  	{\textposstrut}%
-  	#4%
-  	\end{textblock}%
-  }
+
+% Define a strut with the desired dimensions:
+\newcommand{\PaStrut}{{\color{blue}\vrule height\PaStrutHeight width\PaStrutWidth depth\PaStrutDepth}}
+
+% remove horizontal and vertical spacing from paragraphs; curiously, we have to use a negative value for
+% `\parskip` (see http://http://tex.stackexchange.com/questions/167628):
+\newcommand{\PaNoSpacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
+
+\newcommand{\PaLeft}[3]{{%
+  \settowidth{\PaTextWidth}{#3{\PaStrut}}
+  \begin{textblock*}{\PaTextWidth}[0,0.5](#1,#2)%
+    \PaNoSpacing%
+    \flushleft% needed although it should be gratuitous
+    #3%
+    {\PaStrut}%
+    \end{textblock*}%
+  }}
+
+\newcommand{\PaCenter}[3]{{%
+  \settowidth{\PaTextWidth}{{\PaStrut}#3{\PaStrut}}
+  \begin{textblock*}{\PaTextWidth}[0.5,0.5](#1,#2)%
+    \PaNoSpacing%
+    \center%
+    {\PaStrut}%
+    #3%
+    {\PaStrut}%
+    \end{textblock*}%
+  }}
+
+\newcommand{\PaRight}[3]{{%
+  \settowidth{\PaTextWidth}{{\PaStrut}#3}
+  \begin{textblock*}{\PaTextWidth}[1,0.5](#1,#2)%
+    \PaNoSpacing%
+    \flushright% needed although it should be gratuitous
+    {\PaStrut}%
+    #3%
+    \end{textblock*}%
+  }}
 
 
 

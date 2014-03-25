@@ -34,7 +34,12 @@ that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 
 ### CXLTX Style: Position Absolute
 
-This style essentially loads [textpos][1] and then does some configuration choices:
+This style essentially loads [textpos][1], configures it, and adds some useful commands; these steps are
+intended to make it easier to specifically put *single* lines of text onto the page, using absolute
+coordinates that take the left end, the center point, or the right end of the baseline of the text and the
+edge of paper as reference points.
+
+The 'badge' of this style is `Pa`; it defines the following items:
 
 [1]: http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
 
