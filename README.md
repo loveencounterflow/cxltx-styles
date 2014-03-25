@@ -59,6 +59,23 @@ uses `calc`).
 
 The 'badge' of this style is `Pa`; it defines the following items:
 
+    \PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!§\$}
+
+Use `\PaGauge{...}` in a suitable place of your document with a suitable sample of characters to have PA
+determine the dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
+
+    \PaHeightDepthRatio = \ $
+
+$ 1 + 1 = 2 $
+
+
+
 [1]: http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
+
+
+
+
+
+
 
 
