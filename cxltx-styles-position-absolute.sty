@@ -24,8 +24,10 @@
 \PaStrutHeight=2.7mm
 \PaStrutDepth=2.8mm
 
-% Define text width variable:
+% Define text dimensions:
 \newdimen\PaTextWidth
+\newdimen\PaTextHeight
+\newdimen\PaTextDepth
 
 
 % Define a strut with the desired dimensions:
@@ -34,6 +36,11 @@
 % remove horizontal and vertical spacing from paragraphs; curiously, we have to use a negative value for
 % `\parskip` (see http://http://tex.stackexchange.com/questions/167628):
 \newcommand{\PaNoSpacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
+
+\PaGauge[1]{%
+  \settoheight{\PaTextHeight}{#1}%
+  \settodepth{\PaTextDepth}{#1}%
+  }
 
 \newcommand{\PaLeft}[3]{{%
   \settowidth{\PaTextWidth}{#3{\PaStrut}}
