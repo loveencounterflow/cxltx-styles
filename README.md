@@ -36,10 +36,26 @@ that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 
 ### CXLTX Style: Position Absolute
 
-This style essentially loads [textpos][1], configures it, and adds some useful commands; these steps are
-intended to make it easier to specifically put *single* lines of text onto the page, using absolute
-coordinates that take the left end, the center point, or the right end of the baseline of the text and the
-edge of paper as reference points.
+CXLTX Position Absolute (PA) essentially loads [textpos][1], configures it, and adds some useful commands;
+these steps are intended to make it easier to specifically put *single* lines of text onto the page, using
+absolute coordinates that take the left end, the center point, or the right end of the baseline of the text
+and the edge of paper as reference points.
+
+XXXXXX loads `textpos` as
+
+    \usepackage[absolute,overlay]{textpos}
+
+so all material will be absolutely positioned (rather than relative to the current point of insertion), and
+put on top of ecerything (?) else on the page. The latter option has been chosen to ensure `pagegrid`s will
+not cover material typeset with Position Absolute.
+
+PA uses the starred form, `\begin{textblock*}... \end{textblock*}`, which means that all dimensions must be
+given as lengths rather than as pure numbers. I feel this is an advantage, as (1) pure numbers are only
+meaningful as 'abstract lengths' as used in geometry, but not as concrete lengths in the physical world; and
+(2) only by using length units in the arguments can simple arithmetic like adding lengths be done (`textpos`
+uses `calc`).
+
+
 
 The 'badge' of this style is `Pa`; it defines the following items:
 
