@@ -42,7 +42,7 @@ that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 
 Each CXLTX Style has a particular 'badge', i.e. a prefix, prepended to each of the names defined in that
 style. Badges are mostly two lowercase letters out of `[a-z]` that are reminiscent of the style's name.
-All names of private members (which are not documented here; see the source) have both the 'sigil' `@`,
+All names of private members (which are not documented here; see the source) start with the sigil `@`,
 followed by the badge, followed by the name proper. Further, all names are written out (no surprising abbr.
 pls.) and use CamelCase (coz that dash is no-go in TeX, y'know).
 
