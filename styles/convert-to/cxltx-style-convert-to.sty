@@ -1,0 +1,20 @@
+
+
+% ==========================================================================================================
+% Unit Conversion
+% ----------------------------------------------------------------------------------------------------------
+% see http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
+\ProvidesPackage{cxltx-style-convert-to}
+% thx to http://tex.stackexchange.com/a/37317/28067
+\makeatletter%
+\begingroup%
+  \catcode `P=12% digits and punct. catcode
+  \catcode `T=12% digits and punct. catcode
+  \lowercase{%
+  \def\x{\def\rem@pt##1.##2PT{##1\ifnum##2>\z@.##2\fi}}}%
+     \expandafter\endgroup\x%
+\def\strip@pt{\expandafter\rem@pt\the}%
+\def\ctConvertTo#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1\relax\relax}%
+\makeatother
+
+
