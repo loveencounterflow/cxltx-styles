@@ -38,13 +38,13 @@ that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 <!-- =================================================================================================== -->
 ### CXLTX Style: Position Absolute
 
-CXLTX Position Absolute (PA) essentially loads
-[textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf), configures it, and adds some
-useful commands; these steps are intended to make it easier to specifically put *single* lines of text onto
-the page, using absolute coordinates that take the left end, the center point, or the right end of the
-baseline of the text and the edge of paper as reference points.
+CXLTX Position Absolute (PA) is based on
+[textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf), it is intended to make it
+easy (even easier than using `textpos` directly) to position single lines of text onto
+the page, using absolute coordinates that take the left edge, the center point, or the right edge of the
+baseline of the text and the edge of the paper (or the text area) as reference points.
 
-XXXXXX loads `textpos` as
+PA loads `textpos` as
 
 ````latex
 \usepackage[absolute,overlay]{textpos}
@@ -62,9 +62,7 @@ meaningful as 'abstract lengths' as used in geometry, but not as concrete length
 (2) only by using length units in the arguments can simple arithmetic like adding lengths be done (`textpos`
 uses `calc`).
 
-
-
-The 'badge' of this style is `Pa`; it defines the following items:
+The badge of this style is `Pa`. PA defines the following items:
 
 <!-- ................................................................................................... -->
 #### PaRight, PaCenter, and PaLeft
