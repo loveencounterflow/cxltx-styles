@@ -85,6 +85,7 @@ Here are some samples:
 
 which produces (with `\usepackage[top-left]{pagegrid}` in the preamble):
 
+![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/Screen%20Shot%202014-03-26%20at%2001.47.44.png)
 
 <!-- ................................................................................................... -->
 #### PaGauge
