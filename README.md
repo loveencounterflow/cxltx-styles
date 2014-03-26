@@ -18,6 +18,7 @@ sheets.
 ````
 
 
+<!-- ################################################################################################### -->
 ## Installation
 
 To make it easier for TeX to resolve `\usepackage{cxltx-styles-*}` commands, put a symlink to your
@@ -34,6 +35,19 @@ In a [more general fashion](http://tex.stackexchange.com/a/1138/28067), you may 
 then take that route (e.g. `/Users/$USER/Library/texmf`) and append `/tex/latex` (which gets you
 `/Users/$USER/Library/texmf/tex/latex`) to obtain a suitable location. It may be necessary to first create
 that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
+
+
+<!-- =================================================================================================== -->
+### Badges
+
+Each CXLTX Style has a particular 'badge', i.e. a prefix, prepended to each of the names defined in that
+style. Badges are mostly two lowercase letters out of `[a-z]` that are reminiscent of the style's name.
+All names of private members (which are not documented here; see the source) have both the 'sigil' `@`,
+followed by the badge, followed by the name proper. Further, all names are written out (no surprising abbr.
+pls.) and use CamelCase (coz that dash is no-go in TeX, y'know).
+
+> Badges are necessitated by the fact that all of the huge ecosystem that is TeX & LaTeX has only one
+> single, *huge* namespace.
 
 
 <!-- =================================================================================================== -->
