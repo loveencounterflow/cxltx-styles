@@ -56,11 +56,11 @@ put on top of everything (?) else on the page.
 > The latter option has been chosen to ensure `pagegrid`s will
 > not cover material typeset with Position Absolute.
 
-PA uses the starred form, `\begin{textblock*}... \end{textblock*}`, which means that all dimensions must be
-given as lengths rather than as pure numbers. I feel this is an advantage, as (1) pure numbers are only
-meaningful as 'abstract lengths' as used in geometry, but not as concrete lengths in the physical world; and
-(2) only by using length units in the arguments can simple arithmetic like adding lengths be done (`textpos`
-uses `calc`).
+PA uses the starred form of the `textblock` environment, `\begin{textblock*}... \end{textblock*}`, which
+means that all dimensions must be given as lengths rather than as pure numbers. I feel this is an advantage,
+as (1) pure numbers are only meaningful as 'abstract lengths' when used in geometry, but not as concrete
+lengths in the physical world; and (2) simple arithmetics in command arguments are only possible with
+lengths, not with numbers (`textpos` uses `calc`).
 
 The badge of this style is `Pa`. PA defines the following items:
 
