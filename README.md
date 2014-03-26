@@ -120,7 +120,7 @@ current text extent, *not* the paper. This can be done by placing
 \paOriginToText
 ````
 
-somewhere near the beginning of the document.
+somewhere near the beginning of the document (or just leave it with the default settings).
 
 **Though this option is the slowest one (because it performs a floating point calculation on each single
 text placement), i chose to make it the default one**, simply because there is good reason to think that if
@@ -160,9 +160,16 @@ This code:
 \paRight{40mm}{20mm}{this text ends at 40mm}
 ````
 
-produces (with `\usepackage[top-left]{pagegrid}` in the preamble):
+produces (with `\usepackage[top-left]{pagegrid}` and `\paShow` in the preamble):
 
 ![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/Screen%20Shot%202014-03-26%20at%2001.47.44.png)
+
+The origin and direction of ascending values is indicated by the arrow; observe how each text box comes
+with one or two 'struts' (the blue bars) that regulate the box heights. You can see how `\paRight` produces
+a flush right text against the `x = 40mm` vertical, while `\paLeft` is flush left and `paCenter` centers
+the text horizontally so the 40mm mark lands smack in the middle. No surprises here, which is really the
+purpose of this package!
+
 
 <!-- ................................................................................................... -->
 #### paGauge
