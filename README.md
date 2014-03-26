@@ -66,6 +66,53 @@ lengths, not with numbers (`textpos` uses `calc`).
 The badge of this style is `pa`. PA defines the following items:
 
 <!-- ................................................................................................... -->
+#### paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs
+
+These commands are all concerned with the origin (the reference point) of the measurements you will want to
+give when using `\paRight`, `\paCenter`, or `\paLeft` (for which see below).
+
+The most basic command is `\paOriginTo`, which you can use to set the origin absolutely; the measurements
+given here are always in turn interpreted as being relative to the edge of the paper, so
+
+````latex
+\paOriginTo{20mm}{25mm}
+````
+
+will set the reference point to 20mm to the right from the left edge and 25mm down from the top edge of the
+paper. If your coordinates refer to the paper without any offset, you can, instead of `\paOriginTo{0mm}{0mm}`,
+simply say
+
+````latex
+\paOriginToPaper
+````
+
+However, i anticipate that most of the time people will want to place their text lines relative to the
+current text extent, *not* the paper. This can be done by placing
+
+````latex
+\paOriginToText
+````
+
+somewhere near the beginning of the document.
+
+**Though this option is the slowest one (because it performs a floating point calculation on each single
+text placement), i chose to make it the default one**, simply because there is good reason to think that if
+anyone uses CXLTX Position Absolute, the straightforward and reasonable handling of absolute placement *in
+the context of a real document* might be the one selling point.
+
+> The inefficiencies, where deemed unbearable, could probably be easily ironed out by caching values. Pull
+> Request Are Awesome.
+
+**Important**: in case you want to use the default `\paOriginToText` setting, please bear in mind that since
+this option uses [`changepage`](http://ctan.org/pkg/changepage), **LaTeX has to run at least twice** before
+you get correct results. You're already used to this, right?
+
+Lastly, there is `\paOriginIs` which is internally used to keep state; it will expand to one of `text` (the
+default), `page`, or some `custom (20mm,25mm)` (for the first example, above).
+
+With these considerations out of the way, let's have a look at how to actually put stuff onto the page.
+
+<!-- ................................................................................................... -->
 #### paRight, paCenter, and paLeft
 
 These are the basic commands to place printing material onto absolute positions; unlike their counterpart
