@@ -8,12 +8,13 @@ sheets.
 **Pull Requests Are Awesome.**
 
 ````latex
-\usepackage{cxltx-styles-base}                % you always want this one
-\usepackage{cxltx-styles-cjk}                 % Chinese / Japanese / Korean
-\usepackage{cxltx-styles-accentbox}           % boxed accents as per http://www.eutypon.gr/eutypon/pdf/e2000-05/e05-a04.pdf
-\usepackage{cxltx-styles-smashbox}            % boxed contents to preserve lineheights
-\usepackage{cxltx-styles-multimulti}          % multiple columns and rows on pages and in tables
-\usepackage{cxltx-styles-position-absolute}   % absolute textpositioning
+\usepackage{cxltx-style-base}                 % you always want this one
+\usepackage{cxltx-style-cjk}                  % Chinese / Japanese / Korean
+\usepackage{cxltx-style-accentbox}            % boxed accents as per http://www.eutypon.gr/eutypon/pdf/e2000-05/e05-a04.pdf
+\usepackage{cxltx-style-smashbox}             % boxed contents to preserve lineheights
+\usepackage{cxltx-style-multimulti}           % multiple columns and rows on pages and in tables
+\usepackage{cxltx-style-position-absolute}    % absolute textpositioning
+\usepackage{cxltx-style-convert-to}           % simplistic unit conversion
 ````
 
 
@@ -137,6 +138,16 @@ output. In case you want to muck with their default appearances, refer to the
 [source](https://github.com/loveencounterflow/cxltx-styles/blob/master/cxltx-styles-position-absolute.sty).
 
 
+
+<!-- =================================================================================================== -->
+### CXLTX Style: Convert To
+
+Simplistic unit conversion routine; see http://tex.stackexchange.com/a/37317/28067. Badge is `ct`; a
+single command is defined:
+
+````latex
+\ctConvertTo{mm}{\the\paStrutHeight}mm
+````
 
 
 
