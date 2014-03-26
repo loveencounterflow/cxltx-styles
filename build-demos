@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+xelatex --halt-on-error --output-directory style-demos style-demos/position-absolute-demo.tex
+
+
+
