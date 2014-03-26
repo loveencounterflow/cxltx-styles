@@ -77,19 +77,22 @@ or simply
 \PaGaugeSample
 ````
 
-in a suitable place of your document with a suitable sample of characters to have PA determine the
-dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
+(which will use the sample shown above) in a suitable place of your document with a suitable sample of
+characters to have PA determine the dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
 
 ````latex
 \PaHeightDepthRatio = \PaStrutHeight / ( \PaStrutHeight + \PaStrutDepth )
 ````
 
-which it will use to determine where the baseline of the specific font lies. Needless to say that you should
-make sure that both your character sample is representative and that the font that `\PaGauge` implicitly
-uses is the same that will appear in your positioned material. `\PaGauge` does not produce any output.
+PA uses these figures to determine where the baseline of the specific font lies.
 
-Observe that while loading this style will execute `PaGauge` as shown above to determine suitable default
-values, they will at best be approximate in case you change fonts later in your document setup.
+> Needless to say that
+> you should make sure that both your character sample is representative and that the font that `\PaGauge`
+> implicitly uses is the same that will appear in your positioned material. `\PaGauge` does not produce any
+> output.
+
+Observe that while loading this style will run `PaGaugeSample` as shown above, dimensions will at best be
+approximate in case you change fonts later in your document setup.
 
 
 
