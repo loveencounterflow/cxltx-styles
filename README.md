@@ -63,25 +63,25 @@ as (1) pure numbers are only meaningful as 'abstract lengths' when used in geome
 lengths in the physical world; and (2) simple arithmetics in command arguments are only possible with
 lengths, not with numbers (`textpos` uses `calc`).
 
-The badge of this style is `Pa`. PA defines the following items:
+The badge of this style is `pa`. PA defines the following items:
 
 <!-- ................................................................................................... -->
-#### PaRight, PaCenter, and PaLeft
+#### paRight, paCenter, and paLeft
 
 These are the basic commands to place printing material onto absolute positions; unlike their counterpart
 in `textpos` (the `textblock` environment), each takes three regular arguments, namely, the `x` position,
 the `y` position (growing from the top to the bottom), and the content of the box:
 
 ````latex
-\Pa〚Left|Center|Right〛{$x}{$y}{$text}
+\pa〚Left|Center|Right〛{$x}{$y}{$text}
 ````
 
 This code:
 
 ````latex
-\PaLeft{40mm}{10mm}{this text starts at 40mm}
-\PaCenter{40mm}{15mm}{centered centered}
-\PaRight{40mm}{20mm}{this text ends at 40mm}
+\paLeft{40mm}{10mm}{this text starts at 40mm}
+\paCenter{40mm}{15mm}{centered centered}
+\paRight{40mm}{20mm}{this text ends at 40mm}
 ````
 
 produces (with `\usepackage[top-left]{pagegrid}` in the preamble):
@@ -89,48 +89,48 @@ produces (with `\usepackage[top-left]{pagegrid}` in the preamble):
 ![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/Screen%20Shot%202014-03-26%20at%2001.47.44.png)
 
 <!-- ................................................................................................... -->
-#### PaGauge
+#### paGauge
 
-Use `\PaGauge{...}` like
+Use `\paGauge{...}` like
 
 ````latex
-\PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}
+\paGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}
 ````
 
 or simply
 
 ````latex
-\PaGaugeSample
+\paGaugeSample
 ````
 
 (which will use the sample shown above) in a suitable place of your document with a suitable sample of
-characters to have PA determine the dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
+characters to have PA determine the dimensions `\paStrutHeight`, `\paStrutDepth`, and the ratio
 
 ````latex
-\PaHeightDepthRatio = \PaStrutHeight / ( \PaStrutHeight + \PaStrutDepth )
+\paHeightDepthRatio = \paStrutHeight / ( \paStrutHeight + \paStrutDepth )
 ````
 
 PA uses these figures to determine where the baseline of the specific font lies.
 
 > Needless to say that
-> you should make sure that both your character sample is representative and that the font that `\PaGauge`
-> implicitly uses is the same that will appear in your positioned material. `\PaGauge` does not produce any
+> you should make sure that both your character sample is representative and that the font that `\paGauge`
+> implicitly uses is the same that will appear in your positioned material. `\paGauge` does not produce any
 > output.
 
-Observe that while loading this style will run `PaGaugeSample` as shown above, dimensions will at best be
+Observe that while loading this style will run `paGaugeSample` as shown above, dimensions will at best be
 approximate in case you change fonts later in your document setup.
 
 You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protuding
 heights and depths in your PA textboxes.
 
 <!-- ................................................................................................... -->
-#### PaShow and PaHide
+#### paShow and paHide
 
 You can use
 
 ````latex
-\PaShow
-\PaHide
+\paShow
+\paHide
 ````
 
 respectively to show or hide the boxes and the struts that are used by PA and `textpos` to produce the
