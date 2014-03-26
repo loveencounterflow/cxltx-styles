@@ -85,10 +85,10 @@ put on top of everything (?) else on the page.
 > not cover material typeset with Position Absolute.
 
 PA uses the starred form of the `textblock` environment, `\begin{textblock*}... \end{textblock*}`, which
-means that all dimensions must be given as lengths rather than as pure numbers. I feel this is an advantage,
-as (1) pure numbers are only meaningful as 'abstract lengths' when used in geometry, but not as concrete
-lengths in the physical world; and (2) simple arithmetics in command arguments are only possible with
-lengths, not with numbers (`textpos` uses `calc`).
+means that **all dimensions must be given as lengths rather than as pure numbers**. I feel this is an
+advantage, as (1) pure numbers are only meaningful as 'abstract lengths' when used in geometry, but not as
+concrete lengths in the physical world; and (2) simple arithmetics in command arguments are only possible
+with lengths, not with numbers (`textpos` uses `calc`).
 
 The badge of this style is `pa`. PA defines the following items:
 
