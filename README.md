@@ -164,11 +164,11 @@ produces (with `\usepackage[top-left]{pagegrid}` and `\paShow` in the preamble):
 
 ![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/Screen%20Shot%202014-03-26%20at%2001.47.44.png)
 
-The origin and direction of ascending values is indicated by the arrow; observe how each text box comes
-with one or two 'struts' (the blue bars) that regulate the box heights. You can see how `\paRight` produces
-a flush right text against the `x = 40mm` vertical, while `\paLeft` is flush left and `paCenter` centers
-the text horizontally so the 40mm mark lands smack in the middle. No surprises here, which is really the
-purpose of this package!
+The coordinate system origin and the direction of ascending values is indicated by the arrow; observe how
+each text box comes with one or two 'struts' (the blue bars) that regulate the box heights. You can see how
+`\paRight` produces a flush right text against the `x = 40mm` vertical, while `\paLeft` is flush left and
+`paCenter` centers the text horizontally so the 40mm mark lands smack in the middle. No surprises here,
+which is really the purpose of this package!
 
 
 <!-- ................................................................................................... -->
