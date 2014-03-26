@@ -1,8 +1,9 @@
 
 
-# cxltx-styles
+# CXLTX Styles
 
-A (hopefully) sensible (but still incipient) collection of basic X<sub>E</sub>L<sub>A</sub>T<sub>E</sub>X style sheets.
+An incipient and hopefully sensible collection of basic X<sub>E</sub>L<sub>A</sub>T<sub>E</sub>X style
+sheets.
 
 **Pull Requests Are Awesome.**
 
@@ -94,7 +95,8 @@ PA uses these figures to determine where the baseline of the specific font lies.
 Observe that while loading this style will run `PaGaugeSample` as shown above, dimensions will at best be
 approximate in case you change fonts later in your document setup.
 
-
+You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protuding
+heights and depths in your PA textboxes.
 
 [1]: http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
 
