@@ -79,13 +79,19 @@
   }}
 
 \newcommand{\PaShow}{%
+  \textblockrulecolour{orange}
+  \TPboxrulesize=0.2mm%
   \TPshowboxestrue%
-  \PaStrutWidth=0.5mm%
+  \PaStrutWidth=0.8mm%
   }
 
+% There would appear to be a bug / arcane and as yet undocumented feature in `textpos` which causes boxes to
+% vertically shift upon execution of `\TPshowboxesfalse`. We remedy that by *always* 'showing' boxes but
+% setting rule width to zero.
 \newcommand{\PaHide}{%
-  \TPshowboxesfalse%
-  \PaStrutWidth=0.1mm%
+  \TPboxrulesize=0mm%
+  \TPshowboxestrue%
+  \PaStrutWidth=0mm%
   }
 
 \PaHide

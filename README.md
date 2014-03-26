@@ -38,10 +38,11 @@ that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 <!-- =================================================================================================== -->
 ### CXLTX Style: Position Absolute
 
-CXLTX Position Absolute (PA) essentially loads [textpos][1], configures it, and adds some useful commands;
-these steps are intended to make it easier to specifically put *single* lines of text onto the page, using
-absolute coordinates that take the left end, the center point, or the right end of the baseline of the text
-and the edge of paper as reference points.
+CXLTX Position Absolute (PA) essentially loads
+[textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf), configures it, and adds some
+useful commands; these steps are intended to make it easier to specifically put *single* lines of text onto
+the page, using absolute coordinates that take the left end, the center point, or the right end of the
+baseline of the text and the edge of paper as reference points.
 
 XXXXXX loads `textpos` as
 
@@ -62,6 +63,28 @@ uses `calc`).
 
 
 The 'badge' of this style is `Pa`; it defines the following items:
+
+<!-- ................................................................................................... -->
+#### PaRight, PaCenter, and PaLeft
+
+These are the basic commands to place printing material onto absolute positions; unlike their counterpart
+in `textpos` (the `textblock` environment), each takes three regular arguments, namely, the `x` position,
+the `y` position (growing from the top to the bottom), and the content of the box:
+
+````latex
+\Pa〚Left|Center|Right〛{$x}{$y}{$text}
+````
+
+Here are some samples:
+
+````latex
+\PaLeft{40mm}{40mm}{this text starts at 40mm}
+\PaCenter{40mm}{50mm}{centered centered}
+\PaRight{40mm}{60mm}{this text ends at 40mm}
+````
+
+which produces (with `\usepackage[top-left]{pagegrid}` in the preamble):
+
 
 <!-- ................................................................................................... -->
 #### PaGauge
@@ -98,7 +121,19 @@ approximate in case you change fonts later in your document setup.
 You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protuding
 heights and depths in your PA textboxes.
 
-[1]: http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
+<!-- ................................................................................................... -->
+#### PaShow and PaHide
+
+You can use
+
+````latex
+\PaShow
+\PaHide
+````
+
+respectively to show or hide the boxes and the struts that are used by PA and `textpos` to produce the
+output. In case you want to muck with their default appearances, refer to the
+[source](https://github.com/loveencounterflow/cxltx-styles/blob/master/cxltx-styles-position-absolute.sty).
 
 
 
