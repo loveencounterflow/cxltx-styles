@@ -68,9 +68,9 @@ pls.) and use CamelCase (coz that dash is no-go in TeX, y'know).
 
 *CXLTX Position Absolute* (PA) is based on
 [textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf). It is intended to make it
-easy (even easier than using `textpos` directly) to position single lines of text onto
-the page, using absolute coordinates that take the left edge, the center point, or the right edge of the
-baseline of the text and the edge of the paper (or the text area) as reference points.
+easy (much easier than using `textpos` directly) to position single lines of text on the page, using
+absolute coordinates that take the left edge, the center point, or the right edge of the baseline of the
+text and the edges of the paper, the text area, or custom coordinates as reference points.
 
 PA loads `textpos` as
 
@@ -127,8 +127,10 @@ text placement), i chose to make it the default one**, simply because there is g
 anyone uses CXLTX Position Absolute, the straightforward and reasonable handling of absolute placement *in
 the context of a real document* might be the one selling point.
 
-> The inefficiencies, where deemed unbearable, could probably be easily ironed out by caching values. Pull
-> Request Are Awesome.
+> The inefficiencies, where deemed unbearable, could probably be easily ironed out by caching values. **Pull
+> Request Are Awesome.** In case you consider to improve on the current state of affairs, please consider
+> that, as it stands, `\paOriginToText` *should* be able to handle intermittent layout changes gracefully,
+> although this is as yet untested.
 
 **Important**: in case you want to use the default `\paOriginToText` setting, please bear in mind that since
 this option uses [`changepage`](http://ctan.org/pkg/changepage), **LaTeX has to run at least twice** before
