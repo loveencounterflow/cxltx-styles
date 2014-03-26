@@ -21,16 +21,29 @@ sheets.
 <!-- ################################################################################################### -->
 ## Installation
 
-To make it easier for TeX to resolve `\usepackage{cxltx-styles-*}` commands, put a symlink to your
+Simply clone
+
+````bash
+git clone https://github.com/loveencounterflow/cxltx-styles.git
+````
+
+or [download an archive](https://github.com/loveencounterflow/cxltx-styles/archive/master.zip) to get
+the code.
+
+To enable TeX to resolve `\usepackage{cxltx-styles-*}` commands, put a symlink to your
 CXLTX Styles directory into a directory that is on LaTeX's search path. On OSX with TeX Live, that can
 be achieved by doing
 
-    cd ~/Library/texmf/tex/latex
-    ln -s route/to/cxltx-styles cxltx-styles
+````bash
+cd ~/Library/texmf/tex/latex
+ln -s route/to/cxltx-styles cxltx-styles
+````
 
 In a [more general fashion](http://tex.stackexchange.com/a/1138/28067), you may want to
 
-    kpsewhich -var-value=TEXMFHOME
+````bash
+kpsewhich -var-value=TEXMFHOME
+````
 
 then take that route (e.g. `/Users/$USER/Library/texmf`) and append `/tex/latex` (which gets you
 `/Users/$USER/Library/texmf/tex/latex`) to obtain a suitable location. It may be necessary to first create
