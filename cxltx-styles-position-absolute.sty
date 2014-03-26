@@ -22,30 +22,30 @@
 \newdimen\PaStrutHeight
 \newdimen\PaStrutWidth
 \newdimen\PaStrutDepth
-\PaStrutWidth=0.5mm
-\PaStrutHeight=2.7mm
-\PaStrutDepth=2.8mm
+\PaStrutWidth=0mm
+\PaStrutHeight=0mm
+\PaStrutDepth=0mm
 
 % Define text dimensions:
 \newdimen\PaTextWidth
-% \newdimen\PaTextHeight
-% \newdimen\PaTextDepth
-
-
-% Define a strut with the desired dimensions:
-\newcommand{\PaStrut}{{\color{blue}\vrule height\PaStrutHeight width\PaStrutWidth depth\PaStrutDepth}}
 
 % Remove horizontal and vertical spacing from paragraphs; curiously, we have to use a negative value for
 % `\parskip` (see http://http://tex.stackexchange.com/questions/167628):
 \newcommand{\PaNoSpacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
 
+% Determine locally valid strut dimensions:
 \newcommand{\PaGauge}[1]{%
   \settoheight{\PaStrutHeight}{#1}%
   \settodepth{\PaStrutDepth}{#1}%
   \FPeval{\PaHeightDepthRatio}{\number\PaStrutHeight/(\number\PaStrutHeight+\number\PaStrutDepth)}%
   }
 
-\PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!§\$}
+% Run gauging macro once to set default values:
+\newcommand{\PaGaugeSample}{\PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}}%
+\PaGaugeSample%
+
+% Define a strut with the desired dimensions:
+\newcommand{\PaStrut}{{\color{blue}\vrule height\PaStrutHeight width\PaStrutWidth depth\PaStrutDepth}}
 
 \newcommand{\PaLeft}[3]{{%
   \settowidth{\PaTextWidth}{#3{\PaStrut}}
@@ -78,7 +78,17 @@
     \end{textblock*}%
   }}
 
+\newcommand{\PaShow}{%
+  \TPshowboxestrue%
+  \PaStrutWidth=0.5mm%
+  }
 
+\newcommand{\PaHide}{%
+  \TPshowboxesfalse%
+  \PaStrutWidth=0.1mm%
+  }
+
+\PaHide
 
 % You may give a optional argument to the \Lenv{textblock}
 % environment, specifying which point in the box

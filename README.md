@@ -44,7 +44,9 @@ and the edge of paper as reference points.
 
 XXXXXX loads `textpos` as
 
-    \usepackage[absolute,overlay]{textpos}
+````latex
+\usepackage[absolute,overlay]{textpos}
+````
 
 so all material will be absolutely positioned (rather than relative to the current point of insertion), and
 put on top of ecerything (?) else on the page. The latter option has been chosen to ensure `pagegrid`s will
@@ -65,16 +67,29 @@ The 'badge' of this style is `Pa`; it defines the following items:
 
 Use `\PaGauge{...}` like
 
-    \PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!§\$}
+````latex
+\PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}
+````
+
+or simply
+
+````latex
+\PaGaugeSample
+````
 
 in a suitable place of your document with a suitable sample of characters to have PA determine the
 dimensions `\PaStrutHeight`, `\PaStrutDepth`, and the ratio
 
-    \PaHeightDepthRatio = \PaStrutHeight / ( \PaStrutHeight + \PaStrutDepth )
+````latex
+\PaHeightDepthRatio = \PaStrutHeight / ( \PaStrutHeight + \PaStrutDepth )
+````
 
 which it will use to determine where the baseline of the specific font lies. Needless to say that you should
 make sure that both your character sample is representative and that the font that `\PaGauge` implicitly
 uses is the same that will appear in your positioned material. `\PaGauge` does not produce any output.
+
+Observe that while loading this style will execute `PaGauge` as shown above to determine suitable default
+values, they will at best be approximate in case you change fonts later in your document setup.
 
 
 
