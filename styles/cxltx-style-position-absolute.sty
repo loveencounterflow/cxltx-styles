@@ -7,85 +7,85 @@
 % see http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
 \ProvidesPackage{cxltx-style-position-absolute}
 \usepackage[absolute,overlay]{textpos}
-\usepackage{calc}% http://ctan.org/pkg/calc
-\usepackage{fp}% http://ctan.org/pkg/fp
-\usepackage{changepage}% http://ctan.org/pkg/changepage
+\usepackage{calc}%          http://ctan.org/pkg/calc
+\usepackage{fp}%            http://ctan.org/pkg/fp
+\usepackage{changepage}%    http://ctan.org/pkg/changepage
 
-% % Set Horizontal and vertical modules:
-% \setlength{\TPHorizModule}{1mm}
-% \setlength{\TPVertModule}{1mm}
+\makeatletter
 
-% set origin for absolutely positioned `textblock`s
-% (set to upper left corner of main printing area):
-% \textblockorigin{0mm}{0mm}%
+% Commands / values to keep track of coordinates origin characteristics:
+\newcommand{\@paLeftMargin}{null}
+\newcommand{\@paTopMargin}{null}
 
-\def\paOddLeftMargin{}
-\def\paEvenLeftMargin{}
-\def\paTopMargin{}
+% Records type of origin (`paper`, `text`, or `custom ($x,$y)`)
+\newcommand{\paOriginIs}{null}
 
+% An alias for `textpos` `\textblockorigin`:
+\newcommand{\paOriginTo}[2]{%
+  \textblockorigin{#1}{#2}%
+  \renewcommand{\paOriginIs}{custom (#1,#2)}%
+  }
+
+% Helper token:
+\newcommand{\@paTextToken}{text}
+
+% Set origin to paper edge:
 \newcommand{\paOriginToPaper}{%
   \textblockorigin{0mm}{0mm}%
+  \renewcommand{\paOriginIs}{paper}%
   }
 
-\newcommand{\paOriginToOddText}{}
-\newcommand{\paOriginToEvenText}{}
-
+% Check whether we're on an odd or an even page, and set `\paCurrentOddEven` to `odd` or `even`:
+\newcommand{\@paSetOrigin}{
+  \ifx\paOriginIs\@paTextToken%
+    \FPeval{\@paTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
+    \strictpagecheck\checkoddpage\ifoddpage%
+      \FPeval{\@paLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
+    \else%
+      \FPeval{\@paLeftMargin}{(\number\evensidemargin+4736286)/186467}%
+    \fi%
+    \textblockorigin{\@paLeftMargin mm}{\@paTopMargin mm}%
+  \fi%
+  }
 
 \newcommand{\paOriginToText}{%
-  \FPeval{\paOddLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
-  \FPeval{\paEvenLeftMargin}{(\number\evensidemargin+4736286)/186467}%
-  \FPeval{\paTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
-% ### TAINT this is wrong on more than one level:
-  \renewcommand{\paOriginToOddText}{\textblockorigin{\paOddLeftMargin mm}{\paTopMargin mm}}%
-  \renewcommand{\paOriginToEvenText}{\textblockorigin{\paEvenLeftMargin mm}{\paTopMargin mm}}%
+  \renewcommand{\paOriginIs}{text}%
   }
 
-\paOriginToText
-\paOriginToPaper
 
 % Define strut dimensions:
-\newdimen\paStrutHeight
-\newdimen\paStrutWidth
-\newdimen\paStrutDepth
-\paStrutWidth=0mm
-\paStrutHeight=0mm
-\paStrutDepth=0mm
+\newdimen\@paStrutHeight
+\newdimen\@paStrutWidth
+\newdimen\@paStrutDepth
+\@paStrutWidth=0mm
+\@paStrutHeight=0mm
+\@paStrutDepth=0mm
 
 % Define text dimensions:
-\newdimen\paTextWidth
+\newdimen\@paTextWidth
 
 % Remove horizontal and vertical spacing from paragraphs; curiously, we have to use a negative value for
 % `\parskip` (see http://http://tex.stackexchange.com/questions/167628):
-\newcommand{\paNoSpacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
+\newcommand{\@paNoSpacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
 
 % Determine locally valid strut dimensions:
 \newcommand{\paGauge}[1]{%
-  \settoheight{\paStrutHeight}{#1}%
-  \settodepth{\paStrutDepth}{#1}%
-  \FPeval{\paHeightDepthRatio}{\number\paStrutHeight/(\number\paStrutHeight+\number\paStrutDepth)}%
+  \settoheight{\@paStrutHeight}{#1}%
+  \settodepth{\@paStrutDepth}{#1}%
+  \FPeval{\paHeightDepthRatio}{\number\@paStrutHeight/(\number\@paStrutHeight+\number\@paStrutDepth)}%
   }
 
 % Run gauging macro once to set default values:
 \newcommand{\paGaugeSample}{\paGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}}%
-\paGaugeSample%
 
 % Define a strut with the desired dimensions:
-\newcommand{\paStrut}{{\color{blue}\vrule height\paStrutHeight width\paStrutWidth depth\paStrutDepth}}
-
-\newcommand{\paOriginToTextOddOrEven}
-  \strictpagecheck%
-  \checkoddpage%
-  \ifoddpage%
-    \paOriginToOddText%
-  \else%
-    \paOriginToEvenText%
-  \fi%
+\newcommand{\paStrut}{{\color{blue}\vrule height\@paStrutHeight width\@paStrutWidth depth\@paStrutDepth}}
 
 \newcommand{\paLeft}[3]{{%
-  \paOriginToTextOddOrEven%
-  \settowidth{\paTextWidth}{#3{\paStrut}}
-  \begin{textblock*}{\paTextWidth}[0,\paHeightDepthRatio](#1,#2)%
-    \paNoSpacing%
+  \@paSetOrigin%
+  \settowidth{\@paTextWidth}{#3{\paStrut}}
+  \begin{textblock*}{\@paTextWidth}[0,\paHeightDepthRatio](#1,#2)%
+    \@paNoSpacing%
     \flushleft% needed although it should be gratuitous
     #3%
     {\paStrut}%
@@ -93,10 +93,10 @@
   }}
 
 \newcommand{\paCenter}[3]{{%
-  \paOriginToTextOddOrEven%
-  \settowidth{\paTextWidth}{{\paStrut}#3{\paStrut}}
-  \begin{textblock*}{\paTextWidth}[0.5,\paHeightDepthRatio](#1,#2)%
-    \paNoSpacing%
+  \@paSetOrigin%
+  \settowidth{\@paTextWidth}{{\paStrut}#3{\paStrut}}
+  \begin{textblock*}{\@paTextWidth}[0.5,\paHeightDepthRatio](#1,#2)%
+    \@paNoSpacing%
     \center%
     {\paStrut}%
     #3%
@@ -105,10 +105,10 @@
   }}
 
 \newcommand{\paRight}[3]{{%
-  \paOriginToTextOddOrEven%
-  \settowidth{\paTextWidth}{{\paStrut}#3}
-  \begin{textblock*}{\paTextWidth}[1,\paHeightDepthRatio](#1,#2)%
-    \paNoSpacing%
+  \@paSetOrigin%
+  \settowidth{\@paTextWidth}{{\paStrut}#3}
+  \begin{textblock*}{\@paTextWidth}[1,\paHeightDepthRatio](#1,#2)%
+    \@paNoSpacing%
     \flushright% needed although it should be gratuitous
     {\paStrut}%
     #3%
@@ -119,17 +119,22 @@
   \textblockrulecolour{orange}
   \TPboxrulesize=0.2mm%
   \TPshowboxestrue%
-  \paStrutWidth=0.8mm%
+  \@paStrutWidth=0.8mm%
   }
 
-% There would appear to be a bug / arcane and as yet undocumented feature in `textpos` which causes boxes to
+% It would appear there is a bug / arcane and undocumented feature in `textpos` which causes boxes to
 % vertically shift upon execution of `\TPshowboxesfalse`. We remedy that by *always* 'showing' boxes but
-% setting rule width to zero.
+% setting rule width to zero:
 \newcommand{\paHide}{%
   \TPboxrulesize=0mm%
   \TPshowboxestrue%
-  \paStrutWidth=0mm%
+  \@paStrutWidth=0mm%
   }
 
-\paHide
+% Default settings:
+\paHide%
+\paGaugeSample%
+\paOriginToText%
 
+% kthxbye:
+\makeatother

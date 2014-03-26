@@ -1,5 +1,22 @@
 
 \documentclass[a5paper]{memoir}
+\usepackage[
+  xetex,
+  showframe,
+  left=20mm,
+  right=10mm,
+  top=9mm,
+  bottom=12mm,
+  headsep=1mm,
+  footskip=5mm,
+  marginparsep=1mm,
+  marginparwidth=14mm,
+  headheight=5mm,
+  includehead,
+  includefoot,
+  paperwidth=148mm,
+  paperheight=210mm]{geometry}
+
 \usepackage{cxltx-style-base}
 \usepackage{cxltx-style-position-absolute}
 \usepackage[top-left]{pagegrid}
@@ -8,7 +25,7 @@
 
 \paGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}
 \paShow
-\paOriginToPaper
+% \paOriginToPaper
 \paOriginToText
 % \paOriginTo{10mm}{10mm}
 
@@ -19,14 +36,35 @@
 
 \null\newpage
 
-\paOriginToText
-\the\oddsidemargin\\
-\the\evensidemargin
+% \paOriginToText
+% \the\oddsidemargin\\
+% \the\evensidemargin
+
+\paOriginIs
+
 
 \paCenter{0mm}{0mm}{o}
 \paLeft{40mm}{10mm}{this text starts at 40mm}
 \paCenter{40mm}{15mm}{centered centered}
 \paRight{40mm}{20mm}{this text ends at 40mm}
+
+% \null\newpage
+
+% helo
+
+% \def\texttoken{text}
+% \def\x{text}
+
+% \texttoken, \x
+
+% \ifx\x\texttoken
+% It's 'text'
+% \fi
+
+
+
+
+
 
 \end{document}
 
