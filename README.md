@@ -51,8 +51,10 @@ XXXXXX loads `textpos` as
 ````
 
 so all material will be absolutely positioned (rather than relative to the current point of insertion), and
-put on top of ecerything (?) else on the page. The latter option has been chosen to ensure `pagegrid`s will
-not cover material typeset with Position Absolute.
+put on top of everything (?) else on the page.
+
+> The latter option has been chosen to ensure `pagegrid`s will
+> not cover material typeset with Position Absolute.
 
 PA uses the starred form, `\begin{textblock*}... \end{textblock*}`, which means that all dimensions must be
 given as lengths rather than as pure numbers. I feel this is an advantage, as (1) pure numbers are only
