@@ -19,117 +19,117 @@
 % (set to upper left corner of main printing area):
 % \textblockorigin{0mm}{0mm}%
 
-\def\PaOddLeftMargin{}
-\def\PaEvenLeftMargin{}
-\def\PaTopMargin{}
+\def\paOddLeftMargin{}
+\def\paEvenLeftMargin{}
+\def\paTopMargin{}
 
-\newcommand{\PaOriginToPaper}{%
+\newcommand{\paOriginToPaper}{%
   \textblockorigin{0mm}{0mm}%
   }
 
-\newcommand{\PaOriginToOddText}{}
-\newcommand{\PaOriginToEvenText}{}
+\newcommand{\paOriginToOddText}{}
+\newcommand{\paOriginToEvenText}{}
 
 
-\newcommand{\PaOriginToText}{%
-  \FPeval{\PaOddLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
-  \FPeval{\PaEvenLeftMargin}{(\number\evensidemargin+4736286)/186467}%
-  \FPeval{\PaTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
+\newcommand{\paOriginToText}{%
+  \FPeval{\paOddLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
+  \FPeval{\paEvenLeftMargin}{(\number\evensidemargin+4736286)/186467}%
+  \FPeval{\paTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
 % ### TAINT this is wrong on more than one level:
-  \renewcommand{\PaOriginToOddText}{\textblockorigin{\PaOddLeftMargin mm}{\PaTopMargin mm}}%
-  \renewcommand{\PaOriginToEvenText}{\textblockorigin{\PaEvenLeftMargin mm}{\PaTopMargin mm}}%
+  \renewcommand{\paOriginToOddText}{\textblockorigin{\paOddLeftMargin mm}{\paTopMargin mm}}%
+  \renewcommand{\paOriginToEvenText}{\textblockorigin{\paEvenLeftMargin mm}{\paTopMargin mm}}%
   }
 
-\PaOriginToText
-\PaOriginToPaper
+\paOriginToText
+\paOriginToPaper
 
 % Define strut dimensions:
-\newdimen\PaStrutHeight
-\newdimen\PaStrutWidth
-\newdimen\PaStrutDepth
-\PaStrutWidth=0mm
-\PaStrutHeight=0mm
-\PaStrutDepth=0mm
+\newdimen\paStrutHeight
+\newdimen\paStrutWidth
+\newdimen\paStrutDepth
+\paStrutWidth=0mm
+\paStrutHeight=0mm
+\paStrutDepth=0mm
 
 % Define text dimensions:
-\newdimen\PaTextWidth
+\newdimen\paTextWidth
 
 % Remove horizontal and vertical spacing from paragraphs; curiously, we have to use a negative value for
 % `\parskip` (see http://http://tex.stackexchange.com/questions/167628):
-\newcommand{\PaNoSpacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
+\newcommand{\paNoSpacing}{\setlength{\parskip}{-\baselineskip}\setlength{\parindent}{0pt}}
 
 % Determine locally valid strut dimensions:
-\newcommand{\PaGauge}[1]{%
-  \settoheight{\PaStrutHeight}{#1}%
-  \settodepth{\PaStrutDepth}{#1}%
-  \FPeval{\PaHeightDepthRatio}{\number\PaStrutHeight/(\number\PaStrutHeight+\number\PaStrutDepth)}%
+\newcommand{\paGauge}[1]{%
+  \settoheight{\paStrutHeight}{#1}%
+  \settodepth{\paStrutDepth}{#1}%
+  \FPeval{\paHeightDepthRatio}{\number\paStrutHeight/(\number\paStrutHeight+\number\paStrutDepth)}%
   }
 
 % Run gauging macro once to set default values:
-\newcommand{\PaGaugeSample}{\PaGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}}%
-\PaGaugeSample%
+\newcommand{\paGaugeSample}{\paGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}}%
+\paGaugeSample%
 
 % Define a strut with the desired dimensions:
-\newcommand{\PaStrut}{{\color{blue}\vrule height\PaStrutHeight width\PaStrutWidth depth\PaStrutDepth}}
+\newcommand{\paStrut}{{\color{blue}\vrule height\paStrutHeight width\paStrutWidth depth\paStrutDepth}}
 
-\newcommand{\PaOriginToTextOddOrEven}
+\newcommand{\paOriginToTextOddOrEven}
   \strictpagecheck%
   \checkoddpage%
   \ifoddpage%
-    \PaOriginToOddText%
+    \paOriginToOddText%
   \else%
-    \PaOriginToEvenText%
+    \paOriginToEvenText%
   \fi%
 
-\newcommand{\PaLeft}[3]{{%
-  \PaOriginToTextOddOrEven%
-  \settowidth{\PaTextWidth}{#3{\PaStrut}}
-  \begin{textblock*}{\PaTextWidth}[0,\PaHeightDepthRatio](#1,#2)%
-    \PaNoSpacing%
+\newcommand{\paLeft}[3]{{%
+  \paOriginToTextOddOrEven%
+  \settowidth{\paTextWidth}{#3{\paStrut}}
+  \begin{textblock*}{\paTextWidth}[0,\paHeightDepthRatio](#1,#2)%
+    \paNoSpacing%
     \flushleft% needed although it should be gratuitous
     #3%
-    {\PaStrut}%
+    {\paStrut}%
     \end{textblock*}%
   }}
 
-\newcommand{\PaCenter}[3]{{%
-  \PaOriginToTextOddOrEven%
-  \settowidth{\PaTextWidth}{{\PaStrut}#3{\PaStrut}}
-  \begin{textblock*}{\PaTextWidth}[0.5,\PaHeightDepthRatio](#1,#2)%
-    \PaNoSpacing%
+\newcommand{\paCenter}[3]{{%
+  \paOriginToTextOddOrEven%
+  \settowidth{\paTextWidth}{{\paStrut}#3{\paStrut}}
+  \begin{textblock*}{\paTextWidth}[0.5,\paHeightDepthRatio](#1,#2)%
+    \paNoSpacing%
     \center%
-    {\PaStrut}%
+    {\paStrut}%
     #3%
-    {\PaStrut}%
+    {\paStrut}%
     \end{textblock*}%
   }}
 
-\newcommand{\PaRight}[3]{{%
-  \PaOriginToTextOddOrEven%
-  \settowidth{\PaTextWidth}{{\PaStrut}#3}
-  \begin{textblock*}{\PaTextWidth}[1,\PaHeightDepthRatio](#1,#2)%
-    \PaNoSpacing%
+\newcommand{\paRight}[3]{{%
+  \paOriginToTextOddOrEven%
+  \settowidth{\paTextWidth}{{\paStrut}#3}
+  \begin{textblock*}{\paTextWidth}[1,\paHeightDepthRatio](#1,#2)%
+    \paNoSpacing%
     \flushright% needed although it should be gratuitous
-    {\PaStrut}%
+    {\paStrut}%
     #3%
     \end{textblock*}%
   }}
 
-\newcommand{\PaShow}{%
+\newcommand{\paShow}{%
   \textblockrulecolour{orange}
   \TPboxrulesize=0.2mm%
   \TPshowboxestrue%
-  \PaStrutWidth=0.8mm%
+  \paStrutWidth=0.8mm%
   }
 
 % There would appear to be a bug / arcane and as yet undocumented feature in `textpos` which causes boxes to
 % vertically shift upon execution of `\TPshowboxesfalse`. We remedy that by *always* 'showing' boxes but
 % setting rule width to zero.
-\newcommand{\PaHide}{%
+\newcommand{\paHide}{%
   \TPboxrulesize=0mm%
   \TPshowboxestrue%
-  \PaStrutWidth=0mm%
+  \paStrutWidth=0mm%
   }
 
-\PaHide
+\paHide
 
