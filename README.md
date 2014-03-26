@@ -78,9 +78,9 @@ the `y` position (growing from the top to the bottom), and the content of the bo
 Here are some samples:
 
 ````latex
-\PaLeft{40mm}{40mm}{this text starts at 40mm}
-\PaCenter{40mm}{50mm}{centered centered}
-\PaRight{40mm}{60mm}{this text ends at 40mm}
+\PaLeft{40mm}{10mm}{this text starts at 40mm}
+\PaCenter{40mm}{15mm}{centered centered}
+\PaRight{40mm}{20mm}{this text ends at 40mm}
 ````
 
 which produces (with `\usepackage[top-left]{pagegrid}` in the preamble):
