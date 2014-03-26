@@ -174,37 +174,47 @@ middle. No surprises here, which is really the purpose of this package!
 <!-- ................................................................................................... -->
 #### paGauge
 
-Use `\paGauge{...}` like
+CXLTX Position Absolute promises to deliver text positioned with respect to the *baseline* of the text. Now
+the baseline is a fickle thing that is different from font to font. There are two ways to get the baseline
+right: either ask PA to do it for you, or else do it yourself. The easy way first: use `\paGauge{...}` like
 
 ````latex
 \paGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}
 ````
 
-or simply
+(using a suitable selection of characters) or simply
 
 ````latex
 \paGaugeSample
 ````
 
-(which will use the sample shown above) in a suitable place of your document with a suitable sample of
-characters to have PA determine the dimensions `\paStrutHeight`, `\paStrutDepth`, and the ratio
+(which will use the sample shown above) in your document to have PA determine the (internal) dimensions
+`\@paStrutHeight`, `\@paStrutDepth`, and the ratio
 
 ````latex
-\paHeightDepthRatio = \paStrutHeight / ( \paStrutHeight + \paStrutDepth )
+\@paHeightDepthRatio = \@paStrutHeight / ( \@paStrutHeight + \@paStrutDepth )
 ````
 
-PA uses these figures to determine where the baseline of the specific font lies.
+> Needless to say that you should make sure that both your character sample is representative and that the
+> font that `\paGauge` implicitly uses is the same that will appear in your positioned material. `\paGauge`
+> does not produce any output.
 
-> Needless to say that
-> you should make sure that both your character sample is representative and that the font that `\paGauge`
-> implicitly uses is the same that will appear in your positioned material. `\paGauge` does not produce any
-> output.
+**Observe that while loading this style will run `paGaugeSample` as shown above, dimensions will at best be
+approximate in case you change fonts later in your document setup.**
 
-Observe that while loading this style will run `paGaugeSample` as shown above, dimensions will at best be
-approximate in case you change fonts later in your document setup.
+> You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protuding
+> heights and depths in your PA textboxes.
 
-You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protuding
-heights and depths in your PA textboxes.
+Now for the hard way: if you find you want to do it yourself (maybe because you're mixing typefaces on the
+positioned line), you're free to add something like
+
+````latex
+\paSetStrut{4mm}{3mm}
+````
+
+which will both set the strut's height (the first argument) and depth (the second argument) and calculate
+the ratio as detailed above to find the baseline. This feature may prove useful for positioning characters
+from symbol fonts.
 
 <!-- ................................................................................................... -->
 #### paShow and paHide
@@ -229,7 +239,7 @@ Simplistic unit conversion routine; see http://tex.stackexchange.com/a/37317/280
 single command is defined:
 
 ````latex
-\ctConvertTo{mm}{\the\paStrutHeight}mm
+\ctConvertTo{mm}{\the\@paStrutHeight}mm
 ````
 
 

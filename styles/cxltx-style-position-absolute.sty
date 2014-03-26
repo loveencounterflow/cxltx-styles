@@ -72,11 +72,21 @@
 \newcommand{\paGauge}[1]{%
   \settoheight{\@paStrutHeight}{#1}%
   \settodepth{\@paStrutDepth}{#1}%
+  \@paSetHeightDepthRatio%
+  }
+
+\newcommand{\@paSetHeightDepthRatio}{%
   \FPeval{\paHeightDepthRatio}{\number\@paStrutHeight/(\number\@paStrutHeight+\number\@paStrutDepth)}%
   }
 
 % Run gauging macro once to set default values:
 \newcommand{\paGaugeSample}{\paGauge{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?§\$}}%
+
+\newcommand{\paSetStrut}[2]{%
+  \@paStrutHeight=#1%
+  \@paStrutDepth=#2%
+  \@paSetHeightDepthRatio%
+  }
 
 % Define a strut with the desired dimensions:
 \newcommand{\paStrut}{{\color{blue}\vrule height\@paStrutHeight width\@paStrutWidth depth\@paStrutDepth}}
