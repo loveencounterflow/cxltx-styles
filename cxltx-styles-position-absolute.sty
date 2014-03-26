@@ -9,6 +9,7 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{calc}% http://ctan.org/pkg/calc
 \usepackage{fp}% http://ctan.org/pkg/fp
+\usepackage{changepage}% http://ctan.org/pkg/changepage
 
 % % Set Horizontal and vertical modules:
 % \setlength{\TPHorizModule}{1mm}
@@ -16,7 +17,31 @@
 
 % set origin for absolutely positioned `textblock`s
 % (set to upper left corner of main printing area):
-\textblockorigin{0mm}{0mm}
+% \textblockorigin{0mm}{0mm}%
+
+\def\PaOddLeftMargin{}
+\def\PaEvenLeftMargin{}
+\def\PaTopMargin{}
+
+\newcommand{\PaOriginToPaper}{%
+  \textblockorigin{0mm}{0mm}%
+  }
+
+\newcommand{\PaOriginToOddText}{}
+\newcommand{\PaOriginToEvenText}{}
+
+
+\newcommand{\PaOriginToText}{%
+  \FPeval{\PaOddLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
+  \FPeval{\PaEvenLeftMargin}{(\number\evensidemargin+4736286)/186467}%
+  \FPeval{\PaTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
+% ### TAINT this is wrong on more than one level:
+  \renewcommand{\PaOriginToOddText}{\textblockorigin{\PaOddLeftMargin mm}{\PaTopMargin mm}}%
+  \renewcommand{\PaOriginToEvenText}{\textblockorigin{\PaEvenLeftMargin mm}{\PaTopMargin mm}}%
+  }
+
+\PaOriginToText
+\PaOriginToPaper
 
 % Define strut dimensions:
 \newdimen\PaStrutHeight
@@ -47,7 +72,17 @@
 % Define a strut with the desired dimensions:
 \newcommand{\PaStrut}{{\color{blue}\vrule height\PaStrutHeight width\PaStrutWidth depth\PaStrutDepth}}
 
+\newcommand{\PaOriginToTextOddOrEven}
+  \strictpagecheck%
+  \checkoddpage%
+  \ifoddpage%
+    \PaOriginToOddText%
+  \else%
+    \PaOriginToEvenText%
+  \fi%
+
 \newcommand{\PaLeft}[3]{{%
+  \PaOriginToTextOddOrEven%
   \settowidth{\PaTextWidth}{#3{\PaStrut}}
   \begin{textblock*}{\PaTextWidth}[0,\PaHeightDepthRatio](#1,#2)%
     \PaNoSpacing%
@@ -58,6 +93,7 @@
   }}
 
 \newcommand{\PaCenter}[3]{{%
+  \PaOriginToTextOddOrEven%
   \settowidth{\PaTextWidth}{{\PaStrut}#3{\PaStrut}}
   \begin{textblock*}{\PaTextWidth}[0.5,\PaHeightDepthRatio](#1,#2)%
     \PaNoSpacing%
@@ -69,6 +105,7 @@
   }}
 
 \newcommand{\PaRight}[3]{{%
+  \PaOriginToTextOddOrEven%
   \settowidth{\PaTextWidth}{{\PaStrut}#3}
   \begin{textblock*}{\PaTextWidth}[1,\PaHeightDepthRatio](#1,#2)%
     \PaNoSpacing%

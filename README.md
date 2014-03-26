@@ -38,8 +38,8 @@ that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 <!-- =================================================================================================== -->
 ### CXLTX Style: Position Absolute
 
-CXLTX Position Absolute (PA) is based on
-[textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf), it is intended to make it
+*CXLTX Position Absolute* (PA) is based on
+[textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf). It is intended to make it
 easy (even easier than using `textpos` directly) to position single lines of text onto
 the page, using absolute coordinates that take the left edge, the center point, or the right edge of the
 baseline of the text and the edge of the paper (or the text area) as reference points.
