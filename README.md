@@ -254,8 +254,8 @@ case that while *you* know you did put printing stuff onto the page, TeX (rather
 be blithely unaware of that—which matters as soon as you have a page full of absolutely positioned material
 and nothing else, and you want to use `\newpage` to advance to the next page.
 
-Mind you, LaTeX in all its incredibly convoluted glory that is hardly adequately described by adjectives
-such as 'baroque' or even 'byzantine' does care for you! It keeps you from comitting grave errors such as
+Mind you, LaTeX in all its incredibly convoluted glory—hardly adequately described by adjectives
+such as 'baroque' or even 'byzantine'—*does care for you*! It keeps you from comitting grave errors such as
 emitting blank sheets of paper! I mean, you'd totally loose your street cred if that should ever happen to
 you, in the Data Center, with everyone and the staff looking at you, Waster of Computing Cycles! And Paper!!
 
