@@ -214,9 +214,15 @@ positioned line), you're free to add something like
 
 which will both set the strut's height (the first argument) and depth (the second argument) and calculate
 the ratio as detailed above to find the baseline. This feature may prove useful for positioning characters
-from symbol fonts.
+from symbol fonts. For people who haven't heard of height and depth in type, here's a picture to clarify
+those concepts:
 
 ![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/height-and-depth.png)
+
+You can see that the 'height' is the length that a given text extends *above* the baseline (i.e. the
+one in the middle) and the 'depth' is the length that it it extends *below* the same. Now `textpos` wants
+to know the *ratio w.r.t the total height* (that is, `height + depth`) to position its point of reference,
+reckoned from the top—which is, of course, `ratio = height / ( height + depth )`.
 
 **Note** To obtain a correct positioning of text boxes, only the *relative* height and depth of the strut
 are important. Since material typeset with PA does not 'take space' on the page (i.e. it can overlap with
