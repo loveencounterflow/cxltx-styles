@@ -265,7 +265,7 @@ You can use
 ````
 
 respectively to show or hide the boxes and the struts that are used by PA. In case you want to muck with
-their default appearances (a box with slender, almost elegant outlines, whose creamy orange tint contrasts
+their default appearances (boxes with slender, elegant outlines, whose creamy orange tint contrasts
 gleefully with the sober marina blue of the rather sturdy struts that adorn each typeset line), refer to the
 [source](https://github.com/loveencounterflow/cxltx-styles/blob/master/cxltx-styles-position-absolute.sty).
 Use `\paShow` and `\usepackage[top-left]{pagegrid}` to debug your PA-powered document today! Experience the
