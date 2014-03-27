@@ -226,9 +226,9 @@ reference, reckoned from the top—which is, of course, `ratio = height / ( heig
 
 **Note** To obtain a correct positioning of text boxes, only the *relative* height and depth of the strut
 are important. Since material typeset with PA does not 'take space' on the page (i.e. it can overlap with
-other material, just as a `<div/>` with CSS style `position: absolute` would), the absolute height of the
-struts (as long as it equal to or greater than the height and depth of any material within the box) is of
-little consequence.—Which brings us to the final point to discuss.
+other material, just as a HTML `<div/>` with CSS style `position: absolute` would), the absolute height of
+the struts (as long as it equal to or greater than the height and depth of any material within the box) is
+of little consequence.—Which brings us to the final point to discuss.
 
 ### Absolute Positioning and Page Breaks
 
