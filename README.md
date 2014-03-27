@@ -7,7 +7,7 @@
 			- [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
 			- [paRight, paCenter, and paLeft](#paright-pacenter-and-paleft)
 			- [paGauge](#pagauge)
-		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
+			- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
 			- [paShow and paHide](#pashow-and-pahide)
 		- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 
@@ -245,7 +245,7 @@ other material, just as a HTML `<div/>` with CSS style `position: absolute` woul
 the struts (as long as it equal to or greater than the height and depth of any material within the box) is
 of little consequence.—Which brings us to the next point.
 
-### Absolute Positioning and Page Breaks
+#### Absolute Positioning and Page Breaks
 
 As said in the preceding paragraph, material typeset with PA does not take space on the page—it may overlap
 without triggering any line justification or word hyphenation action. Since this is so, it may also be the
