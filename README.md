@@ -183,7 +183,7 @@ The coordinate system origin and the direction of ascending values is indicated 
 each text box comes with one or two 'struts' (the blue bars) that regulate box heights.
 
 You can also see that `\paRight` produces a text (the bottommost line) that is set flush right against the
-`x = 40mm` vertical, while `\paLeft` text (the topmpost one) is set flush left against the same; `paCenter`
+`x = 40mm` vertical, while `\paLeft` text (the topmost one) is set flush left against the same; `paCenter`
 centers the text horizontally so the 40mm mark lands smack in the middle. No surprises here, which is really
 the purpose of this package! (The boxes and struts are only shown for demonstration; they're of course
 absent from the output unless you state to `\paShow` them.)
