@@ -199,8 +199,8 @@ right: either ask PA to do it for you, or else do it yourself. The easy way firs
 > font that `\paGauge` implicitly uses is the same that will appear in your positioned material. `\paGauge`
 > does not produce any output.
 
-**Observe that while loading this style will run `paGaugeSample` as shown above, dimensions will at best be
-approximate in case you change fonts later in your document setup.**
+**Observe that while `\usepackage{cxltx-style-position-absolute}` will run `paGaugeSample` implicitly,
+dimensions will at best be approximate in case you change fonts later in your document setup.**
 
 > You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protuding
 > heights and depths in your PA textboxes.
@@ -215,6 +215,36 @@ positioned line), you're free to add something like
 which will both set the strut's height (the first argument) and depth (the second argument) and calculate
 the ratio as detailed above to find the baseline. This feature may prove useful for positioning characters
 from symbol fonts.
+
+**Note** To obtain a correct positioning of text boxes, only the *relative* height and depth of the strut
+are important. Since material typeset with PA does not 'take space' on the page (i.e. it can overlap with
+other material, just as a `<div/>` with CSS style `position: absolute` would), the absolute height of the
+struts (as long as it equal to or greater than the height and depth of any material within the box) is of
+little consequence.—Which brings us to the final point to discuss.
+
+### Absolute Positioning and Page Breaks
+
+As said in the preceding paragraph, material typeset with PA does not take space on the page—it may overlap
+without triggering any line justification or word hyphenation action. Since this is so, it may also be the
+case that while you know you put printing stuff unto the page, TeX may all the while be blithely unaware of
+that—which matters as soon as you have a page full of absolutely positioned material and use `\newpage` to
+go the next page.
+
+Mind you, LaTeX in all its incredibly convoluted glory that is hardly adequately described by adjectives
+such as 'baroque' or even 'byzantine' does care for you! It keeps you from comitting grave errors such as
+emitting blank sheets of paper! I mean, you'd totally loose your street cred if that should ever happen to
+you, in the Data Center, with everyone and the staff looking at you, Waster of Computing Cycles! And Paper!!
+
+I know i know. Anyhows, remember this: always use
+
+````latex
+\null\newpage
+````
+
+when in doubt whether there was non-PA material on that page, but *not* in doubt that a new page is what you
+want (there's probably a gazillion other methods documented how to get that new page but i like the
+non-chalant understatement of this particular incantation).
+
 
 <!-- ................................................................................................... -->
 #### paShow and paHide
