@@ -100,9 +100,9 @@ put on top of everything (?) else on the page.
 > not cover material typeset with Position Absolute.
 
 PA uses the starred form of the `textblock` environment, `\begin{textblock*}... \end{textblock*}`, which
-means that **all dimensions must be given as lengths rather than as pure numbers**. I feel this is an
-advantage, as (1) pure numbers are only meaningful as 'abstract lengths' when used in geometry, but not as
-concrete lengths in the physical world; and (2) simple arithmetics in command arguments are only possible
+means that **all dimensions must be given as lengths rather than pure numbers**. I feel this is an
+advantage, as **(1)** pure numbers are only meaningful as 'abstract lengths' when used in geometry, but not as
+concrete lengths in the physical world; and **(2)** simple arithmetics in command arguments are only possible
 with lengths, not with numbers (`textpos` uses `calc`).
 
 The badge of this style is `pa`. PA defines the following items:
@@ -137,15 +137,22 @@ current text extent, *not* the paper. This can be done by placing
 
 somewhere near the beginning of the document (or just leave it with the default settings).
 
-**Though this option is the slowest one (because it performs a floating point calculation on each single
-text placement), i chose to make it the default one**, simply because there is good reason to think that if
-anyone uses CXLTX Position Absolute, the straightforward and reasonable handling of absolute placement *in
-the context of a real document* might be the one selling point.
+**Though this option is the slowest one (because it performs a floating point (using the venerable
+[`fp`](http://ctan.org/pkg/fp) package) calculation on each single text placement), i chose to make it the
+default one**, simply because there is good reason to think that if anyone uses CXLTX Position Absolute, the
+straightforward and reasonable handling of absolute placement *in the context of a real document* might be
+the one selling point.
 
 > The inefficiencies, where deemed unbearable, could probably be easily ironed out by caching values. **Pull
 > Request Are Awesome.** In case you consider to improve on the current state of affairs, please consider
 > that, as it stands, `\paOriginToText` *should* be able to handle intermittent layout changes gracefully,
 > although this is as yet untested.
+
+> **Update** I can now confirm (doing test runs of [CND Tides](https://github.com/loveencounterflow
+> **/coffeenode-tides/)) that `fp` is really kind of slow—so slow it dominates total processing time.
+> Optimizations, therefore, should consider to **(1)** replace `fp` with something suitable, but faster,
+> and / or **(2)** cache intermediate results (i think one can assume layouts do not normally change within
+> a document, and when they do, it should be the responsibility of the user to tell PA of the fact).
 
 **Important**: in case you want to use the default `\paOriginToText` setting, please bear in mind that since
 this option uses [`changepage`](http://ctan.org/pkg/changepage), **LaTeX has to run at least twice** before
