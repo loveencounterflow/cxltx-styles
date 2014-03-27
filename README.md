@@ -1,5 +1,19 @@
 
 
+- [CXLTX Styles](#cxltx-styles)
+	- [Installation](#installation)
+		- [Badges](#badges)
+		- [CXLTX Style: Position Absolute](#cxltx-style-position-absolute)
+			- [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
+			- [paRight, paCenter, and paLeft](#paright-pacenter-and-paleft)
+			- [paGauge](#pagauge)
+		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
+			- [paShow and paHide](#pashow-and-pahide)
+		- [CXLTX Style: Convert To](#cxltx-style-convert-to)
+
+> **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+
 # CXLTX Styles
 
 An incipient and hopefully sensible collection of basic X<sub>E</sub>L<sub>A</sub>T<sub>E</sub>X style
@@ -59,16 +73,17 @@ All names of private members (which are not documented here; see the source) sta
 followed by the badge, followed by the name proper. Further, all names are written out (no surprising abbr.
 pls.) and use CamelCase (coz that dash is no-go in TeX, y'know).
 
-> Badges are necessitated by the fact that all of the huge ecosystem that is TeX & LaTeX has only one
-> single, *huge* namespace.
+> Badges are necessitated by the fact that all of the huge ecosystem that is TeX & LaTeX lives within one
+> single, *enormous* namespace. There's not even so much as a stringent convention to minimize chances of
+> naming collisions
 
 
 <!-- =================================================================================================== -->
 ### CXLTX Style: Position Absolute
 
 *CXLTX Position Absolute* (PA) is based on
-[textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf). It is intended to make it
-easy (much easier than using `textpos` directly) to position single lines of text on the page, using
+[textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf). **It is intended to make it
+easy to position single lines of text on the page** (much easier than using `textpos` directly), using
 absolute coordinates that take the left edge, the center point, or the right edge of the baseline of the
 text and the edges of the paper, the text area, or custom coordinates as reference points.
 
