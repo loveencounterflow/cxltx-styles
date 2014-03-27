@@ -180,10 +180,13 @@ produces (with `\usepackage[top-left]{pagegrid}` and `\paShow` in the preamble):
 ![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/Screen%20Shot%202014-03-26%20at%2001.47.44.png)
 
 The coordinate system origin and the direction of ascending values is indicated by the arrow; observe how
-each text box comes with one or two 'struts' (the blue bars) that regulate the box heights. You can also see
-that `\paRight` produces a text that is set flush right against the `x = 40mm` vertical, while `\paLeft` is
-flush left against the same; `paCenter` centers the text horizontally so the 40mm mark lands smack in the
-middle. No surprises here, which is really the purpose of this package!
+each text box comes with one or two 'struts' (the blue bars) that regulate box heights.
+
+You can also see that `\paRight` produces a text that is set flush right against the `x = 40mm` vertical,
+while `\paLeft` is flush left against the same; `paCenter` centers the text horizontally so the 40mm mark
+lands smack in the middle. No surprises here, which is really the purpose of this package! (The boxes and
+struts are only shown for demonstration; they're of course absent from the output unless you state to
+`\paShow` them.)
 
 
 <!-- ................................................................................................... -->
