@@ -270,7 +270,10 @@ I know i know. Anyhows, remember this: always use
 
 when in doubt whether there was non-PA material on that page, but *not* in doubt that a new page is what you
 damn want (there's probably a gazillion other methods documented how to get that new page but i like the
-non-chalant understatement of this particular incantation).
+non-chalant understatement of this particular incantation. I mean, null is nought is what i'm saying, zilch,
+nuthin, right? We *can* position printing stuff and TeX will think there's nil to print, but when we
+*explicitly* tell TeX to send *nada* to output, *then* it will act like there *was* something to print. Now
+i must stop at this or i'll get all worked up again.
 
 
 <!-- ................................................................................................... -->
