@@ -228,7 +228,7 @@ reference, reckoned from the top—which is, of course, `ratio = height / ( heig
 are important. Since material typeset with PA does not 'take space' on the page (i.e. it can overlap with
 other material, just as a HTML `<div/>` with CSS style `position: absolute` would), the absolute height of
 the struts (as long as it equal to or greater than the height and depth of any material within the box) is
-of little consequence.—Which brings us to the final point to discuss.
+of little consequence.—Which brings us to the next point.
 
 ### Absolute Positioning and Page Breaks
 
@@ -250,7 +250,7 @@ I know i know. Anyhows, remember this: always use
 ````
 
 when in doubt whether there was non-PA material on that page, but *not* in doubt that a new page is what you
-want (there's probably a gazillion other methods documented how to get that new page but i like the
+damn want (there's probably a gazillion other methods documented how to get that new page but i like the
 non-chalant understatement of this particular incantation).
 
 
@@ -264,10 +264,14 @@ You can use
 \paHide
 ````
 
-respectively to show or hide the boxes and the struts that are used by PA and `textpos` to produce the
-output. In case you want to muck with their default appearances, refer to the
+respectively to show or hide the boxes and the struts that are used by PA. In case you want to muck with
+their default appearances (a box with slender, almost elegant outlines, whose creamy orange tint contrasts
+gleefully with the sober marina blue of the rather sturdy struts that adorn each typeset line), refer to the
 [source](https://github.com/loveencounterflow/cxltx-styles/blob/master/cxltx-styles-position-absolute.sty).
+Use `\paShow` and `\usepackage[top-left]{pagegrid}` to debug your PA-powered document today! Experience the
+Beauty of Simplicity! Never look back to those inferior and clumsy methods of days gone by!
 
+Enough of that.
 
 
 <!-- =================================================================================================== -->
