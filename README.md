@@ -219,10 +219,10 @@ those concepts:
 
 ![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/height-and-depth.png)
 
-You can see that the 'height' is the length that a given text extends *above* the baseline (i.e. the
-one in the middle) and the 'depth' is the length that it it extends *below* the same. Now `textpos` wants
-to know the *ratio w.r.t the total height* (that is, `height + depth`) to position its point of reference,
-reckoned from the top—which is, of course, `ratio = height / ( height + depth )`.
+You can see that the 'height' is the length that a given text extends *above* the baseline (i.e. the one in
+the middle) and the 'depth' is the length that it it extends *below* the same. Now `textpos` wants to know
+the ratio of those with respect to the *total* height (that is, `height + depth`) to position its point of
+reference, reckoned from the top—which is, of course, `ratio = height / ( height + depth )`.
 
 **Note** To obtain a correct positioning of text boxes, only the *relative* height and depth of the strut
 are important. Since material typeset with PA does not 'take space' on the page (i.e. it can overlap with
