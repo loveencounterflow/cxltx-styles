@@ -274,7 +274,7 @@ damn want.
 > There's probably a gazillion other methods documented how to get that new page but i like the non-chalant
 > understatement of this particular incantation. I mean, null is nought is what i'm saying, right?—zilch,
 > nuthin! We *can* position printing stuff and TeX will think there's nil to print!, but when we
-> *explicitly* tell TeX to send *nada* to output, *then* it will act like there *was* something to print.
+> *explicitly* tell TeX to send *nada* to output, *then* it will act like there *was* something to print...!
 > Now i must stop at this or i'll get all worked up again.
 
 
