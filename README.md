@@ -2,14 +2,14 @@
 
 - [CXLTX Styles](#cxltx-styles)
 	- [Installation](#installation)
-		- [Badges](#badges)
-		- [CXLTX Style: Position Absolute](#cxltx-style-position-absolute)
-			- [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
-			- [paRight, paCenter, and paLeft](#paright-pacenter-and-paleft)
-			- [paGauge](#pagauge)
-			- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
-			- [paShow and paHide](#pashow-and-pahide)
-		- [CXLTX Style: Convert To](#cxltx-style-convert-to)
+	- [Badges](#badges)
+	- [CXLTX Style: Position Absolute](#cxltx-style-position-absolute)
+		- [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
+		- [paRight, paCenter, and paLeft](#paright-pacenter-and-paleft)
+		- [paGauge](#pagauge)
+		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
+		- [paShow and paHide](#pashow-and-pahide)
+	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 
 > **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
@@ -65,7 +65,7 @@ that location using `mkdir -p ~/texmf/tex/latex`. Confusing it certainly is.
 
 
 <!-- =================================================================================================== -->
-### Badges
+## Badges
 
 Each CXLTX Style has a particular 'badge', i.e. a prefix, prepended to each of the names defined in that
 style. Badges are mostly two lowercase letters out of `[a-z]` that are reminiscent of the style's name.
@@ -79,7 +79,7 @@ pls.) and use CamelCase (coz that dash is no-go in TeX, y'know).
 
 
 <!-- =================================================================================================== -->
-### CXLTX Style: Position Absolute
+## CXLTX Style: Position Absolute
 
 *CXLTX Position Absolute* (PA) is based on
 [textpos](http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf). **It is intended to make it
@@ -108,7 +108,7 @@ with lengths, not with numbers (`textpos` uses `calc`).
 The badge of this style is `pa`. PA defines the following items:
 
 <!-- ................................................................................................... -->
-#### paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs
+### paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs
 
 These commands are all concerned with the origin (the reference point) of the measurements you will want to
 give when using `\paRight`, `\paCenter`, or `\paLeft` (for which see below).
@@ -157,7 +157,7 @@ default), `page`, or some `custom (20mm,25mm)` (for the first example, above).
 With these considerations out of the way, let's have a look at how to actually put stuff onto the page.
 
 <!-- ................................................................................................... -->
-#### paRight, paCenter, and paLeft
+### paRight, paCenter, and paLeft
 
 These are the basic commands to place printing material onto absolute positions; unlike their counterpart
 in `textpos` (the `textblock` environment), each takes three regular arguments, namely, the `x` position,
@@ -187,7 +187,7 @@ middle. No surprises here, which is really the purpose of this package!
 
 
 <!-- ................................................................................................... -->
-#### paGauge
+### paGauge
 
 CXLTX Position Absolute promises to deliver text positioned with respect to the *baseline* of the text. Now
 the baseline is a fickle thing that is different from font to font. There are two ways to get the baseline
@@ -245,7 +245,8 @@ other material, just as a HTML `<div/>` with CSS style `position: absolute` woul
 the struts (as long as it equal to or greater than the height and depth of any material within the box) is
 of little consequence.—Which brings us to the next point.
 
-#### Absolute Positioning and Page Breaks
+<!-- ................................................................................................... -->
+### Absolute Positioning and Page Breaks
 
 As said in the preceding paragraph, material typeset with PA does not take space on the page—it may overlap
 without triggering any line justification or word hyphenation action. Since this is so, it may also be the
@@ -270,7 +271,7 @@ non-chalant understatement of this particular incantation).
 
 
 <!-- ................................................................................................... -->
-#### paShow and paHide
+### paShow and paHide
 
 You can use
 
@@ -290,7 +291,7 @@ Enough of that.
 
 
 <!-- =================================================================================================== -->
-### CXLTX Style: Convert To
+## CXLTX Style: Convert To
 
 Simplistic unit conversion routine; see http://tex.stackexchange.com/a/37317/28067. Badge is `ct`; a
 single command is defined:
