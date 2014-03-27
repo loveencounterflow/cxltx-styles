@@ -216,6 +216,8 @@ which will both set the strut's height (the first argument) and depth (the secon
 the ratio as detailed above to find the baseline. This feature may prove useful for positioning characters
 from symbol fonts.
 
+![](https://raw.githubusercontent.com/loveencounterflow/cxltx-styles/master/art/height-and-depth.png)
+
 **Note** To obtain a correct positioning of text boxes, only the *relative* height and depth of the strut
 are important. Since material typeset with PA does not 'take space' on the page (i.e. it can overlap with
 other material, just as a `<div/>` with CSS style `position: absolute` would), the absolute height of the
