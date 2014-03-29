@@ -10,6 +10,7 @@
 		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
 		- [paShow and paHide](#pashow-and-pahide)
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
+	- [CXLTX Style: Equals](#cxltx-style-equals)
 
 > **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
@@ -29,6 +30,7 @@ sheets.
 \usepackage{cxltx-style-multimulti}           % multiple columns and rows on pages and in tables
 \usepackage{cxltx-style-position-absolute}    % absolute textpositioning
 \usepackage{cxltx-style-convert-to}           % simplistic unit conversion
+\usepackage{cxltx-style-equals}               % equality testing made easy
 ````
 
 
@@ -315,6 +317,55 @@ single command is defined:
 \ctConvertTo{mm}{\the\@paStrutHeight}mm
 ````
 
+
+<!-- =================================================================================================== -->
+## CXLTX Style: Equals
+
+Routines to do equality checks. The badge is `eq`. Currently, a single command is defined:
+
+````latex
+\eqTextEquals{$valueOne}{$valueTwo}{if branch}{else branch}
+````
+
+`\eqTextEquals` checks whether `$valueOne` and `$valueTwo` are equal strings or expand to equal strings; as
+such, it combines the functionalities of `\ifdefstrequal`, `\ifdefstring`, and `\ifstrequal` from the
+`etoolbox` package. If we go and define the following macros:
+
+````latex
+\newcommand{\cmdA}{sometext}
+\newcommand{\cmdB}{sometext}
+\newcommand{\cmdC}{othertext}
+\def\defA{sometext}
+\def\defB{sometext}
+\def\defC{othertext}
+````
+
+then all of the following comparisons work and will print out `OK`:
+
+````latex
+\eqTextEquals{sometext}{sometext}{OK}{wrong}
+\eqTextEquals{sometext}{othertext}{wrong}{OK}
+
+\eqTextEquals{\cmdA}{sometext}{OK}{wrong}
+\eqTextEquals{\cmdA}{othertext}{wrong}{OK}
+
+\eqTextEquals{\defA}{sometext}{OK}{wrong}
+\eqTextEquals{\defA}{othertext}{wrong}{OK}
+
+\eqTextEquals{\cmdA}{\cmdB}{OK}{wrong}
+\eqTextEquals{\cmdA}{\cmdC}{wrong}{OK}
+
+\eqTextEquals{\cmdA}{\defB}{OK}{wrong}
+\eqTextEquals{\cmdA}{\defC}{wrong}{OK}
+
+\eqTextEquals{\defA}{\cmdB}{OK}{wrong}
+\eqTextEquals{\defA}{\cmdC}{wrong}{OK}
+
+\eqTextEquals{\defA}{\defB}{OK}{wrong}
+\eqTextEquals{\defA}{\defC}{wrong}{OK}
+````
+
+For more details, have a look at []
 
 
 

@@ -1,0 +1,430 @@
+
+
+\documentclass[a5paper,10pt,german]{memoir}
+\pagestyle{empty}
+\usepackage{wasysym} % provides symbols
+
+\usepackage{cxltx-style-base}
+\usepackage{cxltx-style-cjk}
+\usepackage{cxltx-style-shadequote}
+\usepackage{cxltx-style-equals}
+
+\newfontfamily\frakturFont[Scale=1]{Gotenburg A}
+\newcommand{\fraktur}[1]{\frakturFont #1}
+\newfontfamily\floralsFont[Scale=3]{IM FELL FLOWERS 1}
+\newcommand{\florals}[1]{{\center\floralsFont #1\par}}
+
+\newenvironment{verdict}{{\fraktur Verdict.}—}{\par}
+\newenvironment{advice}{{\fraktur Advice.}—}{\par}
+
+
+
+\usepackage[
+  xetex,
+  % showframe,
+  left=20mm,
+  right=20mm,
+  top=9mm,
+  bottom=12mm,
+  headsep=1mm,
+  footskip=5mm,
+  marginparsep=1mm,
+  marginparwidth=14mm,
+  headheight=5mm,
+  includehead,
+  includefoot,
+  paperwidth=148mm,
+  paperheight=210mm]{geometry}
+
+\usepackage{etoolbox}
+\parindent=0mm
+\parskip=2.5mm
+% \paGaugeSample
+
+% First, let's define some LaTeX and TeX commands with texts we want to compare:
+\newcommand{\cmdA}{sometext}
+\newcommand{\cmdB}{sometext}
+\newcommand{\cmdC}{othertext}
+\def\defA{sometext}
+\def\defB{sometext}
+\def\defC{othertext}
+
+\newcommand{\cmditem}[5]{\textbackslash \texttt{#1}\{\prm{#2}\}\{\prm{#3}\}\{\prm{#4}\}\{\prm{#5}\}}
+\newcommand{\prm}[1]{$\langle$\textit{\thinspace #1\thinspace}$\rangle$}
+
+
+
+
+\begin{document}
+
+\begingroup% AW, Design of Books
+  \pagestyle{empty}
+  \centering
+  % {\Huge \cn{中日韓文}}\\[\baselineskip]
+  % {\Huge \cn{字形索引}}\\[\baselineskip]
+  ~\vspace{2\baselineskip}\\
+  % \florals{IJ}
+  \florals{KLM}
+  ~\vspace{2\baselineskip}\\
+
+  {\Huge\textit{The}}\\[1\baselineskip]
+  {\HUGE\scFont\LaTeX\\[0.25\baselineskip]
+  String~Equality\\[0.25\baselineskip]
+  Comparison~Primer}\\[1\baselineskip]
+  {\Huge\textit{by}}\\[1\baselineskip]
+  {\HUGE\cn{慈夆流}}
+  % {\HUGE \cn{字面索引}}\\[\baselineskip]
+  % {\HUGE \scFont Chinese, Japanese \textit{\&} Korean}\\[0.75\baselineskip]
+  % {\HUGE \scFont \textit{Characters}}\\[3\baselineskip]
+
+  \vspace{2\baselineskip}
+  % % {Containing \thejzrglyphcount\ characters}\\[8\baselineskip]
+  % {\LARGE\textit{Containing}}\\[0.25\baselineskip]
+  % {\Huge 9980 characters}\\[0.25\baselineskip]
+  % % {\LARGE\textit{grouped}}\\%[0.5\baselineskip]
+  % % {\LARGE\textit{on geometric principles}}\\%[0.5\baselineskip]
+  % % {\LARGE\textit{by}}\\[0.5\baselineskip]
+  % {\LARGE\textit{grouped on geometric principles by}}\\[0.25\baselineskip]
+  % {\Huge 657 guides}\\[0.25\baselineskip]
+  % {\LARGE\textit{which are divided into}}\\[0.25\baselineskip]
+  % {\Huge 119 shapeclasses}\\[0.25\baselineskip]
+  % {\LARGE\textit{according to their initial strokes}}\\[0.25\baselineskip]
+  \florals{KLM}
+  \vfill
+  \thispagestyle{empty} % repeated here as per http://tug.org/pipermail/macostex-archives/2010-February/043062.html
+  % {\small\sffamily THE PUBLISHER}\par
+  \endgroup
+
+\newpage
+
+\verb#\newcommand{\cmdA}{sometext}#\\
+\verb#\newcommand{\cmdB}{sometext}#\\
+\verb#\newcommand{\cmdC}{othertext}#\\
+\verb#\def\defA{sometext}#\\
+\verb#\def\defB{sometext}#\\
+\verb#\def\defB{othertext}#\\
+
+\newpage
+\section{Rationale}
+
+While there is a justified interest in the question what it really {\em is}, in essence, that distinguishes a
+Turing-complete programming language from, say, mere markup, sane pragmatics know very well that this
+not-so elusive bit lies in
+
+\RIGHTarrow~variables,\\
+\RIGHTarrow~conditionals (if/then/else\ldots),\\
+\RIGHTarrow~loopage (loop, hwile, break\ldots), and\\
+\RIGHTarrow~anonymous and named functions.
+
+All of these four factors are (in principle) part of \TeX. You certainly could do with less {\em in
+principle}, but {\em in practice} (read: most of the time), you want your idiom to possess all four factors,
+as program sources quickly become obfuscated and convoluted if any one of these is missing or poorly
+implemented.
+
+In the present document, we are solely concerned with conditionals and branching, more specifically: how
+to write \LaTeX\ code that branches according to a string equality test.
+
+Equality testing is the most fundamental of all tests, so fundamental that a programming language with a
+poor implementation of equality testing must be considered a poor programming language.
+
+According to this metric, \TeX\ (and \LaTeX) are poor programming languages indeed. Anyone who has heard
+of \TeX's \verb#\ifx# command, be it from the Book or from the Net, and tried to make it work and not
+commit a blunder that leads to mysterious, subtle and hard-to-debug errors can testify to this.
+
+Forunately for us, the community that has grown up around \TeX—and especially \LaTeX—has provided the world
+of free and open-source software with a plethora of packages that make many things much easier for Joe
+the average \LaTeX\ writer.
+
+To the best of my knowledge, easy and straightforward string equality testing has sadly not yet been fully
+covered.
+
+In the present document, i want to discuss the merits and flaws of the four most popular string equality
+testing commands that float around in forum discussions: these are \verb#\ifdefstrequal#,
+\verb#\ifdefstring#, and \verb#\ifstrequal#, all from the \verb#etoolbox# package, and \TeX's `primeval'
+(and confusingly named) \verb#\ifx# command.
+
+In the last section, i then propose a new macro by the name of \verb#\eqTextEquals#, which tries to combine the
+knowledge gained from documentation \& testing, and provide means to make equality testing a no-brainer.
+
+
+
+\newpage
+\section{A Word of Caution}
+
+During the preparation of this document, an Error krept in, where i had forgotten to define macro
+\verb#\defC#. Now we all know well that should you ever have an undefined name, say:
+
+\verb#\unknown#
+
+almost anywhere in your \TeX source, then the compiler will most certainly opt-out with
+
+\verb#! Undefined control sequence.#\\
+\verb#l.73 \unknown#
+
+But not so when you're doing string comparison. Testing two texts for equality requires such deep and
+mysterious inner workings of \TeX to be used that testing whether a given name is defined gets swept under
+the carpet somehow. So you {\em can} write this:
+
+\verb#\ifdefstrequal{\cmdA}{\unknown}{if branch}{else branch}#
+
+and \verb#\ifdefstrequal# will duly choose the else branch—which is correct, in a way, since an undefined
+value can never ever equal any defined value (though in JavaScript, this is not true). Still, this is an
+unexpected behavior, as the Principle of Least Surprise would dictate that undefined names {\em always}
+make \TeX halt with error. So take special care you have all your marbles defined, and no typos in your
+string comparison arguments.
+
+
+\newpage
+\section{ifstrequal}
+
+\cmditem{ifstrequal}{string}{string}{true}{false}
+
+\begin{shadequote}{etoolbox.pdf}
+Compares two strings and executes \prm{true} if they are equal, and \prm{false} otherwise. The strings are
+not expanded in the test and the comparison is category code agnostic. Control sequence tokens in any of the
+\prm{string} arguments will be detokenized and treated as strings. This command is robust.
+\end{shadequote}
+
+
+\verb#\ifstrequal{sometext}{sometext}#:      \ifstrequal{sometext}{sometext}{OK}{wrong}\\
+\verb#\ifstrequal{sometext}{othertext}#:     \ifstrequal{sometext}{othertext}{wrong}{OK}
+
+\verb#\ifstrequal{\cmdA}{sometext}#:      \ifstrequal{\cmdA}{sometext}{OK}{wrong}\\
+\verb#\ifstrequal{\cmdA}{othertext}#:     \ifstrequal{\cmdA}{othertext}{wrong}{OK}
+
+\verb#\ifstrequal{\defA}{sometext}#:      \ifstrequal{\defA}{sometext}{OK}{wrong}\\
+\verb#\ifstrequal{\defA}{othertext}#:     \ifstrequal{\defA}{othertext}{wrong}{OK}
+
+\verb#\ifstrequal{\cmdA}{\cmdB}#:         \ifstrequal{\cmdA}{\cmdB}{OK}{wrong}\\
+\verb#\ifstrequal{\cmdA}{\cmdC}#:         \ifstrequal{\cmdA}{\cmdC}{wrong}{OK}
+
+\verb#\ifstrequal{\cmdA}{\defB}#:         \ifstrequal{\cmdA}{\defB}{OK}{wrong}\\
+\verb#\ifstrequal{\cmdA}{\defC}#:         \ifstrequal{\cmdA}{\defC}{wrong}{OK}
+
+\verb#\ifstrequal{\defA}{\cmdB}#:         \ifstrequal{\defA}{\cmdB}{OK}{wrong}\\
+\verb#\ifstrequal{\defA}{\cmdC}#:         \ifstrequal{\defA}{\cmdC}{wrong}{OK}
+
+\verb#\ifstrequal{\defA}{\defB}#:         \ifstrequal{\defA}{\defB}{OK}{wrong}\\
+\verb#\ifstrequal{\defA}{\defC}#:         \ifstrequal{\defA}{\defC}{wrong}{OK}
+
+\begin{verdict}
+A jolly useless command as such, as it merely checks whether two literal texts are equal. In many years of
+programming, i've virtually {\em never} felt the urge to litter my sources with non-consequential
+incantations à la \verb#42 == 42#. Still, it's useful inside macro definitions, as shown in the definition
+of \verb#\eqTextEquals#, below.
+\end{verdict}
+
+\begin{advice}
+You never want to use this one, except when writing a macro yourself.
+\end{advice}
+
+\newpage
+\section{ifdefstring}
+
+
+\cmditem{ifdefstring}{command}{string}{true}{false}
+
+\begin{shadequote}{etoolbox.pdf}
+Compares the replacement text of a \prm{command} to a \prm{string} and executes \prm{true} if they are
+equal, and \prm{false} otherwise. Neither the \prm{command} nor the \prm{string} is expanded in the test and
+the comparison is category code agnostic. Control sequence tokens in the \prm{string} argument will be
+detokenized and treated as strings. This command is robust. Note that it will only consider the replacement
+text of the \prm{command}.
+\end{shadequote}
+
+
+\verb#\ifdefstring{\cmdA}{sometext}#:     \ifdefstring{\cmdA}{sometext}{OK}{wrong}\\
+\verb#\ifdefstring{\cmdA}{othertext}#:    \ifdefstring{\cmdA}{othertext}{wrong}{OK}
+
+\verb#\ifdefstring{\defA}{sometext}#:     \ifdefstring{\defA}{sometext}{OK}{wrong}\\
+\verb#\ifdefstring{\defA}{othertext}#:    \ifdefstring{\defA}{othertext}{wrong}{OK}
+
+\verb#\ifdefstring{\cmdA}{\cmdB}#:        \ifdefstring{\cmdA}{\cmdB}{OK}{wrong}\\
+\verb#\ifdefstring{\cmdA}{\cmdC}#:        \ifdefstring{\cmdA}{\cmdC}{wrong}{OK}
+
+\verb#\ifdefstring{\cmdA}{\defB}#:        \ifdefstring{\cmdA}{\defB}{OK}{wrong}\\
+\verb#\ifdefstring{\cmdA}{\defC}#:        \ifdefstring{\cmdA}{\defC}{wrong}{OK}
+
+\verb#\ifdefstring{\defA}{\cmdB}#:        \ifdefstring{\defA}{\cmdB}{OK}{wrong}\\
+\verb#\ifdefstring{\defA}{\cmdC}#:        \ifdefstring{\defA}{\cmdC}{wrong}{OK}
+
+\verb#\ifdefstring{\defA}{\defB}#:        \ifdefstring{\defA}{\defB}{OK}{wrong}\\
+\verb#\ifdefstring{\defA}{\defC}#:        \ifdefstring{\defA}{\defC}{wrong}{OK}
+
+\begin{verdict}
+Use this command to compare a \TeX\ \verb#\def# or \LaTeX\ \verb#\newcommand# expansion with a literal
+text. If the second argument is or contains a macro, only the \verb#else# clause will be executed.
+
+\verb#\ifdefstring# should prove useful in a lot of circumstances. The fact that the first argument can be
+both a \verb#\def# or a \verb#\newcommand# makes it robust (in the sense that you don't need to know which
+command was defined in what way); the fact that the second argument must be a literal helps to keep the
+source simple and readable.
+\end{verdict}
+
+\begin{advice}
+Use \verb#\ifdefstring# especially in cases where a macro is a state-keeping variable that operates on
+short keywords.
+\end{advice}
+
+
+\newpage
+\section{ifdefstrequal}
+
+\cmditem{ifdefstrequal}{command}{command}{true}{false}
+
+\begin{shadequote}{etoolbox.pdf}
+Performs a category code agnostic string comparison of the replacement text of two commands. This command is
+similar to \cmd{ifdefstring} except that both arguments to be compared are macros. This command is robust.
+\end{shadequote}
+
+
+\verb#\ifdefstrequal{\cmdA}{sometext}#:   \ifdefstrequal{\cmdA}{sometext}{OK}{wrong}\\
+\verb#\ifdefstrequal{\cmdA}{othertext}#:  \ifdefstrequal{\cmdA}{othertext}{wrong}{OK}
+
+\verb#\ifdefstrequal{\defA}{sometext}#:   \ifdefstrequal{\defA}{sometext}{OK}{wrong}\\
+\verb#\ifdefstrequal{\defA}{othertext}#:  \ifdefstrequal{\defA}{othertext}{wrong}{OK}
+
+\verb#\ifdefstrequal{\cmdA}{\cmdB}#:      \ifdefstrequal{\cmdA}{\cmdB}{OK}{wrong}\\
+\verb#\ifdefstrequal{\cmdA}{\cmdC}#:      \ifdefstrequal{\cmdA}{\cmdC}{wrong}{OK}
+
+\verb#\ifdefstrequal{\cmdA}{\defB}#:      \ifdefstrequal{\cmdA}{\defB}{OK}{wrong}\\
+\verb#\ifdefstrequal{\cmdA}{\defC}#:      \ifdefstrequal{\cmdA}{\defC}{wrong}{OK}
+
+\verb#\ifdefstrequal{\defA}{\cmdB}#:      \ifdefstrequal{\defA}{\cmdB}{OK}{wrong}\\
+\verb#\ifdefstrequal{\defA}{\cmdC}#:      \ifdefstrequal{\defA}{\cmdC}{wrong}{OK}
+
+\verb#\ifdefstrequal{\defA}{\defB}#:      \ifdefstrequal{\defA}{\defB}{OK}{wrong}\\
+\verb#\ifdefstrequal{\defA}{\defC}#:      \ifdefstrequal{\defA}{\defC}{wrong}{OK}
+
+\begin{verdict}
+Works as advertised.
+\end{verdict}
+
+\begin{advice}
+Use \verb#\ifdefstrequal# to ckeck whether two macros have the same string expansion.
+\end{advice}
+
+\newpage
+\section{ifx}
+
+\begin{shadequote}{http://en.wikibooks.org/wiki/TeX/ifx}
+With the \verb#\ifx# command you can perform conditional compilation by testing for macro equivalence.
+It does not expand the given macros. The two macros are considered equal if\\
+\RIGHTarrow~both are macros and \\
+\RIGHTarrow~the first level expansion is equal and \\
+\RIGHTarrow~they have the same state with regards to \verb#\long# and \verb#\outer#.
+\end{shadequote}
+
+
+\verb#\ifx\cmdA\cmdB#\ifx\cmdA\cmdB\ OK    \else\ wrong \fi\\
+\verb#\ifx\cmdA\cmdC#\ifx\cmdA\cmdC\ wrong \else\ OK    \fi
+
+\verb#\ifx\cmdA\defB#\ifx\cmdA\defB\ OK    \else\ wrong \fi\\
+\verb#\ifx\cmdA\defC#\ifx\cmdA\defC\ wrong \else\ OK    \fi
+
+\verb#\ifx\defA\cmdB#\ifx\defA\cmdB\ OK    \else\ wrong \fi\\
+\verb#\ifx\defA\cmdC#\ifx\defA\cmdC\ wrong \else\ OK    \fi
+
+\verb#\ifx\defA\defB#\ifx\defA\defB\ OK    \else\ wrong \fi\\
+\verb#\ifx\defA\defC#\ifx\defA\defC\ wrong \else\ OK    \fi
+
+
+\begin{verdict}
+This macro's description hurts my feelings. Seriously. It would {\em appear} to work correctly when both
+arguments are either \TeX\ \verb#\def#s or else \LaTeX\ \verb#\newcommand#s, but be aware that in the
+general case you will {\em not} know for sure whether a given \verb#\x# was defined in whatever which way
+(unless you did it yourself a short while ago or you perused the sources).
+\end{verdict}
+
+\begin{advice}
+Use with care and only after testing whether the command works for your special case. Consider to use
+\verb#\ifdefstrequal# instead, as that one offers fewer opportunities to write meaningless, buggy code.
+Also, the syntax of \verb#\ifdefstrequal# is more in keeping with \LaTeX conventions.
+\end{advice}
+
+\newpage
+\section{eqTextEquals}
+
+\cmditem{eqTextEquals}{valueOne}{valueTwo}{true}{false}
+
+\begin{shadequote}{the author}
+Uses the \verb#\ifdefmacro# command from the \verb#\etoolbox# package to test whether \prm{valueOne} and
+\prm{valueTwo} are macros or literals; based on this knowledge, it decides whether to use
+\verb#\ifdefstrequal#, \verb#\ifdefstring#, or \verb#\ifstrequal# to perform a string comparison.
+
+\end{shadequote}
+
+
+\verb#\eqTextEquals{sometext}{sometext}#:      \eqTextEquals{sometext}{sometext}{OK}{wrong}\\
+\verb#\eqTextEquals{sometext}{othertext}#:     \eqTextEquals{sometext}{othertext}{wrong}{OK}
+
+\verb#\eqTextEquals{\cmdA}{sometext}#:   \eqTextEquals{\cmdA}{sometext}{OK}{wrong}\\
+\verb#\eqTextEquals{\cmdA}{othertext}#:  \eqTextEquals{\cmdA}{othertext}{wrong}{OK}
+
+\verb#\eqTextEquals{\defA}{sometext}#:   \eqTextEquals{\defA}{sometext}{OK}{wrong}\\
+\verb#\eqTextEquals{\defA}{othertext}#:  \eqTextEquals{\defA}{othertext}{wrong}{OK}
+
+\verb#\eqTextEquals{\cmdA}{\cmdB}#:      \eqTextEquals{\cmdA}{\cmdB}{OK}{wrong}\\
+\verb#\eqTextEquals{\cmdA}{\cmdC}#:      \eqTextEquals{\cmdA}{\cmdC}{wrong}{OK}
+
+\verb#\eqTextEquals{\cmdA}{\defB}#:      \eqTextEquals{\cmdA}{\defB}{OK}{wrong}\\
+\verb#\eqTextEquals{\cmdA}{\defC}#:      \eqTextEquals{\cmdA}{\defC}{wrong}{OK}
+
+\verb#\eqTextEquals{\defA}{\cmdB}#:      \eqTextEquals{\defA}{\cmdB}{OK}{wrong}\\
+\verb#\eqTextEquals{\defA}{\cmdC}#:      \eqTextEquals{\defA}{\cmdC}{wrong}{OK}
+
+\verb#\eqTextEquals{\defA}{\defB}#:      \eqTextEquals{\defA}{\defB}{OK}{wrong}\\
+\verb#\eqTextEquals{\defA}{\defC}#:      \eqTextEquals{\defA}{\defC}{wrong}{OK}
+
+% \newdimen\lengthA
+% \newdimen\lengthB
+% \newdimen\lengthC
+% \lengthA=42mm
+% \lengthB=42mm
+% \lengthC=108mm
+
+% \verb#\eqTextEquals{\lengthA}{\lengthB}#:      \eqTextEquals{\lengthA}{\lengthB}{OK}{wrong}\\
+% \verb#\eqTextEquals{\lengthA}{\lengthC}#:      \eqTextEquals{\lengthA}{\lengthC}{wrong}{OK}
+
+
+\begin{verdict}
+Works as advertised.
+\end{verdict}
+
+\begin{advice}
+Use \verb#\ifdefstrequal# to ckeck whether two macros have the same string expansion.
+\end{advice}
+
+\begin{verbatim}
+\newcommand{\eqTextEquals}[4]{%
+  \ifdefmacro{#1}{% #1 is a macro
+    \ifdefmacro{#2}{% #1 and #2 are macros
+        \ifdefstrequal{#1}{#2}{#3}{#4}
+      }{% #1 is a macro, #2 is a literal
+        \ifdefstring{#1}{#2}{#3}{#4}
+      }%
+  }{% #1 is a literal
+    \ifdefmacro{#2}{% #1 is a literal, #2 is a macro
+        \ifdefstring{#2}{#1}{#3}{#4}
+      }{% #1 and #2 are literals
+        \ifstrequal{#1}{#2}{#3}{#4}
+      }%
+    }%
+  }%
+\end{verbatim}
+
+
+
+\end{document}
+
+
+
+
+
+
+% \ifx
+
+% \ifdefstrequal
+% \ifdefstring
+% \ifstrequal
+

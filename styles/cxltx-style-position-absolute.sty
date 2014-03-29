@@ -8,26 +8,29 @@
 \ProvidesPackage{cxltx-style-position-absolute}
 \usepackage[absolute,overlay,quiet]{textpos}
 \usepackage{calc}%            http://ctan.org/pkg/calc
-\usepackage[nomessages]{fp}%  http://ctan.org/pkg/fp
+% \usepackage[nomessages]{fp}%  http://ctan.org/pkg/fp
+\usepackage{fp}%  http://ctan.org/pkg/fp
 \usepackage{changepage}%      http://ctan.org/pkg/changepage
 
 \makeatletter
 
+% Helper tokens:
+\newcommand{\@paTextToken}{text}
+\newcommand{\@paNullToken}{null}
+
 % Commands / values to keep track of coordinates origin characteristics:
-\newcommand{\@paLeftMargin}{null}
-\newcommand{\@paTopMargin}{null}
+\newcommand{\@paOddLeftMargin}{\@paNullToken}
+\newcommand{\@paEvenLeftMargin}{\@paNullToken}
+\newcommand{\@paTopMargin}{\@paNullToken}
 
 % Records type of origin (`paper`, `text`, or `custom ($x,$y)`)
-\newcommand{\paOriginIs}{null}
+\newcommand{\paOriginIs}{\@paNullToken}
 
 % An alias for `textpos` `\textblockorigin`:
 \newcommand{\paOriginTo}[2]{%
   \textblockorigin{#1}{#2}%
   \renewcommand{\paOriginIs}{custom (#1,#2)}%
   }
-
-% Helper token:
-\newcommand{\@paTextToken}{text}
 
 % Set origin to paper edge:
 \newcommand{\paOriginToPaper}{%
@@ -36,20 +39,46 @@
   }
 
 % Check whether we're on an odd or an even page, and set `\paCurrentOddEven` to `odd` or `even`:
-\newcommand{\@paSetOrigin}{
+\newcommand{\@paSetOriginIfOriginIsText}{
+  \typeout{+++++ paSetOriginIfOriginIsText}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  % Check that origin is set to `text`; otherwise, do nothing:
   \ifx\paOriginIs\@paTextToken%
-    \FPeval{\@paTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
-    \strictpagecheck\checkoddpage\ifoddpage%
-      \FPeval{\@paLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
-    \else%
-      \FPeval{\@paLeftMargin}{(\number\evensidemargin+4736286)/186467}%
+    \typeout{+++++ origin is text}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    % Calculate top margin if it is 'null':
+    \ifx\@paTopMargin\@paNullToken%
+      \typeout{+++++ paTopMargin is null}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      \FPeval{\@paTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
     \fi%
-    \textblockorigin{\@paLeftMargin mm}{\@paTopMargin mm}%
+    % If this is an odd page:
+    \strictpagecheck\checkoddpage\ifoddpage%
+      % Re-calculate odd left margin if it is 'null':
+      \typeout{+++++ is odd page}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      \ifx\@paOddLeftMargin\@paNullToken%
+        \FPeval{\@paOddLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
+      \fi%
+      % Set origin for odd page:
+      \textblockorigin{\@paOddLeftMargin mm}{\@paTopMargin mm}%
+    % If this is an even page:
+    \else%
+      \typeout{+++++ is even page}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      % Re-calculate even left margin if it is 'null':
+      \ifx\@paEvenLeftMargin\@paNullToken%
+        \FPeval{\@paEvenLeftMargin}{(\number\evensidemargin+4736286)/186467}%
+      \fi%
+      % Set origin for even page:
+      \textblockorigin{\@paEvenLeftMargin mm}{\@paTopMargin mm}%
+    \fi%
   \fi%
   }
 
+% Set origin to top left corner of text area:
 \newcommand{\paOriginToText}{%
-  \renewcommand{\paOriginIs}{text}%
+  % Set origin to 'text':
+  \renewcommand{\paOriginIs}{\@paTextToken}%
+  % Set margins to 'null', awaiting call to `\@paSetOriginIfOriginIsText`:
+  \renewcommand{\@paOddLeftMargin}{\@paNullToken}
+  \renewcommand{\@paEvenLeftMargin}{\@paNullToken}
+  \renewcommand{\@paTopMargin}{\@paNullToken}
   }
 
 
@@ -93,7 +122,7 @@
 \newcommand{\paStrut}{{\color{blue}\vrule height\@paStrutHeight width\@paStrutWidth depth\@paStrutDepth}}
 
 \newcommand{\paLeft}[3]{{%
-  \@paSetOrigin%
+  \@paSetOriginIfOriginIsText%
   \settowidth{\@paTextWidth}{#3{\paStrut}}
   \begin{textblock*}{\@paTextWidth}[0,\paHeightDepthRatio](#1,#2)%
     \@paNoSpacing%
@@ -104,7 +133,7 @@
   }}
 
 \newcommand{\paCenter}[3]{{%
-  \@paSetOrigin%
+  \@paSetOriginIfOriginIsText%
   \settowidth{\@paTextWidth}{{\paStrut}#3{\paStrut}}
   \begin{textblock*}{\@paTextWidth}[0.5,\paHeightDepthRatio](#1,#2)%
     \@paNoSpacing%
@@ -116,7 +145,7 @@
   }}
 
 \newcommand{\paRight}[3]{{%
-  \@paSetOrigin%
+  \@paSetOriginIfOriginIsText%
   \settowidth{\@paTextWidth}{{\paStrut}#3}
   \begin{textblock*}{\@paTextWidth}[1,\paHeightDepthRatio](#1,#2)%
     \@paNoSpacing%
