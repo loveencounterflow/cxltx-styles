@@ -365,7 +365,8 @@ then all of the following comparisons work and will print out `OK`:
 \eqTextEquals{\defA}{\defC}{wrong}{OK}
 ````
 
-For more details, have a look at []
+For more details, have a look at [The LaTeX String Equality Comparison
+Primer](https://github.com/loveencounterflow/cxltx-styles/raw/master/style-demos/string-comparison.pdf)
 
 
 
