@@ -1,8 +1,10 @@
 
 
-\documentclass[a5paper,10pt,german]{memoir}
-\pagestyle{empty}
+\documentclass[a5paper,10pt,german]{article}
+% \usepackage[nottoc]{tocbibind}
+% \setcounter{secnumdepth}{0}
 \usepackage{wasysym} % provides symbols
+\usepackage{minted} % syntax coloring
 
 \usepackage{cxltx-style-base}
 \usepackage{cxltx-style-cjk}
@@ -16,6 +18,18 @@
 
 \newenvironment{verdict}{{\fraktur Verdict.}—}{\par}
 \newenvironment{advice}{{\fraktur Advice.}—}{\par}
+
+\makeatletter
+\newcommand*{\miniscule}{\@setfontsize\miniscule\@vpt{6}}
+% \newcommand*{\tiny}{\@setfontsize\tiny\@vipt{7}}
+% \newcommand*{\scriptsize}{\@setfontsize\scriptsize\@viipt{8}}
+\renewcommand*{\large}{\@setfontsize\large\@xipt{13.6}}
+\renewcommand*{\Large}{\@setfontsize\Large\@xiipt{14.5}}
+\renewcommand*{\LARGE}{\@setfontsize\LARGE\@xivpt{18}}
+\renewcommand*{\huge}{\@setfontsize\huge\@xviipt{22}}
+\renewcommand*{\Huge}{\@setfontsize\Huge\@xxpt{25}}
+\newcommand*{\HUGE}{\@setfontsize\HUGE\@xxvpt{30}}
+\makeatother
 
 
 
@@ -50,6 +64,7 @@
 \def\defC{othertext}
 
 \newcommand{\cmditem}[5]{\textbackslash \texttt{#1}\{\prm{#2}\}\{\prm{#3}\}\{\prm{#4}\}\{\prm{#5}\}}
+\newcommand{\cmd}[1]{\textbackslash \texttt{#1}}
 \newcommand{\prm}[1]{$\langle$\textit{\thinspace #1\thinspace}$\rangle$}
 
 
@@ -95,14 +110,9 @@
   % {\small\sffamily THE PUBLISHER}\par
   \endgroup
 
-\newpage
-
-\verb#\newcommand{\cmdA}{sometext}#\\
-\verb#\newcommand{\cmdB}{sometext}#\\
-\verb#\newcommand{\cmdC}{othertext}#\\
-\verb#\def\defA{sometext}#\\
-\verb#\def\defB{sometext}#\\
-\verb#\def\defB{othertext}#\\
+% front matter
+% \null\newpage\thispagestyle{empty}\null\newpage\thispagestyle{empty}\tableofcontents
+\null\newpage\thispagestyle{empty}\tableofcontents
 
 \newpage
 \section{Rationale}
@@ -113,7 +123,7 @@ not-so elusive bit lies in
 
 \RIGHTarrow~variables,\\
 \RIGHTarrow~conditionals (if/then/else\ldots),\\
-\RIGHTarrow~loopage (loop, hwile, break\ldots), and\\
+\RIGHTarrow~loopage (loop, while, break\ldots), and\\
 \RIGHTarrow~anonymous and named functions.
 
 All of these four factors are (in principle) part of \TeX. You certainly could do with less {\em in
@@ -138,25 +148,23 @@ the average \LaTeX\ writer.
 To the best of my knowledge, easy and straightforward string equality testing has sadly not yet been fully
 covered.
 
-In the present document, i want to discuss the merits and flaws of the four most popular string equality
-testing commands that float around in forum discussions: these are \verb#\ifdefstrequal#,
+In this paper, i want to discuss the merits of the four most popular string equality
+commands that float around in forum discussions: these are \verb#\ifdefstrequal#,
 \verb#\ifdefstring#, and \verb#\ifstrequal#, all from the \verb#etoolbox# package, and \TeX's `primeval'
 (and confusingly named) \verb#\ifx# command.
 
-In the last section, i then propose a new macro by the name of \verb#\eqTextEquals#, which tries to combine the
-knowledge gained from documentation \& testing, and provide means to make equality testing a no-brainer.
-
-
+In the last section, i then propose a new macro by the name of \verb#\eqTextEquals#, which combines the
+knowledge gained from documentation \& testing, and makes string equality testing a no-brainer.
 
 \newpage
 \section{A Word of Caution}
 
 During the preparation of this document, an Error krept in, where i had forgotten to define macro
-\verb#\defC#. Now we all know well that should you ever have an undefined name, say:
+\verb#\defC#. Now we all know well that whenever you use an undefined name in your \TeX source, say:
 
 \verb#\unknown#
 
-almost anywhere in your \TeX source, then the compiler will most certainly opt-out with
+then the compiler will most certainly opt-out with
 
 \verb#! Undefined control sequence.#\\
 \verb#l.73 \unknown#
@@ -170,9 +178,33 @@ the carpet somehow. So you {\em can} write this:
 and \verb#\ifdefstrequal# will duly choose the else branch—which is correct, in a way, since an undefined
 value can never ever equal any defined value (though in JavaScript, this is not true). Still, this is an
 unexpected behavior, as the Principle of Least Surprise would dictate that undefined names {\em always}
-make \TeX halt with error. So take special care you have all your marbles defined, and no typos in your
+make \TeX\ halt with error. So take special care you have all your marbles defined, and no typos in your
 string comparison arguments.
 
+
+\newpage
+\section{Setup}
+
+To perform the tests, the following definitions are presupposed:
+
+\verb#\newcommand{\cmdA}{sometext}#\\
+\verb#\newcommand{\cmdB}{sometext}#\\
+\verb#\newcommand{\cmdC}{othertext}#\\
+\verb#\def\defA{sometext}#\\
+\verb#\def\defB{sometext}#\\
+\verb#\def\defB{othertext}#
+
+All tests are done in pairs that are similar to this one:
+
+\verb#\ifstrequal{\cmdA}{sometext}{OK}{wrong}#\\
+\verb#\ifstrequal{\cmdA}{othertext}{wrong}{OK}#
+
+Both clauses of a pair do a string comparison using the command under scrutiny; the first one should execute
+the \verb#if# clause, the second one the \verb#else# clause of the statement. If a test succeeds, an
+\verb#OK# is displayed; if it fails, \verb#wrong# is printed out. Thus, a given argument pattern is usable
+with the given command if two \verb#OK#s are printed behind the command quotations; in case the word
+\verb#wrong# appears, the command is not suited for the kind of arguments used in that test pair—be it \TeX\
+\verb#\def#s, \LaTeX\ \verb#\newcommand#s, or string literals.
 
 \newpage
 \section{ifstrequal}
@@ -307,6 +339,8 @@ Use \verb#\ifdefstrequal# to ckeck whether two macros have the same string expan
 \newpage
 \section{ifx}
 
+\cmd{ifx}\prm{command}\prm{command}\prm{true}\prm{false}\cmd{fi}
+
 \begin{shadequote}{http://en.wikibooks.org/wiki/TeX/ifx}
 With the \verb#\ifx# command you can perform conditional compilation by testing for macro equivalence.
 It does not expand the given macros. The two macros are considered equal if\\
@@ -330,15 +364,18 @@ It does not expand the given macros. The two macros are considered equal if\\
 
 
 \begin{verdict}
-This macro's description hurts my feelings. Seriously. It would {\em appear} to work correctly when both
+This macro's description hurts my feelings. Seriously. According to the tests, it would {\em appear} to work
+correctly when both
 arguments are either \TeX\ \verb#\def#s or else \LaTeX\ \verb#\newcommand#s, but be aware that in the
 general case you will {\em not} know for sure whether a given \verb#\x# was defined in whatever which way
-(unless you did it yourself a short while ago or you perused the sources).
+(unless you did it yourself a short while ago or you perused the sources). The restriction regarding
+\verb#\long# and \verb#\outer# makes \verb#\ifx# even more brittle and ultimately useless for anyone
+but the most hard-core \TeX nocrats.
 \end{verdict}
 
 \begin{advice}
 Use with care and only after testing whether the command works for your special case. Consider to use
-\verb#\ifdefstrequal# instead, as that one offers fewer opportunities to write meaningless, buggy code.
+\verb#\ifdefstrequal# instead, as that one offers fewer opportunities to write buggy code.
 Also, the syntax of \verb#\ifdefstrequal# is more in keeping with \LaTeX conventions.
 \end{advice}
 
@@ -347,7 +384,7 @@ Also, the syntax of \verb#\ifdefstrequal# is more in keeping with \LaTeX convent
 
 \cmditem{eqTextEquals}{valueOne}{valueTwo}{true}{false}
 
-\begin{shadequote}{the author}
+\begin{shadequote}{}
 Uses the \verb#\ifdefmacro# command from the \verb#\etoolbox# package to test whether \prm{valueOne} and
 \prm{valueTwo} are macros or literals; based on this knowledge, it decides whether to use
 \verb#\ifdefstrequal#, \verb#\ifdefstring#, or \verb#\ifstrequal# to perform a string comparison.
@@ -392,26 +429,45 @@ Works as advertised.
 \end{verdict}
 
 \begin{advice}
-Use \verb#\ifdefstrequal# to ckeck whether two macros have the same string expansion.
+Use \verb#eqTextEquals# to replace all the other commands discussed in this document—it's much simpler, more
+versatile, less surprising, and puts less strain onto your name memory.
 \end{advice}
 
-\begin{verbatim}
+\newpage
+\subsection*{Implementation}
+
+The \verb#\eqTextEquals# macro has a fairly simple implementation, {\em viz.}:
+
+\begin{minted}{latex}
 \newcommand{\eqTextEquals}[4]{%
-  \ifdefmacro{#1}{% #1 is a macro
-    \ifdefmacro{#2}{% #1 and #2 are macros
+
+  \ifdefmacro{#1}{%
+    % ...................................................
+    % #1 is a macro
+    \ifdefmacro{#2}{%
+      % .................................................
+      % #1 and #2 are macros
         \ifdefstrequal{#1}{#2}{#3}{#4}
-      }{% #1 is a macro, #2 is a literal
+      }{%
+        % ...............................................
+        % #1 is a macro, #2 is a literal
         \ifdefstring{#1}{#2}{#3}{#4}
       }%
-  }{% #1 is a literal
-    \ifdefmacro{#2}{% #1 is a literal, #2 is a macro
+  }{%
+    % ...................................................
+    % #1 is a literal
+    \ifdefmacro{#2}{%
+      % .................................................
+      % #1 is a literal, #2 is a macro
         \ifdefstring{#2}{#1}{#3}{#4}
-      }{% #1 and #2 are literals
+      }{%
+        % ...............................................
+        % #1 and #2 are literals
         \ifstrequal{#1}{#2}{#3}{#4}
       }%
     }%
   }%
-\end{verbatim}
+\end{minted}
 
 
 
