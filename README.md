@@ -457,7 +457,7 @@ With XeLaTeX, i use the `-8bit` switch. I generally do not support anything but 
 XeLaTeX, so bad luck if you have another configuration and can't make this work. LaTeX is such a complex
 beast, i'm always happy when i'm able to connect the dots using a very narrow range of OS and TeX
 incarnation choices and have no way to test on other systems. **That said, please issue a pull request in
-case you feel there's a meaning ful upgrade to any given command provided here that can make CXLTX styles
+case you feel there's a meaningful upgrade to any given command provided here that can make CXLTX styles
 more robust in this respect.**
 
 Once you get the test working, you may use e.g.
