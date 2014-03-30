@@ -146,13 +146,15 @@ current text extent, *not* the paper. This can be done by placing
 
 somewhere near the beginning of the document (or just leave it with the default settings).
 
-**Important**: in case you want to use the default `\paOriginToText` setting, please be aware that **changing
-page layout in the middle of the document necessitates re-issuing `\paOriginToText`**. PA caches the positions
-of odd and even pages, respectively, and won't detect layout changes unless told to do so.
+**Important**: in case you want to use the default `\paOriginToText` setting, please
 
-**Important**: in case you want to use the default `\paOriginToText` setting, please bear in mind that since
-this option uses [`changepage`](http://ctan.org/pkg/changepage), **LaTeX has to run at least twice** before
-you get correct results. You're already used to this, right?
+* be aware that **changing
+  page layout in the middle of the document necessitates re-issuing `\paOriginToText`**. PA caches the positions
+  of odd and even pages, respectively, and won't detect layout changes unless told to do so.
+
+* bear in mind that since
+  this option uses [`changepage`](http://ctan.org/pkg/changepage), **LaTeX has to run at least twice** before
+  you get correct results. You're already used to this, right?
 
 Lastly, there is `\paOriginIs` which is internally used to keep state; it will expand to one of `text` (the
 default), `paper`, or some `custom (20mm,25mm)` (for the first example, above).
