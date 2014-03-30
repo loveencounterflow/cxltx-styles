@@ -15,7 +15,6 @@
 	- [CXLTX Style: TRM](#cxltx-style-trm)
 		- [Effects](#effects)
 		- [Colors](#colors)
-- [In case you cannot see colors above:](#in-case-you-cannot-see-colors-above)
 
 > **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
@@ -442,19 +441,17 @@ are that on first try, you'll get to see something like this:
 This is because traditionally, TeX is a bit tight on *everything* that is not strictly a US-ASCII printable
 character. You'll see a helpful message below the (un)colorized bars that says
 
-````
-In case you cannot see colors above:
-====================================
+    In case you cannot see colors above:
+    ====================================
 
-— make sure your terminal is color-capable
- (see http://en.wikipedia.org/wiki/ANSI_escape_code)
+    — make sure your terminal is color-capable
+     (see http://en.wikipedia.org/wiki/ANSI_escape_code)
 
-— make sure you're running XeLaTeX with the `-8bit` switch
- (other TeXs may or may not work; some TeXs would appear to require
- a `-translate-file=natural` or `--tcx=natural` switch)
+    — make sure you're running XeLaTeX with the `-8bit` switch
+     (other TeXs may or may not work; some TeXs would appear to require
+     a `-translate-file=natural` or `--tcx=natural` switch)
 
-(now terminating so you can read this output.)
-````
+    (now terminating so you can read this output.)
 
 ### Effects
 * trmBlink
