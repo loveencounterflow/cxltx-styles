@@ -146,29 +146,16 @@ current text extent, *not* the paper. This can be done by placing
 
 somewhere near the beginning of the document (or just leave it with the default settings).
 
-**Though this option is the slowest one (because it performs a floating point (using the venerable
-[`fp`](http://ctan.org/pkg/fp) package) calculation on each single text placement), i chose to make it the
-default one**, simply because there is good reason to think that if anyone uses CXLTX Position Absolute, the
-straightforward and reasonable handling of absolute placement *in the context of a real document* might be
-the one selling point.
-
-> The inefficiencies, where deemed unbearable, could probably be easily ironed out by caching values. **Pull
-> Request Are Awesome.** In case you consider to improve on the current state of affairs, please consider
-> that, as it stands, `\paOriginToText` *should* be able to handle intermittent layout changes gracefully,
-> although this is as yet untested.
-
-> **Update** I can now confirm (doing test runs of [CND Tides](https://github.com/loveencounterflow
-> **/coffeenode-tides/)) that `fp` is really kind of slow—so slow it dominates total processing time.
-> Optimizations, therefore, should consider to **(1)** replace `fp` with something suitable, but faster,
-> and / or **(2)** cache intermediate results (i think one can assume layouts do not normally change within
-> a document, and when they do, it should be the responsibility of the user to tell PA of the fact).
+**Important**: in case you want to use the default `\paOriginToText` setting, please be aware that **changing
+page layout in the middle of the document necessitates re-issuing `\paOriginToText`. PA caches the positions
+of odd and even pages, respectively, and won't detect layout changes unless told to do so.
 
 **Important**: in case you want to use the default `\paOriginToText` setting, please bear in mind that since
 this option uses [`changepage`](http://ctan.org/pkg/changepage), **LaTeX has to run at least twice** before
 you get correct results. You're already used to this, right?
 
 Lastly, there is `\paOriginIs` which is internally used to keep state; it will expand to one of `text` (the
-default), `page`, or some `custom (20mm,25mm)` (for the first example, above).
+default), `paper`, or some `custom (20mm,25mm)` (for the first example, above).
 
 With these considerations out of the way, let's have a look at how to actually put stuff onto the page.
 
