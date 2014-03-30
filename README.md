@@ -460,6 +460,27 @@ incarnation choices and have no way to test on other systems. **That said, pleas
 case you feel there's a meaning ful upgrade to any given command provided here that can make CXLTX styles
 more robust in this respect.**
 
+Once you get the test working, you may use e.g.
+
+````latex
+\typeout{this is \trmIndigo{indigo} output}
+````
+
+or similar to get colorful messages onto the console. Each color command switches a color on for the run
+of its argument, and terminates output with `\trmReset` (i.e. switches back to your console base setting).
+Not that nesting commands do currently not work the way they should: `\trmRed{A \trmBlink{B} C}` will
+give you a red, static `A`, a red, blinking `B`, and a default-colored, static `C` (instead of a red, static
+`C`). One could fix that but i'm too lazy for that now.
+
+In addition to the colors and effects listed below, there are some convenience output macros:
+
+````latex
+\trmWhisper{helo}             % grey message
+\trmWarn{a warning message}   % an exclamation mark     + message in red
+\trmAlert{an alert}           % a blinking warning sign + message in red
+````
+
+
 ### Effects
 * trmBlink
 * trmBold
