@@ -13,6 +13,8 @@
 	- [CXLTX Style: Equals](#cxltx-style-equals)
 	- [CXLTX Style: OddEven](#cxltx-style-oddeven)
 	- [CXLTX Style: TRM](#cxltx-style-trm)
+		- [Effects](#effects)
+		- [Colors](#colors)
 - [In case you cannot see colors above:](#in-case-you-cannot-see-colors-above)
 
 > **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
@@ -454,125 +456,54 @@ In case you cannot see colors above:
 (now terminating so you can read this output.)
 ````
 
+### Effects
+* trmBlink
+* trmBold
+* trmReverse
+* trmUnderline
 
-\newcommand{\trmBlink}[1]{\trmCsi5m#1\trmReset}
-\newcommand{\trmBold}[1]{\trmCsi1m#1\trmReset}
-\newcommand{\trmReverse}[1]{\trmCsi7m#1\trmReset}
-\newcommand{\trmUnderline}[1]{\trmCsi4m#1\trmReset}
+* trmNoBlink
+* trmNoBold
+* trmNoReverse
+* trmNoUnderline
+* trmReset
 
-% ----------------------------------------------------------------------------------------------------------
-% Effects Off
-% ..........................................................................................................
-\newcommand{\trmNoBlink}[1]{\trmCsi25m#1\trmReset}
-\newcommand{\trmNoBold}[1]{\trmCsi22m#1\trmReset}
-\newcommand{\trmNoReverse}[1]{\trmCsi27m#1\trmReset}
-\newcommand{\trmNoUnderline}[1]{\trmCsi24m#1\trmReset}
-\newcommand{\trmReset}{\trmCsi0m}
+### Colors
+* trmBlack
+* trmBlue
+* trmGreen
+* trmCyan
+* trmSepia
+* trmIndigo
+* trmSteel
+* trmBrown
+* trmOlive
+* trmLime
+* trmRed
+* trmCrimson
+* trmPlum
+* trmPink
+* trmOrange
+* trmGold
+* trmTan
+* trmYellow
+* trmGrey
+* trmDarkgrey
+* trmWhite
+* trmSolBaseOThree
+* trmSolBaseOTwo
+* trmSolBaseOOne
+* trmSolBaseOO
+* trmSolBaseO
+* trmSolBaseOne
+* trmSolBaseTwo
+* trmSolBaseThree
+* trmSolYellow
+* trmSolOrange
+* trmSolRed
+* trmSolMagenta
+* trmSolViolet
+* trmSolBlue
+* trmSolCyan
+* trmSolGreen
 
-% ----------------------------------------------------------------------------------------------------------
-% Colors
-% ..........................................................................................................
-\newcommand{\trmBlack}[1]{\trmCsi38;05;16m#1\trmReset}
-\newcommand{\trmBlue}[1]{\trmCsi38;05;27m#1\trmReset}
-\newcommand{\trmGreen}[1]{\trmCsi38;05;34m#1\trmReset}
-\newcommand{\trmCyan}[1]{\trmCsi38;05;51m#1\trmReset}
-\newcommand{\trmSepia}[1]{\trmCsi38;05;52m#1\trmReset}
-\newcommand{\trmIndigo}[1]{\trmCsi38;05;54m#1\trmReset}
-\newcommand{\trmSteel}[1]{\trmCsi38;05;67m#1\trmReset}
-\newcommand{\trmBrown}[1]{\trmCsi38;05;94m#1\trmReset}
-\newcommand{\trmOlive}[1]{\trmCsi38;05;100m#1\trmReset}
-\newcommand{\trmLime}[1]{\trmCsi38;05;118m#1\trmReset}
-\newcommand{\trmRed}[1]{\trmCsi38;05;124m#1\trmReset}
-\newcommand{\trmCrimson}[1]{\trmCsi38;05;161m#1\trmReset}
-\newcommand{\trmPlum}[1]{\trmCsi38;05;176m#1\trmReset}
-\newcommand{\trmPink}[1]{\trmCsi38;05;199m#1\trmReset}
-\newcommand{\trmOrange}[1]{\trmCsi38;05;208m#1\trmReset}
-\newcommand{\trmGold}[1]{\trmCsi38;05;214m#1\trmReset}
-\newcommand{\trmTan}[1]{\trmCsi38;05;215m#1\trmReset}
-\newcommand{\trmYellow}[1]{\trmCsi38;05;226m#1\trmReset}
-\newcommand{\trmGrey}[1]{\trmCsi38;05;240m#1\trmReset}
-\newcommand{\trmDarkgrey}[1]{\trmCsi38;05;234m#1\trmReset}
-\newcommand{\trmWhite}[1]{\trmCsi38;05;255m#1\trmReset}
-
-% ..........................................................................................................
-% experimental:
-% colors as defined by http://ethanschoonover.com/solarized
-\newcommand{\trmSolBaseOThree}[1]{\trmCsi38;05;234m#1\trmReset}
-\newcommand{\trmSolBaseOTwo}[1]{\trmCsi38;05;235m#1\trmReset}
-\newcommand{\trmSolBaseOOne}[1]{\trmCsi38;05;240m#1\trmReset}
-\newcommand{\trmSolBaseOO}[1]{\trmCsi38;05;241m#1\trmReset}
-\newcommand{\trmSolBaseO}[1]{\trmCsi38;05;244m#1\trmReset}
-\newcommand{\trmSolBaseOne}[1]{\trmCsi38;05;245m#1\trmReset}
-\newcommand{\trmSolBaseTwo}[1]{\trmCsi38;05;254m#1\trmReset}
-\newcommand{\trmSolBaseThree}[1]{\trmCsi38;05;230m#1\trmReset}
-\newcommand{\trmSolYellow}[1]{\trmCsi38;05;136m#1\trmReset}
-\newcommand{\trmSolOrange}[1]{\trmCsi38;05;166m#1\trmReset}
-\newcommand{\trmSolRed}[1]{\trmCsi38;05;124m#1\trmReset}
-\newcommand{\trmSolMagenta}[1]{\trmCsi38;05;125m#1\trmReset}
-\newcommand{\trmSolViolet}[1]{\trmCsi38;05;61m#1\trmReset}
-\newcommand{\trmSolBlue}[1]{\trmCsi38;05;33m#1\trmReset}
-\newcommand{\trmSolCyan}[1]{\trmCsi38;05;37m#1\trmReset}
-\newcommand{\trmSolGreen}[1]{\trmCsi38;05;64m#1\trmReset}
-
-
-% ==========================================================================================================
-% TEST COMMAND
-% ----------------------------------------------------------------------------------------------------------
-\newcommand{\trmTest}{
-  \typeout{}%
-  \typeout{\trmBlink{XXXX}    trmBlink}%
-  \typeout{\trmBold{XXXX}   trmBold}%
-  \typeout{\trmReverse{XXXX}    trmReverse}%
-  \typeout{\trmUnderline{XXXX}    trmUnderline}%
-  \typeout{\trmBlack{████}    trmBlack}%
-  \typeout{\trmBlue{████}   trmBlue}%
-  \typeout{\trmGreen{████}    trmGreen}%
-  \typeout{\trmCyan{████}   trmCyan}%
-  \typeout{\trmSepia{████}    trmSepia}%
-  \typeout{\trmIndigo{████}   trmIndigo}%
-  \typeout{\trmSteel{████}    trmSteel}%
-  \typeout{\trmBrown{████}    trmBrown}%
-  \typeout{\trmOlive{████}    trmOlive}%
-  \typeout{\trmLime{████}   trmLime}%
-  \typeout{\trmRed{████}    trmRed}%
-  \typeout{\trmCrimson{████}    trmCrimson}%
-  \typeout{\trmPlum{████}   trmPlum}%
-  \typeout{\trmPink{████}   trmPink}%
-  \typeout{\trmOrange{████}   trmOrange}%
-  \typeout{\trmGold{████}   trmGold}%
-  \typeout{\trmTan{████}    trmTan}%
-  \typeout{\trmYellow{████}   trmYellow}%
-  \typeout{\trmGrey{████}   trmGrey}%
-  \typeout{\trmDarkgrey{████}   trmDarkgrey}%
-  \typeout{\trmWhite{████}    trmWhite}%
-  \typeout{\trmSolBaseOThree{████}    trmSolBaseOThree}%
-  \typeout{\trmSolBaseOTwo{████}    trmSolBaseOTwo}%
-  \typeout{\trmSolBaseOOne{████}    trmSolBaseOOne}%
-  \typeout{\trmSolBaseOO{████}    trmSolBaseOO}%
-  \typeout{\trmSolBaseO{████}   trmSolBaseO}%
-  \typeout{\trmSolBaseOne{████}   trmSolBaseOne}%
-  \typeout{\trmSolBaseTwo{████}   trmSolBaseTwo}%
-  \typeout{\trmSolBaseThree{████}   trmSolBaseThree}%
-  \typeout{\trmSolYellow{████}    trmSolYellow}%
-  \typeout{\trmSolOrange{████}    trmSolOrange}%
-  \typeout{\trmSolRed{████}   trmSolRed}%
-  \typeout{\trmSolMagenta{████}   trmSolMagenta}%
-  \typeout{\trmSolViolet{████}    trmSolViolet}%
-  \typeout{\trmSolBlue{████}    trmSolBlue}%
-  \typeout{\trmSolCyan{████}    trmSolCyan}%
-  \typeout{\trmSolGreen{████}   trmSolGreen}%
-  \typeout{}%
-  \typeout{In case you cannot see colors above:}%
-  \typeout{====================================}%
-  \typeout{}%
-  \typeout{— make sure your terminal is color-capable}%
-  \typeout{  (see http://en.wikipedia.org/wiki/ANSI_escape_code)}%
-  \typeout{}%
-  \typeout{— make sure you're running XeLaTeX with the `-8bit` switch}%
-  \typeout{  (other TeXs may or may not work; some TeXs would appear to require}%
-  \typeout{  a `-translate-file=natural` or `--tcx=natural` switch)}%
-  \typeout{}%
-  \typeout{(now terminating so you can read this output.)}%
-  OUTPUT STOPPED BECAUSE OF trmTest
-  \stop%
-  }%
