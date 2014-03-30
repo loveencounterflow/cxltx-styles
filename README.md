@@ -453,12 +453,18 @@ character. You'll see a helpful message below the (un)colorized bars that says
 
     (now terminating so you can read this output.)
 
+With XeLaTeX, i use the `-8bit` switch. I generally do not support anything but Unixish OSes with Tex Live
+XeLaTeX, so bad luck if you have another configuration and can't make this work. LaTeX is such a complex
+beast, i'm always happy when i'm able to connect the dots using a very narrow range of OS and TeX
+incarnation choices and have no way to test on other systems. **That said, please issue a pull request in
+case you feel there's a meaning ful upgrade to any given command provided here that can make CXLTX styles
+more robust in this respect.**
+
 ### Effects
 * trmBlink
 * trmBold
 * trmReverse
 * trmUnderline
-
 * trmNoBlink
 * trmNoBold
 * trmNoReverse
