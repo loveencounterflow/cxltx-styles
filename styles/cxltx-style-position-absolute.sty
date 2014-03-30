@@ -12,6 +12,7 @@
 \usepackage{changepage}%            http://ctan.org/pkg/changepage
 \usepackage{cxltx-style-equals}%
 \usepackage{cxltx-style-oddeven}%
+\usepackage{cxltx-style-trm}%
 
 \makeatletter
 
@@ -61,19 +62,19 @@
     % ......................................................................................................
     % Calculate top margin if it is 'null':
     \eqIfTextEqualsThen{\@paTopMargin}{null}{%
-      \typeout{(eq: Calculating top margin}%
+      \typeout{\trmSolBlue{(eq: Calculating top margin}}%
       \FPeval{\@paTemp}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
       \global\let\@paTopMargin\@paTemp%
-      \typeout{eq: -> @paTopMargin: \@paTopMargin)}%
+      \typeout{\trmSolBlue{eq: -> @paTopMargin: \@paTopMargin)}}%
       }%
     % ......................................................................................................
     \oeIfOddPage{% If this is an odd page:
       % Re-calculate odd left margin if it is 'null':
       \eqIfTextEqualsThen{\@paOddLeftMargin}{null}{%
-        \typeout{(eq: Calculating odd left margin}%
+        \typeout{\trmSolBlue{(eq: Calculating odd left margin}}%
         \FPeval{\@paTemp}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
         \global\let\@paOddLeftMargin\@paTemp%
-        \typeout{eq: -> @paOddLeftMargin: \@paOddLeftMargin)}%
+        \typeout{\trmSolBlue{eq: -> @paOddLeftMargin: \@paOddLeftMargin)}}%
         }%
       % Set origin for odd page:
       \textblockorigin{\@paOddLeftMargin mm}{\@paTopMargin mm}%
@@ -81,10 +82,10 @@
     }{% If this is an even page:
       % Re-calculate even left margin if it is 'null':
       \eqIfTextEqualsThen{\@paEvenLeftMargin}{null}{%
-        \typeout{(eq: Calculating even left margin}%
+        \typeout{\trmSolBlue{(eq: Calculating even left margin}}%
         \FPeval{\@paTemp}{(\number\evensidemargin+4736286)/186467}%
         \global\let\@paEvenLeftMargin\@paTemp%
-        \typeout{eq: -> @paEvenLeftMargin: \@paEvenLeftMargin)}%
+        \typeout{\trmSolBlue{eq: -> @paEvenLeftMargin: \@paEvenLeftMargin)}}%
         }%
       % Set origin for even page:
       \textblockorigin{\@paEvenLeftMargin mm}{\@paTopMargin mm}%
