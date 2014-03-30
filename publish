@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 echo && \
+doctoc README.md && \
 git add --all && \
 git commit -m "autocommit" && \
 git push -u origin master

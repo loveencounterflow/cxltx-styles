@@ -11,7 +11,9 @@
 		- [paShow and paHide](#pashow-and-pahide)
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 	- [CXLTX Style: Equals](#cxltx-style-equals)
-	- [CXLTX Style: Odd / Even](#cxltx-style-odd--even)
+	- [CXLTX Style: OddEven](#cxltx-style-oddeven)
+	- [CXLTX Style: TRM](#cxltx-style-trm)
+- [In case you cannot see colors above:](#in-case-you-cannot-see-colors-above)
 
 > **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
