@@ -236,7 +236,7 @@ right: either ask PA to do it for you, or else do it yourself. The easy way firs
 **Observe that while `\usepackage{cxltx-style-position-absolute}` will run `paGaugeSample` implicitly,
 dimensions will at best be approximate in case you change fonts later in your document setup.**
 
-> You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protuding
+> You may profit from using CXLTX Smashbox in case you want to mix characters from fonts with protruding
 > heights and depths in your PA textboxes.
 
 Now for the hard way: if you find you want to do it yourself (maybe because you're mixing typefaces on the
@@ -328,10 +328,12 @@ single command is defined:
 <!-- =================================================================================================== -->
 ## CXLTX Style: Equals
 
-Routines to do equality checks. The badge is `eq`. Currently, a single command is defined:
+Routines to do equality checks. The badge is `eq`. Currently, a three commands are defined:
 
 ````latex
 \eqTextEquals{$valueOne}{$valueTwo}{if branch}{else branch}
+\eqIfTextEqualsThen}{$valueOne}{$valueTwo}{if branch}
+\eqUnlessTextEqualsThen}{$valueOne}{$valueTwo}{else branch}
 ````
 
 `\eqTextEquals` checks whether `$valueOne` and `$valueTwo` are equal strings or expand to equal strings; as
