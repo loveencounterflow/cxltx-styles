@@ -20,6 +20,7 @@
 \usepackage{cxltx-style-base}
 \usepackage{cxltx-style-position-absolute}
 \usepackage{cxltx-style-oddeven}
+\usepackage{cxltx-style-trm}
 % \usepackage[top-left]{pagegrid}
 
 \usepackage{ifthen}
@@ -53,14 +54,92 @@
 \oeIfOddPage{It's so odd!}{Now that's even}
 
 
-\uccode`A=27%
-\catcode`27=11
-\uppercase{\typeout{A[38;05;54m Indigo!}}
-\def\indigo{[38;05;54m}
-\immediate\write18{esc "\indigo helo Indigo"}
+% \uccode`A=27%
+% \catcode`27=11
+% \uppercase{\typeout{A[38;05;54m Indigo!}}
+% \def\indigo{[38;05;54m}
+% \immediate\write18{esc "\indigo helo Indigo"}
 
 % \typeout{\char"001B[38;05;54m Indigo!}
 % \typeout{"\x1b[38;05;54m"}
+
+% \begingroup
+%   \makeatletter
+%   \@makeother\^^1b
+% \@firstofone{\endgroup
+%   \newcommand*{\CSI}{^^1b[}%
+% }
+
+\typeout{}
+\typeout{\trmIndigo{Indigo!} normal}
+\typeout{\trmTan{trmTan}}
+% \typeout{\CSI37m\CSI41m\CSI1mBold white on red\CSI0m}
+
+% \newcommand{\trmBlink}[1]{\trmCsi[5m#1\trmReset}
+% \newcommand{\trmBold}[1]{\trmCsi[1m#1\trmReset}
+% \newcommand{\trmReverse}[1]{\trmCsi[7m#1\trmReset}
+% \newcommand{\trmUnderline}[1]{\trmCsi[4m#1\trmReset}
+
+% % ----------------------------------------------------------------------------------------------------------
+% % Effects Off
+% % ..........................................................................................................
+% \newcommand{\trmNoBlink}[1]{\trmCsi[25m#1\trmReset}
+% \newcommand{\trmNoBold}[1]{\trmCsi[22m#1\trmReset}
+% \newcommand{\trmNoReverse}[1]{\trmCsi[27m#1\trmReset}
+% \newcommand{\trmNoUnderline}[1]{\trmCsi[24m#1\trmReset}
+% \newcommand{\trmReset}{\trmCsi0m}
+
+% % ----------------------------------------------------------------------------------------------------------
+% % Colors
+% % ..........................................................................................................
+% \newcommand{\trmBlack}[1]{\trmCsi[38;05;16m#1\trmReset}
+% \newcommand{\trmBlue}[1]{\trmCsi[38;05;27m#1\trmReset}
+% \newcommand{\trmGreen}[1]{\trmCsi[38;05;34m#1\trmReset}
+% \newcommand{\trmCyan}[1]{\trmCsi[38;05;51m#1\trmReset}
+% \newcommand{\trmSepia}[1]{\trmCsi[38;05;52m#1\trmReset}
+% \newcommand{\trmIndigo}[1]{\trmCsi[38;05;54m#1\trmReset}
+% \newcommand{\trmSteel}[1]{\trmCsi[38;05;67m#1\trmReset}
+% \newcommand{\trmBrown}[1]{\trmCsi[38;05;94m#1\trmReset}
+% \newcommand{\trmOlive}[1]{\trmCsi[38;05;100m#1\trmReset}
+% \newcommand{\trmLime}[1]{\trmCsi[38;05;118m#1\trmReset}
+% \newcommand{\trmRed}[1]{\trmCsi[38;05;124m#1\trmReset}
+% \newcommand{\trmCrimson}[1]{\trmCsi[38;05;161m#1\trmReset}
+% \newcommand{\trmPlum}[1]{\trmCsi[38;05;176m#1\trmReset}
+% \newcommand{\trmPink}[1]{\trmCsi[38;05;199m#1\trmReset}
+% \newcommand{\trmOrange}[1]{\trmCsi[38;05;208m#1\trmReset}
+% \newcommand{\trmGold}[1]{\trmCsi[38;05;214m#1\trmReset}
+% \newcommand{\trmTan}[1]{\trmCsi[38;05;215m#1\trmReset}
+% \newcommand{\trmYellow}[1]{\trmCsi[38;05;226m#1\trmReset}
+% \newcommand{\trmGrey}[1]{\trmCsi[38;05;240m#1\trmReset}
+% \newcommand{\trmDarkgrey}[1]{\trmCsi[38;05;234m#1\trmReset}
+% \newcommand{\trmWhite}[1]{\trmCsi[38;05;255m#1\trmReset}
+
+% % ..........................................................................................................
+% % experimental:
+% % colors as defined by http://ethanschoonover.com/solarized
+% \newcommand{\trmBaseOThree}[1]{\trmCsi[38;05;234m#1\trmReset}
+% \newcommand{\trmBaseOTwo}[1]{\trmCsi[38;05;235m#1\trmReset}
+% \newcommand{\trmBaseOOne}[1]{\trmCsi[38;05;240m#1\trmReset}
+% \newcommand{\trmBaseOO}[1]{\trmCsi[38;05;241m#1\trmReset}
+% \newcommand{\trmBaseO}[1]{\trmCsi[38;05;244m#1\trmReset}
+% \newcommand{\trmBaseOne}[1]{\trmCsi[38;05;245m#1\trmReset}
+% \newcommand{\trmBaseTwo}[1]{\trmCsi[38;05;254m#1\trmReset}
+% \newcommand{\trmBaseThree}[1]{\trmCsi[38;05;230m#1\trmReset}
+% \newcommand{\trmYellow}[1]{\trmCsi[38;05;136m#1\trmReset}
+% \newcommand{\trmOrange}[1]{\trmCsi[38;05;166m#1\trmReset}
+% \newcommand{\trmRed}[1]{\trmCsi[38;05;124m#1\trmReset}
+% \newcommand{\trmMagenta}[1]{\trmCsi[38;05;125m#1\trmReset}
+% \newcommand{\trmViolet}[1]{\trmCsi[38;05;61m#1\trmReset}
+% \newcommand{\trmBlue}[1]{\trmCsi[38;05;33m#1\trmReset}
+% \newcommand{\trmCyan}[1]{\trmCsi[38;05;37m#1\trmReset}
+% \newcommand{\trmGreen}[1]{\trmCsi[38;05;64m#1\trmReset}
+
+
+
+
+
+\typeout{}
+
 
 \end{document}
 

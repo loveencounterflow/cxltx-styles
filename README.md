@@ -33,6 +33,7 @@ sheets.
 \usepackage{cxltx-style-convert-to}           % simplistic unit conversion
 \usepackage{cxltx-style-equals}               % equality testing made easy
 \usepackage{cxltx-style-oddeven}              % checking whether we're on an odd or an even page
+\usepackage{cxltx-style-trm}                  % make a hundred colors glow (in terminal output)
 ````
 
 
