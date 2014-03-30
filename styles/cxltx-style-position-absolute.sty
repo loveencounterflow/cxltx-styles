@@ -156,6 +156,29 @@
     \end{textblock*}%
   }}
 
+\def\paTopLeft{\@ifstar\@@paTopLeft\@paTopLeft}
+
+\newcommand{\@paTopLeft}[3]{{%
+  \@paSetOriginIfOriginIsText%
+  \settowidth{\@paTextWidth}{#3{\paStrut}}
+  \begin{textblock*}{\@paTextWidth}[0,0](#1,#2)%
+    \@paNoSpacing%
+    \flushleft% needed although it should be gratuitous
+    #3%
+    {\paStrut}%
+    \end{textblock*}%
+  }}
+
+\newcommand{\@@paTopLeft}[3]{{%
+  \@paSetOriginIfOriginIsText%
+  \settowidth{\@paTextWidth}{#3}
+  \begin{textblock*}{\@paTextWidth}[0,0](#1,#2)%
+    \@paNoSpacing%
+    \flushleft% needed although it should be gratuitous
+    #3%
+    \end{textblock*}%
+  }}
+
 \newcommand{\paCenter}[3]{{%
   \@paSetOriginIfOriginIsText%
   \settowidth{\@paTextWidth}{{\paStrut}#3{\paStrut}}

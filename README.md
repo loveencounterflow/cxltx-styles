@@ -5,7 +5,7 @@
 	- [Badges](#badges)
 	- [CXLTX Style: Position Absolute](#cxltx-style-position-absolute)
 		- [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
-		- [paRight, paCenter, and paLeft](#paright-pacenter-and-paleft)
+		- [paLeft, paCenter, paRight, and paTopLeft](#paleft-pacenter-paright-and-patopleft)
 		- [paGauge](#pagauge)
 		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
 		- [paShow and paHide](#pashow-and-pahide)
@@ -162,14 +162,14 @@ default), `paper`, or some `custom (20mm,25mm)` (for the first example, above).
 With these considerations out of the way, let's have a look at how to actually put stuff onto the page.
 
 <!-- ................................................................................................... -->
-### paRight, paCenter, and paLeft
+### paLeft, paCenter, paRight, and paTopLeft
 
 These are the basic commands to place printing material onto absolute positions; unlike their counterpart
 in `textpos` (the `textblock` environment), each takes three regular arguments, namely, the `x` position,
 the `y` position (growing from the top to the bottom), and the content of the box:
 
 ````latex
-\pa〚Left|Center|Right〛{$x}{$y}{$text}
+\pa〚Left|Center|Right|TopLeft〛{$x}{$y}{$text}
 ````
 
 This code:
@@ -193,6 +193,17 @@ centers the text horizontally so the 40mm mark lands smack in the middle. No sur
 the purpose of this package! (The boxes and struts are only shown for demonstration; they're of course
 absent from the output unless you state to `\paShow` them.)
 
+The `\paTopLeft` command and its stzarred form, `\paTopLeft*`, are intended to be used when you want to
+position material anchored at the top left corner. The unstarred form includes a strut (like the
+commands discussed above); it is intended to be used with text. The starred form does not include a strut
+and is intended to be used with images. Thus:
+
+````latex
+\paTopLeft*{10mm}{10mm}{\includegraphics[height=180mm]{/route/to/image.png}}
+\paTopLeft{10mm}{10mm+180mm}{An interesting image.}
+````
+
+will place an image with a height of 180mm onto the page, with a line of text right beneath it.
 
 <!-- ................................................................................................... -->
 ### paGauge
