@@ -7,24 +7,23 @@
 % see http://www.tex.ac.uk/ctan/macros/latex/contrib/textpos/textpos.pdf
 \ProvidesPackage{cxltx-style-position-absolute}
 \usepackage[absolute,overlay,quiet]{textpos}
-\usepackage{calc}%            http://ctan.org/pkg/calc
-% \usepackage[nomessages]{fp}%  http://ctan.org/pkg/fp
-\usepackage{fp}%  http://ctan.org/pkg/fp
-\usepackage{changepage}%      http://ctan.org/pkg/changepage
+\usepackage{calc}%                  http://ctan.org/pkg/calc
+\usepackage{fp}%                    http://ctan.org/pkg/fp
+\usepackage{changepage}%            http://ctan.org/pkg/changepage
+\usepackage{cxltx-style-equals}%
+\usepackage{cxltx-style-oddeven}%
 
 \makeatletter
 
-% Helper tokens:
-\newcommand{\@paTextToken}{text}
-\newcommand{\@paNullToken}{null}
 
 % Commands / values to keep track of coordinates origin characteristics:
-\newcommand{\@paOddLeftMargin}{\@paNullToken}
-\newcommand{\@paEvenLeftMargin}{\@paNullToken}
-\newcommand{\@paTopMargin}{\@paNullToken}
+\newcommand{\@paOddLeftMargin}{null}
+\newcommand{\@paEvenLeftMargin}{null}
+\newcommand{\@paTopMargin}{null}
+\newcommand{\@paTemp}{null}
 
 % Records type of origin (`paper`, `text`, or `custom ($x,$y)`)
-\newcommand{\paOriginIs}{\@paNullToken}
+\newcommand{\paOriginIs}{null}
 
 % An alias for `textpos` `\textblockorigin`:
 \newcommand{\paOriginTo}[2]{%
@@ -38,47 +37,71 @@
   \renewcommand{\paOriginIs}{paper}%
   }
 
+% ----------------------------------------------------------------------------------------------------------
+% http://tex.stackexchange.com/a/51750/28067
+\def\gnewcommand{\g@star@or@long\gnew@command}
+\def\grenewcommand{\g@star@or@long\grenew@command}
+\def\g@star@or@long#1{%
+  \@ifstar{\let\l@ngrel@x\global#1}{\def\l@ngrel@x{\long\global}#1}}
+\def\gnew@command#1{\@testopt{\@gnewcommand#1}0}
+\def\@gnewcommand#1[#2]{%
+  \kernel@ifnextchar [{\@gxargdef#1[#2]}%
+                {\@argdef#1[#2]}}
+\let\@gxargdef\@xargdef
+\patchcmd{\@gxargdef}{\def}{\gdef}{}{}
+\let\grenew@command\renew@command
+\patchcmd{\grenew@command}{\new@command}{\gnew@command}{}{}
+
+% ----------------------------------------------------------------------------------------------------------
 % Check whether we're on an odd or an even page, and set `\paCurrentOddEven` to `odd` or `even`:
 \newcommand{\@paSetOriginIfOriginIsText}{
-  \typeout{+++++ paSetOriginIfOriginIsText}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  % ........................................................................................................
   % Check that origin is set to `text`; otherwise, do nothing:
-  \ifx\paOriginIs\@paTextToken%
-    \typeout{+++++ origin is text}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  \eqIfTextEqualsThen{\paOriginIs}{text}{%
+    % ......................................................................................................
     % Calculate top margin if it is 'null':
-    \ifx\@paTopMargin\@paNullToken%
-      \typeout{+++++ paTopMargin is null}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      \FPeval{\@paTopMargin}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
-    \fi%
-    % If this is an odd page:
-    \strictpagecheck\checkoddpage\ifoddpage%
+    \eqIfTextEqualsThen{\@paTopMargin}{null}{%
+      \typeout{(eq: Calculating top margin}%
+      \FPeval{\@paTemp}{(\number\headsep+\number\headheight+\number\topmargin+\number\voffset+4736286)/186467}%
+      \global\let\@paTopMargin\@paTemp%
+      \typeout{eq: -> @paTopMargin: \@paTopMargin)}%
+      }%
+    % ......................................................................................................
+    \oeIfOddPage{% If this is an odd page:
       % Re-calculate odd left margin if it is 'null':
-      \typeout{+++++ is odd page}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      \ifx\@paOddLeftMargin\@paNullToken%
-        \FPeval{\@paOddLeftMargin}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
-      \fi%
+      \eqIfTextEqualsThen{\@paOddLeftMargin}{null}{%
+        \typeout{(eq: Calculating odd left margin}%
+        \FPeval{\@paTemp}{(\number\hoffset+\number\oddsidemargin+4736286)/186467}%
+        \global\let\@paOddLeftMargin\@paTemp%
+        \typeout{eq: -> @paOddLeftMargin: \@paOddLeftMargin)}%
+        }%
       % Set origin for odd page:
       \textblockorigin{\@paOddLeftMargin mm}{\@paTopMargin mm}%
-    % If this is an even page:
-    \else%
-      \typeout{+++++ is even page}% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    % ......................................................................................................
+    }{% If this is an even page:
       % Re-calculate even left margin if it is 'null':
-      \ifx\@paEvenLeftMargin\@paNullToken%
-        \FPeval{\@paEvenLeftMargin}{(\number\evensidemargin+4736286)/186467}%
-      \fi%
+      \eqIfTextEqualsThen{\@paEvenLeftMargin}{null}{%
+        \typeout{(eq: Calculating even left margin}%
+        \FPeval{\@paTemp}{(\number\evensidemargin+4736286)/186467}%
+        \global\let\@paEvenLeftMargin\@paTemp%
+        \typeout{eq: -> @paEvenLeftMargin: \@paEvenLeftMargin)}%
+        }%
       % Set origin for even page:
       \textblockorigin{\@paEvenLeftMargin mm}{\@paTopMargin mm}%
-    \fi%
-  \fi%
-  }
+    % ......................................................................................................
+    }
+    }
+  }%
 
+% ----------------------------------------------------------------------------------------------------------
 % Set origin to top left corner of text area:
 \newcommand{\paOriginToText}{%
   % Set origin to 'text':
-  \renewcommand{\paOriginIs}{\@paTextToken}%
+  \renewcommand{\paOriginIs}{text}%
   % Set margins to 'null', awaiting call to `\@paSetOriginIfOriginIsText`:
-  \renewcommand{\@paOddLeftMargin}{\@paNullToken}
-  \renewcommand{\@paEvenLeftMargin}{\@paNullToken}
-  \renewcommand{\@paTopMargin}{\@paNullToken}
+  \renewcommand{\@paOddLeftMargin}{null}%
+  \renewcommand{\@paEvenLeftMargin}{null}%
+  \renewcommand{\@paTopMargin}{null}%
   }
 
 

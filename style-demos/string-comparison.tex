@@ -4,7 +4,6 @@
 % \usepackage[nottoc]{tocbibind}
 % \setcounter{secnumdepth}{0}
 \usepackage{wasysym} % provides symbols
-\usepackage{minted} % syntax coloring
 
 \usepackage{cxltx-style-base}
 \usepackage{cxltx-style-cjk}
@@ -438,36 +437,38 @@ versatile, less surprising, and puts less strain onto your name memory.
 
 The \verb#\eqTextEquals# macro has a fairly simple implementation, {\em viz.}:
 
-\begin{minted}{latex}
-\newcommand{\eqTextEquals}[4]{%
-
-  \ifdefmacro{#1}{%
-    % ...................................................
+\begin{verbatim}
+\newcommand{\eqTextEquals}[4]{
+  \ifdefmacro{#1}{
     % #1 is a macro
-    \ifdefmacro{#2}{%
-      % .................................................
+    \ifdefmacro{#2}{
       % #1 and #2 are macros
-        \ifdefstrequal{#1}{#2}{#3}{#4}
-      }{%
-        % ...............................................
-        % #1 is a macro, #2 is a literal
-        \ifdefstring{#1}{#2}{#3}{#4}
-      }%
-  }{%
-    % ...................................................
+      \ifdefstrequal{#1}{#2}{#3}{#4}
+    }{
+      % #1 is a macro, #2 is a literal
+      \ifdefstring{#1}{#2}{#3}{#4}
+      }
+  }{
     % #1 is a literal
-    \ifdefmacro{#2}{%
-      % .................................................
+    \ifdefmacro{#2}{
       % #1 is a literal, #2 is a macro
-        \ifdefstring{#2}{#1}{#3}{#4}
-      }{%
-        % ...............................................
-        % #1 and #2 are literals
-        \ifstrequal{#1}{#2}{#3}{#4}
-      }%
-    }%
-  }%
-\end{minted}
+      \ifdefstring{#2}{#1}{#3}{#4}
+    }{
+      % #1 and #2 are literals
+      \ifstrequal{#1}{#2}{#3}{#4}
+      }
+    }
+  }
+
+\newcommand{\eqIfTextEqualsThen}[3]{
+  \eqTextEquals{#1}{#2}{#3}{}
+  }
+
+\newcommand{\eqUnlessTextEqualsThen}[3]{
+  \eqTextEquals{#1}{#2}{}{#3}
+  }
+
+\end{verbatim}
 
 
 

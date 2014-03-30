@@ -11,6 +11,7 @@
 		- [paShow and paHide](#pashow-and-pahide)
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 	- [CXLTX Style: Equals](#cxltx-style-equals)
+	- [CXLTX Style: Odd / Even](#cxltx-style-odd--even)
 
 > **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
@@ -31,6 +32,7 @@ sheets.
 \usepackage{cxltx-style-position-absolute}    % absolute textpositioning
 \usepackage{cxltx-style-convert-to}           % simplistic unit conversion
 \usepackage{cxltx-style-equals}               % equality testing made easy
+\usepackage{cxltx-style-oddeven}              % checking whether we're on an odd or an even page
 ````
 
 
@@ -77,7 +79,8 @@ pls.) and use CamelCase (coz that dash is no-go in TeX, y'know).
 
 > Badges are necessitated by the fact that all of the huge ecosystem that is TeX & LaTeX lives within one
 > single, *enormous* namespace. There's not even so much as a stringent convention to minimize chances of
-> naming collisions
+> naming collisions. As a result, name and package option clashes are a frequently observed nuisance that
+> any user of LaTeX has to put up with.
 
 
 <!-- =================================================================================================== -->
@@ -368,6 +371,48 @@ then all of the following comparisons work and will print out `OK`:
 For more details, have a look at [The LaTeX String Equality Comparison
 Primer](https://github.com/loveencounterflow/cxltx-styles/raw/master/style-demos/string-comparison.pdf)
 
+Sometimes you need only take some action when string equality tests positively or negatively; in these
+cases, you can either call `eqTextEquals` with an empty true or false branch:
+
+````latex
+\eqTextEquals{\a}{\b}{true branch}{}
+\eqTextEquals{\a}{\b}{}{false branch}
+````
+
+or use the equivalent commands `\eqIfTextEqualsThen` or `\eqUnlessTextEqualsThen`:
+
+
+````latex
+\eqIfTextEqualsThen{\a}{\b}{true branch}
+\eqUnlessTextEqualsThen{\a}{\b}{false branch}
+````
+
+
+<!-- =================================================================================================== -->
+## CXLTX Style: Odd / Even
+
+`cxltx-style-oddeven` is a very thin shim for the `\ifoddpage` command of the
+[`changepage`](http://www.ctan.org/pkg/changepage) package. It exists to abbreviate the
+incantation
+
+````latex
+\strictpagecheck\checkoddpage\ifoddpage
+  odd branch
+\else
+  even branch
+\fi%
+````
+
+to one of these forms:
+
+````latex
+\oeIfOddPage}{odd branch}{even branch}
+\oeIfEvenPage}{even branch}{odd branch}
+````
+
+The advantage of `cxltx-style-oddeven` is that **(1)** it always uses the `strict` option so you don't have
+to remember that one, and **(2)** it uses the more standards-conformant double-brace-pair syntax instead
+of the somewhat unusual `\if ... \else ... \fi` syntax.
 
 
 

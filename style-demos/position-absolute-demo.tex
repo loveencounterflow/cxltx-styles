@@ -1,5 +1,5 @@
 
-\documentclass[a5paper]{memoir}
+\documentclass[a5paper]{book}
 \usepackage[
   xetex,
   showframe,
@@ -19,7 +19,10 @@
 
 \usepackage{cxltx-style-base}
 \usepackage{cxltx-style-position-absolute}
-\usepackage[top-left]{pagegrid}
+\usepackage{cxltx-style-oddeven}
+% \usepackage[top-left]{pagegrid}
+
+\usepackage{ifthen}
 
 \begin{document}
 
@@ -37,35 +40,27 @@
 
 \null\newpage
 
-% \paOriginToText
-% \the\oddsidemargin\\
-% \the\evensidemargin
-
-\paOriginIs
-
 
 \paCenter{0mm}{0mm}{o}
 \paLeft{40mm}{10mm}{this text starts at 40mm}
 \paCenter{40mm}{15mm}{centered centered}
 \paRight{40mm}{20mm}{this text ends at 40mm}
 
-% \null\newpage
+\null\newpage
+\oeIfOddPage{It's so odd!}{Now that's even}
 
-% helo
-
-% \def\texttoken{text}
-% \def\x{text}
-
-% \texttoken, \x
-
-% \ifx\x\texttoken
-% It's 'text'
-% \fi
+\null\newpage
+\oeIfOddPage{It's so odd!}{Now that's even}
 
 
+\uccode`A=27%
+\catcode`27=11
+\uppercase{\typeout{A[38;05;54m Indigo!}}
+\def\indigo{[38;05;54m}
+\immediate\write18{esc "\indigo helo Indigo"}
 
-
-
+% \typeout{\char"001B[38;05;54m Indigo!}
+% \typeout{"\x1b[38;05;54m"}
 
 \end{document}
 
