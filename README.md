@@ -203,7 +203,10 @@ and is intended to be used with images. Thus:
 \paTopLeft{10mm}{10mm+180mm}{An interesting image.}
 ````
 
-will place an image with a height of 180mm onto the page, with a line of text right beneath it.
+will place an image with a height of 180mm onto the page, with a line of text right beneath it. Observe
+the simple math done here right in the macro argument; this may help to enhance readability and also
+introduces a way to store component lengths in variables.
+
 
 <!-- ................................................................................................... -->
 ### paGauge
