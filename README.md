@@ -193,10 +193,10 @@ centers the text horizontally so the 40mm mark lands smack in the middle. No sur
 the purpose of this package! (The boxes and struts are only shown for demonstration; they're of course
 absent from the output unless you state to `\paShow` them.)
 
-The `\paTopLeft` command and its stzarred form, `\paTopLeft*`, are intended to be used when you want to
-position material anchored at the top left corner. The unstarred form includes a strut (like the
+The `\paTopLeft` command and its starred form, `\paTopLeft*`, are intended to be used when you want to
+position material anchored at the top left corner. **The unstarred form includes a strut (like the
 commands discussed above); it is intended to be used with text. The starred form does not include a strut
-and is intended to be used with images. Thus:
+and is intended to be used with images.** Thus:
 
 ````latex
 \paTopLeft*{10mm}{10mm}{\includegraphics[height=180mm]{/route/to/image.png}}
