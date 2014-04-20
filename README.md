@@ -7,6 +7,7 @@
 		- [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
 		- [paLeft, paCenter, paRight, and paTopLeft](#paleft-pacenter-paright-and-patopleft)
 		- [paGauge](#pagauge)
+		- [paLeftGauge, paCenterGauge, paRightGauge](#paleftgauge-pacentergauge-parightgauge)
 		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
 		- [paShow and paHide](#pashow-and-pahide)
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
@@ -266,6 +267,25 @@ are important. Since material typeset with PA does not 'take space' on the page 
 other material, just as a HTML `<div/>` with CSS style `position: absolute` would), the absolute height of
 the struts (as long as it equal to or greater than the height and depth of any material within the box) is
 of little consequence.—Which brings us to the next point.
+
+<!-- ................................................................................................... -->
+### paLeftGauge, paCenterGauge, paRightGauge
+
+There are three convenience commands
+
+````latex
+\paLeftGauge{40mm}{10mm}{this text starts at 40mm}
+\paCenterGauge{40mm}{15mm}{centered centered}
+\paRightGauge{40mm}{20mm}{this text ends at 40mm}
+````
+
+that work exactly like their counterparts without the `...Gauge` suffix, except that they execute
+`\paGauge{#3}` immediately prior to doing the positiong proper; furthermore, since gaugeing happens within
+the confines of a TeX group, effects are kept local. These commands allow you to throw in materials set with
+other typefaces and/or sizes without worrying much about typeface metrics. If it weren't for the quite
+significant overhead and the incredibly log flooding incurred by the `fp` package, `\paLeftGauge` and
+friends should be the default commands. When there is a lot of absolutely positioned material in your
+document, be sure to make it so that the `\paLeft` commands get the main work to do.
 
 <!-- ................................................................................................... -->
 ### Absolute Positioning and Page Breaks
