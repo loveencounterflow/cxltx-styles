@@ -351,7 +351,7 @@ single command is defined:
 <!-- =================================================================================================== -->
 ## CXLTX Style: Equals
 
-Routines to do equality checks. The badge is `eq`. Currently, a three commands are defined:
+Routines to do equality checks. The badge is `eq`. Currently, three commands are defined:
 
 ````latex
 \eqTextEquals{$valueOne}{$valueTwo}{if branch}{else branch}
