@@ -346,15 +346,15 @@ as http://www.eutypon.gr/eutypon/pdf/e2000-05/e05-a04.pdf. I does not appear to 
 so that's what i did here. An example:
 
 ```latex
-\documentclass[a4paper,12pt]{book}
-\usepackage{cxltx-style-accentbox}
-\begin{document}
+    \documentclass[a4paper,12pt]{book}
+    \usepackage{cxltx-style-accentbox}
+    \begin{document}
 
-\textit{Some variations with an asterisk placed above an `i':}
-i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}
-\textit{i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}}
+    \textit{Some variations with an asterisk placed above an `i':}
+    i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}
+    \textit{i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}}
 
-\end{document}
+    \end{document}
 ```
 
 I didn't modify or wrap the original package, so AccentBox does not have a badge like the other CXLTX
