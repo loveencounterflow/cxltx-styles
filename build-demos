@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-xelatex --halt-on-error --output-directory style-demos style-demos/position-absolute-demo.tex
 
-
+xelatex -8bit --halt-on-error --output-directory style-demos style-demos/accentbox-demo.tex && \
+# xelatex -8bit --halt-on-error --output-directory style-demos style-demos/position-absolute-demo.tex && \
+# xelatex -8bit --halt-on-error --output-directory style-demos style-demos/string-comparison.tex && \
+echo 'ok'
 
