@@ -360,10 +360,10 @@ i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}
 I didn't modify or wrap the original package, so AccentBox does not have a badge like the other CXLTX
 styles. The commands defined are:
 
-`\aboxbar`, aboxbase`, aboxbaseline`, aboxframed`, aboxframestepH`, aboxframestepV`, aboxjoin`, aboxmarker`,
-`\aboxnull`, aboxrule`, aboxshift`, aboxsplit`, aboxsplitdn`, aboxsplitup`, akern`, baseaccent`,
-`\baseaccentC`, baseaccentR`, dnaccent`, dnaccentbar`, dnaccentC`, makeaccent`, markchar`, MARKCHAR`,
-`\marktwochar`, nullaccent`, nullaccentC`, nullaccentR`, upaccent`, upaccentbar`, upaccentC`, upaccentL`,
+`\aboxbar`, `aboxbase`, `aboxbaseline`, `aboxframed`, `aboxframestepH`, `aboxframestepV`, `aboxjoin`, `aboxmarker`,
+`\aboxnull`, `aboxrule`, `aboxshift`, `aboxsplit`, `aboxsplitdn`, `aboxsplitup`, `akern`, `baseaccent`,
+`\baseaccentC`, `baseaccentR`, `dnaccent`, `dnaccentbar`, `dnaccentC`, `makeaccent`, `markchar`, `MARKCHAR`,
+`\marktwochar`, `nullaccent`, `nullaccentC`, `nullaccentR`, `upaccent`, `upaccentbar`, `upaccentC`, `upaccentL`,
 `\upaccentR`. For details please see the PDF linked above; there's also a copy of the manual in the
 `accentbx` folder of this project.
 
