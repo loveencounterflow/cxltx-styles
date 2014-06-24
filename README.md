@@ -10,6 +10,7 @@
 		- [paLeftGauge, paCenterGauge, paRightGauge](#paleftgauge-pacentergauge-parightgauge)
 		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
 		- [paShow and paHide](#pashow-and-pahide)
+	- [CXLTX Style: AccentBox](#cxltx-style-accentbox)
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 	- [CXLTX Style: Equals](#cxltx-style-equals)
 	- [CXLTX Style: OddEven](#cxltx-style-oddeven)
@@ -335,6 +336,36 @@ Use `\paShow` and `\usepackage[top-left]{pagegrid}` to debug your PA-powered doc
 Beauty of Simplicity! Never look back to those inferior and clumsy methods of days gone by!
 
 Enough of that.
+
+
+<!-- =================================================================================================== -->
+## CXLTX Style: AccentBox
+
+*CXLTX AccentBox* is simply a duplication of an diacritics package authored by A.S. Berdnikov and published
+as http://www.eutypon.gr/eutypon/pdf/e2000-05/e05-a04.pdf. I does not appear to be included in TeX Live,
+so that's what i did here. An example:
+
+```latex
+\documentclass[a4paper,12pt]{book}
+\usepackage{cxltx-style-accentbox}
+\begin{document}
+
+\textit{Some variations with an asterisk placed above an `i':}
+i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}
+\textit{i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}i\upaccent{\tiny *}{\i}}
+
+\end{document}
+```
+
+I didn't modify or wrap the original package, so AccentBox does not have a badge like the other CXLTX
+styles. The commands defined are:
+
+`\aboxbar`, aboxbase`, aboxbaseline`, aboxframed`, aboxframestepH`, aboxframestepV`, aboxjoin`, aboxmarker`,
+`\aboxnull`, aboxrule`, aboxshift`, aboxsplit`, aboxsplitdn`, aboxsplitup`, akern`, baseaccent`,
+`\baseaccentC`, baseaccentR`, dnaccent`, dnaccentbar`, dnaccentC`, makeaccent`, markchar`, MARKCHAR`,
+`\marktwochar`, nullaccent`, nullaccentC`, nullaccentR`, upaccent`, upaccentbar`, upaccentC`, upaccentL`,
+`\upaccentR`. For details please see the PDF linked above; there's also a copy of the manual in the
+`accentbx` folder of this project.
 
 
 <!-- =================================================================================================== -->
