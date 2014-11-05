@@ -10,6 +10,7 @@
 		- [paLeftGauge, paCenterGauge, paRightGauge](#paleftgauge-pacentergauge-parightgauge)
 		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
 		- [paShow and paHide](#pashow-and-pahide)
+	- [CXLTX Style: PushRaise](#cxltx-style-pushraise)
 	- [CXLTX Style: AccentBox](#cxltx-style-accentbox)
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 	- [CXLTX Style: Equals](#cxltx-style-equals)
@@ -354,7 +355,12 @@ to raise or to lower it, all in terms of the current font size:
 
 ```
 
+Here is the output of the above, running XeLaTeX with xeCJK; the fornt is Sun-ExtA:
 
+![](https://github.com/loveencounterflow/cxltx-styles/raw/master/art/Screen%20Shot%202014-11-05%20at%2017.56.39.png)
+
+> thx to werner @ http://tex.stackexchange.com/a/51115/28067 who provided the essentials for the `\prPush`
+> implementation.
 
 <!-- =================================================================================================== -->
 ## CXLTX Style: AccentBox
