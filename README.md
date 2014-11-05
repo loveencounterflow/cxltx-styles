@@ -347,12 +347,11 @@ Enough of that.
 to raise or to lower it, all in terms of the current font size and without taking up additional space:
 
 ```latex
-\cn{龍}\prRaise{-0.125}{\cn{覀}}\cn{龍}
+龍覀龍，龍\prRaise{-0.125}{覀}龍
 
-\cn{龍}\prPush{0.5}{\cn{亻}}\cn{龍}
+龍亻龍，龍\prPush{0.5}{亻}龍
 
-\cn{龍}\prPushRaise{0.5}{0.25}{\cn{。}}\cn{龍}
-
+龍。龍，龍\prPushRaise{0.5}{0.25}{。}龍
 ```
 
 Here is the output of the above, running XeLaTeX with xeCJK; the fornt is Sun-ExtA:
