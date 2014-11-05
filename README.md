@@ -344,7 +344,7 @@ Enough of that.
 ## CXLTX Style: PushRaise
 
 *CXLTX PushRaise* (PR) provides (mainly) three commands to push a given glyph to the right (or the left) and
-to raise or to lower it, all in terms of the current font size:
+to raise or to lower it, all in terms of the current font size and without taking up additional space:
 
 ```latex
 \cn{龍}\prRaise{-0.125}{\cn{覀}}\cn{龍}
@@ -358,6 +358,12 @@ to raise or to lower it, all in terms of the current font size:
 Here is the output of the above, running XeLaTeX with xeCJK; the fornt is Sun-ExtA:
 
 ![](https://github.com/loveencounterflow/cxltx-styles/raw/master/art/Screen%20Shot%202014-11-05%20at%2017.56.39.png)
+
+The image illustrates my use-case for these commands: to correct the positioning of glyph shapes in Chinese
+fonts. It's a somewhat bad habit of modern CJK font designers that they shift those glyphs that represent
+the positional variants of 'radicals' (such as 亻灬氵艹) to wherever they appear most of the time. This is
+wrong and printed dictionaries normally don't do that, much less the 康熙字典 which was the first
+major work to use the modern sytem of radicals.
 
 > thx to werner @ http://tex.stackexchange.com/a/51115/28067 who provided the essentials for the `\prPush`
 > implementation.
