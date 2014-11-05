@@ -362,7 +362,10 @@ The image illustrates my use-case for these commands: to correct the positioning
 fonts. It's a somewhat bad habit of modern CJK font designers that they shift those glyphs that represent
 the positional variants of 'radicals' (such as 亻灬氵艹) to wherever they appear most of the time. This is
 wrong and printed dictionaries normally don't do that, much less the 康熙字典 which was the first
-major work to use the modern sytem of radicals.
+major work to use the modern sytem of radicals. Looking at the examples above and comparing them with
+fine printed matter, it also becomes obvious that 亻 is too narrow and 覀 is too flat—it should really look
+like 西 with the vertical lines straightened. That, of course, cannot be fixed with `prPushRaise`, but at
+least it's easy now to make the display less offending.
 
 > thx to werner @ http://tex.stackexchange.com/a/51115/28067 who provided the essentials for the `\prPush`
 > implementation.
