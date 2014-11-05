@@ -1,0 +1,48 @@
+
+
+% ==========================================================================================================
+% Vertical Centering of Text
+% ----------------------------------------------------------------------------------------------------------
+\ProvidesPackage{cxltx-style-pushraise}
+\usepackage{cxltx-style-convert-to}
+
+\makeatletter
+\newcommand{\prFsizeMm}{\ctConvertTo{mm}{\f@size pt}mm}
+
+% \def\prCenter{\@ifstar\@@cvCenter\@cvCenter}
+\newdimen\pr@TextWidth
+\newdimen\pr@Height
+\newdimen\pr@WidthA
+\newdimen\pr@WidthB
+
+% \newcommand{\@cvCenter}[1]{%
+%   % {\setlength{\fboxsep}{0mm}\fbox{\parbox[c][\@fsize][c]{\@fsize}{#1}}}%
+%   {\parbox[c][\f@size pt][c]{\f@size pt}{#1}}%
+%   }
+% \newcommand{\@@cvCenter}[1]{%
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\prCenter}[1]{%
+  {\settowidth{\pr@TextWidth}{#1}\parbox[c]{\pr@TextWidth}{#1}}%
+  }
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\prRaise}[2]{%
+  \setlength{\pr@Height}{\f@size pt}%
+  \raisebox{#1\pr@Height}{#2}%
+  }
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand*{\prPush}[2]{%
+  \settowidth{\pr@WidthA}{#2}%
+  \setlength{\pr@WidthB}{\f@size pt}%
+  \makebox[\pr@WidthA]{\hspace*{#1\pr@WidthB}#2}%
+}
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\prPushRaise}[3]{%
+  \prPush{#1}{\prRaise{#2}{#3}}%
+  }
+
+
+\makeatother

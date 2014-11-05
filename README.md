@@ -35,6 +35,7 @@ sheets.
 \usepackage{cxltx-style-smashbox}             % boxed contents to preserve lineheights
 \usepackage{cxltx-style-multimulti}           % multiple columns and rows on pages and in tables
 \usepackage{cxltx-style-position-absolute}    % absolute textpositioning
+\usepackage{cxltx-style-pushraise}    				% shove and shift those glyphs
 \usepackage{cxltx-style-convert-to}           % simplistic unit conversion
 \usepackage{cxltx-style-equals}               % equality testing made easy
 \usepackage{cxltx-style-oddeven}              % checking whether we're on an odd or an even page
@@ -336,6 +337,23 @@ Use `\paShow` and `\usepackage[top-left]{pagegrid}` to debug your PA-powered doc
 Beauty of Simplicity! Never look back to those inferior and clumsy methods of days gone by!
 
 Enough of that.
+
+
+<!-- =================================================================================================== -->
+## CXLTX Style: PushRaise
+
+*CXLTX PushRaise* (PR) provides (mainly) three commands to push a given glyph to the right (or the left) and
+to raise or to lower it, all in terms of the current font size:
+
+```latex
+\cn{龍}\prRaise{-0.125}{\cn{覀}}\cn{龍}
+
+\cn{龍}\prPush{0.5}{\cn{亻}}\cn{龍}
+
+\cn{龍}\prPushRaise{0.5}{0.25}{\cn{。}}\cn{龍}
+
+```
+
 
 
 <!-- =================================================================================================== -->
