@@ -354,7 +354,7 @@ to raise or to lower it, all in terms of the current font size and without takin
 龍。龍，龍\prPushRaise{0.5}{0.25}{。}龍
 ```
 
-Here is the output of the above, running XeLaTeX with xeCJK; the fornt is Sun-ExtA:
+Here is the output of the above, running XeLaTeX with xeCJK; the font is Sun-ExtA:
 
 ![](https://github.com/loveencounterflow/cxltx-styles/raw/master/art/Screen%20Shot%202014-11-05%20at%2017.56.39.png)
 
@@ -498,8 +498,8 @@ incantation
 to one of these forms:
 
 ````latex
-\oeIfOddPage}{odd branch}{even branch}
-\oeIfEvenPage}{even branch}{odd branch}
+\oeIfOddPage{odd branch}{even branch}
+\oeIfEvenPage{even branch}{odd branch}
 ````
 
 The advantage of `cxltx-style-oddeven` is that **(1)** it always uses the `strict` option so you don't have
