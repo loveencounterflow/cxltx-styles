@@ -12,6 +12,7 @@
 		- [paShow and paHide](#pashow-and-pahide)
 	- [CXLTX Style: PushRaise](#cxltx-style-pushraise)
 	- [CXLTX Style: AccentBox](#cxltx-style-accentbox)
+	- [CXLTX Style: SmashBox](#cxltx-style-smashbox)
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 	- [CXLTX Style: Equals](#cxltx-style-equals)
 	- [CXLTX Style: OddEven](#cxltx-style-oddeven)
@@ -398,6 +399,16 @@ styles. The commands defined are:
 `\marktwochar`, `nullaccent`, `nullaccentC`, `nullaccentR`, `upaccent`, `upaccentbar`, `upaccentC`, `upaccentL`,
 `\upaccentR`. For details please see the PDF linked above; there's also a copy of the manual in the
 `accentbx` folder of this project.
+
+<!-- =================================================================================================== -->
+## CXLTX Style: SmashBox
+
+Taken from Seroul & Levy's *Beginner's Book of TeX* (1991), *CXLTX SmashBox* (badge: `sb`) provides a
+command `sbSmash` that takes a single argument, boxes it, and sets the box heigth and depth to zero,
+thereby preventing it from influencing line height. Alongside with the techniques mentioned in the
+[*TUGboat* Article "Removing Vertical Stretch" by Bazargan & Radhakrishnan, 2007](http://www.tug.org/TUGboat/tb28-1/tb88bazargan.pdf),
+this may greatly help to keep the layout constrained to a baseline grid, something which can be *very*
+tricky to achieve in LaTeX.
 
 
 <!-- =================================================================================================== -->
