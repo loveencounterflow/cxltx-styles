@@ -6,22 +6,39 @@
 \usetikzlibrary{calc}
 \usepackage{geometry}
 
-% ----------------------------------------------------------------------------------------------------------
+% ##########################################################################################################
 \makeatletter
+
+% ----------------------------------------------------------------------------------------------------------
+\newdimen\apLastX
+\newdimen\apLastY
+\setlength{\apLastX}{100mm}
+\setlength{\apLastY}{0mm}
+
+% ----------------------------------------------------------------------------------------------------------
 \newcommand\apToMm[1]{%
   \strip@pt\dimexpr 0.351459804\dimexpr#1\relax\relax mm%
 }
 
+% ----------------------------------------------------------------------------------------------------------
 \newcommand{\apSaveXy}[1]{%
-  \zsavepos{#1}
-  \write\mywrite{#1: (\apToMm{\zposx{#1}sp}, \apToMm{\the\paperheight-\zposy{#1}sp})}%
+  \zsavepos{#1}%
+  \write\ap@writer{#1: %
+  % \immediate\write\@auxout{#1: %
+    abs: ( \apToMm{\zposx{#1}sp}, %
+           \apToMm{\the\paperheight-\zposy{#1}sp} ), %
+    rel: ( \apToMm{\zposx{#1}sp-\apLastX},
+           \apToMm{\the\paperheight-\apLastY-\zposy{#1}sp} )%
+  % \apToMm{\the\apLastX}
+      }%
+  \setlength{\apLastX}{\zposx{#1}sp}%
+  \setlength{\apLastY}{\zposy{#1}sp}%
 }
-\newwrite\mywrite
-\openout\mywrite=\jobname.cxltx-abspos.txt\relax
 
 % ----------------------------------------------------------------------------------------------------------
-\apSaveXy{cxltx@origin}
+\newwrite\ap@writer
+\openout\ap@writer=\jobname.cxltx-abspos.txt\relax
 
 
-% ----------------------------------------------------------------------------------------------------------
+% ##########################################################################################################
 \makeatother
