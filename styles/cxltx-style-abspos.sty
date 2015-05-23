@@ -3,17 +3,19 @@
 % thx to http://tex.stackexchange.com/a/37300/28067
 
 \usepackage{zref-abspos}
+\usepackage{tikz}
 \usetikzlibrary{calc}
-\usepackage{geometry}
+% \usepackage{geometry}
+\usepackage{siunitx}
 
 % ##########################################################################################################
 \makeatletter
 
 % ----------------------------------------------------------------------------------------------------------
-\newdimen\apLastX
-\newdimen\apLastY
-\setlength{\apLastX}{0mm}
-\setlength{\apLastY}{0mm}
+\newdimen\ap@LastX
+\newdimen\ap@LastY
+\setlength{\ap@LastX}{0mm}
+\setlength{\ap@LastY}{\paperheight}
 
 % ----------------------------------------------------------------------------------------------------------
 \catcode`\%=11
@@ -26,20 +28,21 @@
   \strip@pt\dimexpr 0.351459804\dimexpr#1\relax\relax mm%
 }
 
+% \newcommand\apToMm[1]{%
+%   \num[round-mode=places,round-precision=4]{\strip@pt\dimexpr 0.351459804\dimexpr#1\relax\relax mm}%
+% }
+
 % ----------------------------------------------------------------------------------------------------------
 \newcommand{\apSaveXy}[1]{%
   \zsavepos{#1}%
-  % \write\ap@writer{#1: %
-  % \immediate\write\@auxout{#1: %
   \apWriteAuxComment{#1: %
     abs: ( \apToMm{\zposx{#1}sp}, %
            \apToMm{\the\paperheight-\zposy{#1}sp} ), %
-    rel: ( \apToMm{\zposx{#1}sp-\apLastX}, %
-           \apToMm{\the\paperheight-\apLastY-\zposy{#1}sp} )%
-  % \apToMm{\the\apLastX}
-      }%
-  \setlength{\apLastX}{\zposx{#1}sp}%
-  \setlength{\apLastY}{\zposy{#1}sp}%
+    rel: ( \apToMm{\zposx{#1}sp-\ap@LastX}, %
+           \apToMm{\ap@LastY-\zposy{#1}sp} )%
+  }%
+  \setlength{\ap@LastX}{\zposx{#1}sp}%
+  \setlength{\ap@LastY}{\zposy{#1}sp}%
 }
 
 % ----------------------------------------------------------------------------------------------------------
