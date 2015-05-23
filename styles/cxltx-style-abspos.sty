@@ -6,11 +6,11 @@
 \usetikzlibrary{calc}
 \usepackage{geometry}
 
+% ----------------------------------------------------------------------------------------------------------
 \makeatletter
 \newcommand\apToMm[1]{%
   \strip@pt\dimexpr 0.351459804\dimexpr#1\relax\relax mm%
 }
-\makeatother
 
 \newcommand{\apSaveXy}[1]{%
   \zsavepos{#1}
@@ -18,3 +18,10 @@
 }
 \newwrite\mywrite
 \openout\mywrite=\jobname.cxltx-abspos.txt\relax
+
+% ----------------------------------------------------------------------------------------------------------
+\apSaveXy{cxltx@origin}
+
+
+% ----------------------------------------------------------------------------------------------------------
+\makeatother
