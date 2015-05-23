@@ -33,3 +33,13 @@
   % From Raymond Seroul, Silvio Levy, "A Beginner's Book of TeX", 1991, p91
   \setbox0=\hbox{#1}\ht0=0pt\dp0=0pt\box0}
 
+% ----------------------------------------------------------------------------------------------------------
+% Sometimes, when trying to measure the current position, things don't work out as expected; for example, at
+% the start of a paragraph, `zref-savepos` yields faulty `y` positions because nothing has been typeset yet.
+% In such cases, `\sbDummy` may be used; it simply puts a zero-width `\makebox` into the stream which isn't
+% visible, but causes the positioning to be 'initialized'. As such, this command is 'not worth the effort',
+% as its definition is simply `\makebox[0mm]{}`; however, it's perhaps helpful to name this critter.
+% Inspired by https://groups.google.com/d/msg/comp.text.tex/GikFchXJIM0/jVzCFGGzzacJ
+\newcommand{\sbDummy}{%
+  \makebox[0mm]{}%
+}

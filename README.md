@@ -16,6 +16,7 @@
 	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
 	- [CXLTX Style: Equals](#cxltx-style-equals)
 	- [CXLTX Style: OddEven](#cxltx-style-oddeven)
+	- [CXLTX Style: AbsPos](#cxltx-style-abspos)
 	- [CXLTX Style: TRM](#cxltx-style-trm)
 		- [Effects](#effects)
 		- [Colors](#colors)
@@ -42,6 +43,7 @@ sheets.
 \usepackage{cxltx-style-equals}               % equality testing made easy
 \usepackage{cxltx-style-oddeven}              % checking whether we're on an odd or an even page
 \usepackage{cxltx-style-trm}                  % make a hundred colors glow (in terminal output)
+\usepackage{cxltx-style-abspos}               % store current (x,y)-position (in mm)
 ````
 
 
@@ -410,6 +412,12 @@ thereby preventing it from influencing line height. Alongside with the technique
 this may greatly help to keep the layout constrained to a baseline grid, something which can be *very*
 tricky to achieve in LaTeX.
 
+Sometimes, when trying to measure the current position, things don't work out as expected; for example, at
+the start of a paragraph, `zref-savepos` yields faulty `y` positions because nothing has been typeset yet.
+In such cases, `\sbDummy` may be used; it simply puts a zero-width `\makebox` into the stream which isn't
+visible, but causes the positioning to be 'initialized'. As such, this command is 'not worth the effort',
+as its definition is simply `\makebox[0mm]{}`; however, it's perhaps helpful to name this critter.
+
 
 <!-- =================================================================================================== -->
 ## CXLTX Style: Convert To
@@ -516,6 +524,53 @@ to one of these forms:
 The advantage of `cxltx-style-oddeven` is that **(1)** it always uses the `strict` option so you don't have
 to remember that one, and **(2)** it uses the more standards-conformant double-brace-pair syntax instead
 of the somewhat unusual `\if ... \else ... \fi` syntax.
+
+<!-- =================================================================================================== -->
+## CXLTX Style: AbsPos
+
+Sometimes it's useful to make sure where you are on the page in a human-readable
+format. In principle you could use the `zref` package's `\zsavepos` command for
+this, but this command somewhat suffers from using TeX's inhumane scaled points
+(of which there are no less than 186449.92 to the millimeter) on the one hand,
+and, on the other hand, `\zsavepos` measures the `y` coordinate from the
+*bottom* of the paper, not from the *top* as people do.
+
+`cxltx-style-abspos` defines two commands: `\apToMm` and `\apSaveXy`.
+
+`\apToMm` lets you convert length literals to millimeters very simply; thanks to
+an `\usetikzlibrary{calc}` incantation you can use simple arithmetic in the
+argument, so for example `\apToMm{3pt-5in}` will print `-125.94414mm` to the
+document.
+
+`\apToMm` is used by `\apSaveXy` together with the `\paperheight` dimension from
+the `geometry` package to calculate the current position (of the top of the
+current line), relative to the top left edge of the paper, and write it to a
+file named `\jobname.cxltx-abspos.txt`. You must provide an individual label
+for each invocation. Example:
+
+````latex
+\apSaveXy{label-1}Line 1\\
+\apSaveXy{label-2}Line 2\\
+\apSaveXy{label-3}Line 3\\
+\apSaveXy{label-4}Line 4\\
+\apSaveXy{label-5}Line 5\\
+````
+
+````latex
+label-1: (32.38495mm, 33.52794mm)
+label-2: (32.38495mm, 41.25996mm)
+label-3: (32.38495mm, 45.47743mm)
+label-4: (32.38495mm, 49.6949mm)
+label-5: (32.38495mm, 53.91237mm)
+````
+
+
+
+
+
+
+
+
 
 
 <!-- =================================================================================================== -->
@@ -629,4 +684,5 @@ In addition to the colors and effects listed below, there are some convenience o
 * trmSolBlue
 * trmSolCyan
 * trmSolGreen
+
 

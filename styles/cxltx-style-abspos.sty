@@ -1,0 +1,20 @@
+
+\ProvidesPackage{cxltx-style-abspos}
+% thx to http://tex.stackexchange.com/a/37300/28067
+
+\usepackage{zref-abspos}
+\usetikzlibrary{calc}
+\usepackage{geometry}
+
+\makeatletter
+\newcommand\apToMm[1]{%
+  \strip@pt\dimexpr 0.351459804\dimexpr#1\relax\relax mm%
+}
+\makeatother
+
+\newcommand{\apSaveXy}[1]{%
+  \zsavepos{#1}
+  \write\mywrite{#1: (\apToMm{\zposx{#1}sp}, \apToMm{\the\paperheight-\zposy{#1}sp})}%
+}
+\newwrite\mywrite
+\openout\mywrite=\jobname.cxltx-abspos.txt\relax

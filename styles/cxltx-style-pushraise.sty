@@ -7,6 +7,8 @@
 \usepackage{cxltx-style-convert-to}
 
 \makeatletter
+\newcommand{\prFontSizePt}{\f@size}
+% \newcommand{\prFontSizeSp}{\ctConvertTo{sp}{\f@size pt}}
 \newcommand{\prFsizeMm}{\ctConvertTo{mm}{\f@size pt}mm}
 
 % \def\prCenter{\@ifstar\@@cvCenter\@cvCenter}
@@ -30,6 +32,20 @@
 \newcommand{\prRaise}[2]{%
   \setlength{\pr@Height}{\f@size pt}%
   \raisebox{#1\pr@Height}{#2}%
+  }
+
+% ----------------------------------------------------------------------------------------------------------
+% This (makeshift?) version reverses the order of arguments, so you'd say `\prRaiseBy{X}{0.2}` instead of
+% `\prRaise{0.2}{X}`. The sole reason for this command is interoperability with `CXLTX`; specifically, you
+% you can now call an external command in the first argument and use the result in the second:
+%
+%     A \prRaiseBy{\node{gimme-five}{-0.5}CONTEXT}{\cxltxR} C
+%                  '---------------------'        '-------'
+%                    factor computation            factor
+%                                                   usage
+\newcommand{\prRaiseBy}[2]{%
+  \setlength{\pr@Height}{\f@size pt}%
+  \raisebox{#2\pr@Height}{#1}%
   }
 
 % ----------------------------------------------------------------------------------------------------------
