@@ -12,8 +12,14 @@
 % ----------------------------------------------------------------------------------------------------------
 \newdimen\apLastX
 \newdimen\apLastY
-\setlength{\apLastX}{100mm}
+\setlength{\apLastX}{0mm}
 \setlength{\apLastY}{0mm}
+
+% ----------------------------------------------------------------------------------------------------------
+\catcode`\%=11
+\newcommand{\apWriteAuxComment}[1]{\immediate\write\@auxout{% #1}}
+\catcode`\%=14
+
 
 % ----------------------------------------------------------------------------------------------------------
 \newcommand\apToMm[1]{%
@@ -23,11 +29,12 @@
 % ----------------------------------------------------------------------------------------------------------
 \newcommand{\apSaveXy}[1]{%
   \zsavepos{#1}%
-  \write\ap@writer{#1: %
+  % \write\ap@writer{#1: %
   % \immediate\write\@auxout{#1: %
+  \apWriteAuxComment{#1: %
     abs: ( \apToMm{\zposx{#1}sp}, %
            \apToMm{\the\paperheight-\zposy{#1}sp} ), %
-    rel: ( \apToMm{\zposx{#1}sp-\apLastX},
+    rel: ( \apToMm{\zposx{#1}sp-\apLastX}, %
            \apToMm{\the\paperheight-\apLastY-\zposy{#1}sp} )%
   % \apToMm{\the\apLastX}
       }%
@@ -36,8 +43,8 @@
 }
 
 % ----------------------------------------------------------------------------------------------------------
-\newwrite\ap@writer
-\openout\ap@writer=\jobname.cxltx-abspos.txt\relax
+% \newwrite\ap@writer
+% \openout\ap@writer=\jobname.cxltx-abspos.txt\relax
 
 
 % ##########################################################################################################
