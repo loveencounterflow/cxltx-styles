@@ -1,0 +1,24 @@
+{
+  "name": "cxltx-styles",
+  "version": "1.0.0",
+  "description": "A (hopefully) sensible collection of basic XeLaTeX style sheets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loveencounterflow/cxltx-styles.git"
+  },
+  "keywords": [
+    "tex",
+    "latex",
+    "xelatex"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loveencounterflow/cxltx-styles/issues"
+  },
+  "homepage": "https://github.com/loveencounterflow/cxltx-styles#readme"
+}
