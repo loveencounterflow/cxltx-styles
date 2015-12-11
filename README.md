@@ -1,3 +1,31 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [CXLTX Styles](#cxltx-styles)
+  - [Installation](#installation)
+  - [Badges](#badges)
+  - [CXLTX Style: Position Absolute](#cxltx-style-position-absolute)
+    - [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
+    - [paLeft, paCenter, paRight, and paTopLeft](#paleft-pacenter-paright-and-patopleft)
+    - [paGauge](#pagauge)
+    - [paLeftGauge, paCenterGauge, paRightGauge](#paleftgauge-pacentergauge-parightgauge)
+    - [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
+    - [paShow and paHide](#pashow-and-pahide)
+  - [CXLTX Style: PushRaise](#cxltx-style-pushraise)
+  - [CXLTX Style: PushRaiseStacked](#cxltx-style-pushraisestacked)
+  - [CXLTX Style: AccentBox](#cxltx-style-accentbox)
+  - [CXLTX Style: SmashBox](#cxltx-style-smashbox)
+  - [CXLTX Style: Convert To](#cxltx-style-convert-to)
+  - [CXLTX Style: Equals](#cxltx-style-equals)
+  - [CXLTX Style: OddEven](#cxltx-style-oddeven)
+  - [CXLTX Style: AbsPos](#cxltx-style-abspos)
+  - [CXLTX Style: TRM](#cxltx-style-trm)
+    - [Effects](#effects)
+    - [Colors](#colors)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 
 - [CXLTX Styles](#cxltx-styles)
@@ -39,6 +67,7 @@ sheets.
 \usepackage{cxltx-style-multimulti}           % multiple columns and rows on pages and in tables
 \usepackage{cxltx-style-position-absolute}    % absolute textpositioning
 \usepackage{cxltx-style-pushraise}    				% shove and shift those glyphs
+\usepackage{cxltx-style-stackedpushraise}			% similar to the pushraise
 \usepackage{cxltx-style-convert-to}           % simplistic unit conversion
 \usepackage{cxltx-style-equals}               % equality testing made easy
 \usepackage{cxltx-style-oddeven}              % checking whether we're on an odd or an even page
@@ -373,6 +402,12 @@ least it's easy now to make the display less offending.
 > thx to werner @ http://tex.stackexchange.com/a/51115/28067 who provided the essentials for the `\prPush`
 > implementation.
 
+
+<!-- =================================================================================================== -->
+## CXLTX Style: PushRaiseStacked
+
+*CXLTX PushRaiseStacked* (PRS) provides
+
 <!-- =================================================================================================== -->
 ## CXLTX Style: AccentBox
 
@@ -417,6 +452,7 @@ the start of a paragraph, `zref-savepos` yields faulty `y` positions because not
 In such cases, `\sbDummy` may be used; it simply puts a zero-width `\makebox` into the stream which isn't
 visible, but causes the positioning to be 'initialized'. As such, this command is 'not worth the effort',
 as its definition is simply `\makebox[0mm]{}`; however, it's perhaps helpful to name this critter.
+
 
 
 <!-- =================================================================================================== -->
