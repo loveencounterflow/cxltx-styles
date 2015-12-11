@@ -1,6 +1,6 @@
 {
   "name": "cxltx-styles",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A (hopefully) sensible collection of basic XeLaTeX style sheets",
   "main": "index.js",
   "scripts": {
