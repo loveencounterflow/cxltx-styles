@@ -1,0 +1,42 @@
+
+\documentclass{article}
+\usepackage{cxltx-style-transform}
+\usepackage{cxltx-style-pushraisestacked}
+\setlength{\parindent}{0mm}
+\begin{document}
+
+% xxx\tfPush{0.5}y\tfBack xxx
+% abc\tfPush{0.5}xyz
+
+% abc\tfRaise{0.5}x\tfBack{}def
+%
+% abc\tfPush{0.5}x\tfBack{}def
+
+% abc{\tfScale{1.5}{1}1\tfRaise{-0.5}2\tfBack{}3}def\\
+
+abc2defghijklmnopqrstuvwxyz\\
+abc{\tfPushRaise{-0.5}{0.5}2}defghijklmnopqrstuvwxyz\\
+abc2defghijklmnopqrstuvwxyz\\
+
+abc2defghijklmnopqrstuvwxyz\\
+abc{\tfTransform{1}{1}{0}{1}{0}{0}2}defghijklmnopqrstuvwxyz\\
+abc2defghijklmnopqrstuvwxyz\\
+
+abc2defghijklmnopqrstuvwxyz\\
+abc{\tfTransform{1}{1}{0}{1}{0}{0}234}defghijklmnopqrstuvwxyz\\
+abc2defghijklmnopqrstuvwxyz\\
+
+abc2defghijklmnopqrstuvwxyz\\
+abc{\tfTransform{-1}{0}{0}{-1}{0}{-1}2}defghijklmnopqrstuvwxyz\\
+abc2defghijklmnopqrstuvwxyz\\
+
+% abc\prsRaise{0.5}x\prsBack{}def
+
+% abc{\tfTransform{1}{1}{0}{1}{0}{0}f}def
+%
+% abc{\tfTransform{-1}{0}{0}{1}{0}{0}f}def\\
+% abc{\tfTransform{-1}{0}{0}{1}{0}{0}f}def\\
+% abc{\tfTransform{1}{0}{0}{-1}{0}{0}f}def\\
+% abc{\tfTransform{-1}{0}{0}{-1}{0}{-1}f}def\\
+
+\end{document}

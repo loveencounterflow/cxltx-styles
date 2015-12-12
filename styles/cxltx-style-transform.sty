@@ -1,0 +1,82 @@
+
+
+
+% ==========================================================================================================
+% TRANSFORMS
+% ----------------------------------------------------------------------------------------------------------
+\ProvidesPackage{cxltx-style-transform}
+\usepackage{fp}
+% https://github.com/diSimplex/latexFifoStack
+\usepackage{fifo-stack}
+
+% ----------------------------------------------------------------------------------------------------------
+\makeatletter
+
+% ----------------------------------------------------------------------------------------------------------
+\FSCreate{tf@StackScaleX}{1}%
+\FSCreate{tf@StackSkewX}{0}%
+\FSCreate{tf@StackSkewY}{0}%
+\FSCreate{tf@StackScaleY}{1}%
+\FSCreate{tf@StackMoveX}{0}%
+\FSCreate{tf@StackMoveY}{0}%
+% ..........................................................................................................
+\FPmul\tfFactorMoveX{1}{5}%
+\FPmul\tfFactorMoveY{1}{10}%
+% ..........................................................................................................
+\FPmul\tf@ScaleX{1}{1}%
+\FPmul\tf@SkewX{1}{0}%
+\FPmul\tf@SkewY{1}{0}%
+\FPmul\tf@ScaleY{1}{1}%
+\FPmul\tf@MoveX{1}{0}%
+\FPmul\tf@MoveY{1}{0}%
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\tfPush}[1]{\tfPushRaise{#1}{0}}
+\newcommand{\tfRaise}[1]{\tfPushRaise{0}{#1}}
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\tfPushRaise}[2]{%
+  \FPmul\tf@MoveX{#1}{\tfFactorMoveX}%
+  \FPmul\tf@MoveY{#2}{\tfFactorMoveY}%
+  \tfTransform{1}{0}{0}{1}{\tf@MoveX}{\tf@MoveY}}
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\tfScale}[2]{%
+  % \FPmul\tf@MoveX{#1}{\tfFactorMoveX}%
+  % \FPmul\tf@MoveY{#2}{\tfFactorMoveY}%
+  % \tfTransform{1}{0}{0}{1}{\tf@MoveX}{\tf@MoveY}}
+  \tfTransform{#1}{0}{0}{#2}{0}{0}}
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\tfBack}{%
+  \FPdiv\tf@ScaleX{1}{\FSTop{tf@StackScaleX}}%
+  \FPmul\tf@SkewX{-1}{\FSTop{tf@StackSkewX}}%
+  \FPmul\tf@SkewY{-1}{\FSTop{tf@StackSkewY}}%
+  \FPdiv\tf@ScaleY{1}{\FSTop{tf@StackScaleY}}%
+  \FPmul\tf@MoveX{-1}{\FSTop{tf@StackMoveX}}%
+  \FPmul\tf@MoveY{-1}{\FSTop{tf@StackMoveY}}%
+  \FSPop{tf@StackScaleX}%
+  \FSPop{tf@StackSkewX}%
+  \FSPop{tf@StackSkewY}%
+  \FSPop{tf@StackScaleY}%
+  \FSPop{tf@StackMoveX}%
+  \FSPop{tf@StackMoveY}%
+  \tf@Transform{\tf@ScaleX}{\tf@SkewX}{\tf@SkewY}{\tf@ScaleY}{\tf@MoveX}{\tf@MoveY}}
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\tfTransform}[6]{%
+  \FSPush{tf@StackScaleX}{#1}%
+  \FSPush{tf@StackSkewX}{#2}%
+  \FSPush{tf@StackSkewY}{#3}%
+  \FSPush{tf@StackScaleY}{#4}%
+  \FSPush{tf@StackMoveX}{#5}%
+  \FSPush{tf@StackMoveY}{#6}%
+  \aftergroup\tfBack%
+  \tf@Transform{#1}{#2}{#3}{#4}{#5}{#6}}
+
+% ----------------------------------------------------------------------------------------------------------
+\newcommand{\tf@Transform}[6]{%
+  \special{pdf:literal #1 #2 #3 #4 #5 #6 cm}}
+
+% ----------------------------------------------------------------------------------------------------------
+\makeatother
