@@ -1,0 +1,19 @@
+
+\documentclass{article}
+\usepackage{cxltx-style-transform}
+\usepackage{cxltx-style-pushraisestacked}
+
+\begin{document}
+
+% xxx\tfPush{0.5}y\tfBack xxx
+% abc\tfPush{0.5}xyz
+
+abc\tfRaise{0.5}x\tfBack{}def
+
+abc\tfPush{0.5}x\tfBack{}def
+
+abc{\tfScale{2}{2}\tfRaise{-0.5}x}def
+% abc\prsRaise{0.5}x\prsBack{}def
+
+
+\end{document}
