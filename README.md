@@ -409,8 +409,8 @@ least it's easy now to make the display less offending.
 
 *CXLTX Transform* (TF) grew out of my new approach to defining formats
 (to select font family, type size and so on) as LaTeX commands without text
-arguments, similar to the `\color` command. In other words,
-where I would have written
+arguments (call them 'environmental commands'), similar to the `\color`
+command. In other words, where I would have written
 
 ```latex
 Foo \fontA{\extraBig{bar}} baz
@@ -423,8 +423,8 @@ Foo {\fontA\extraBig bar} baz
 ```
 
 using groups instead of text arguments. Not only do I find this syntax somewhat
-cleaner; more importantly, it helps to avoid problems with the expandability
-(key word 'robustness') that TeX macros are so well known for. Also, using
+cleaner; more importantly, it helps to avoid problems with expandability
+(key word 'robustness') glitches that TeX macros are so well known for. Also, using
 groups instead of arguments might cause less interference with line breaking.
 
 One problem, however, is that I use CXLTX PushRaise extensively, mainly to
@@ -435,7 +435,7 @@ in a box to push it around. This was when I asked, on
 vertically shift the baseline *without* using a
 box](http://tex.stackexchange.com/questions/282342/possible-to-vertically-shift-baseline-without-using-a-box)?
 
-A very helpful Mr. David Carlisle was so friendly to [suggest a solution](http://tex.stackexchange.com/a/282359/28067) using LuaTeX's `\pdfliteral`:
+A very helpful Mr. David Carlisle was so friendly as to [suggest a solution](http://tex.stackexchange.com/a/282359/28067) using LuaTeX's `\pdfliteral`:
 Writing
 
 ```latex
@@ -447,8 +447,14 @@ any ensuing material to be lowered by 2 units. Just what I needed!
 
 Delving deeper I found out the six numbers in front of the PDF `cm` command are
 the elements of a 2D transformation matrix; more specifically, they are
-responsible for x-scaling, x-skewing, y-skewing (not so sure about the last
-two), y-scaling, x-translation and y-translation. What's more, this stuff
+responsible for
+* x-scaling,
+* x-skewing,
+* y-skewing (not so sure about the last two),
+* y-scaling,
+* x-translation, and
+* y-translation,
+in that order. What's more, this stuff
 can be used in XeLaTeX as well, only the call convention is a bit different:
 
 ```latex
