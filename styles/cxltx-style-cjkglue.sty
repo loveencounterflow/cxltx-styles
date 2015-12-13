@@ -6,7 +6,8 @@
 \ProvidesPackage{cxltx-style-cjkglue}
 
 % ----------------------------------------------------------------------------------------------------------
-\newcommand{\cjkgGlue}{\hskip -0.4pt plus 3pt minus 1pt}%
+% \newcommand{\cjkgGlue}{\hskip -0.4pt plus 3pt minus 1pt}%
+\newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
 
 % ----------------------------------------------------------------------------------------------------------
 \chardef\CharNormal=0%
@@ -23,14 +24,14 @@
   % http://tex.stackexchange.com/a/10266/28067
   % ftp://ftp.mpi-sb.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/info/xetexref/xetex-reference.pdf
   \XeTeXinterchartokenstate=1%
-  % \XeTeXinterchartoks\CharNormal\CharNormal={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharNormal\CharCjk={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharCjk\CharNormal={\cjkgGlue}%
-  % % \XeTeXinterchartoks\CharCjk\CharBound={---}%
-  % % \XeTeXinterchartoks\CharBound\CharCjk={---}%
-  % \XeTeXinterchartoks\CharCjkPunctA\CharCjk={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharCjk\CharCjkPunctA={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
+  \XeTeXinterchartoks\CharNormal\CharNormal={\cjkgGlue}%
+  \XeTeXinterchartoks\CharNormal\CharCjk={\cjkgGlue}%
+  \XeTeXinterchartoks\CharCjk\CharNormal={\cjkgGlue}%
+  % \XeTeXinterchartoks\CharCjk\CharBound={\cjkgGlue}%
+  % \XeTeXinterchartoks\CharBound\CharCjk={\cjkgGlue}%
+  \XeTeXinterchartoks\CharCjkPunctA\CharCjk={\cjkgGlue}%
+  \XeTeXinterchartoks\CharCjk\CharCjkPunctA={\cjkgGlue}%
+  \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
+  \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
+  \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
   }
