@@ -406,11 +406,10 @@ least it's easy now to make the display less offending.
 <!-- =================================================================================================== -->
 ## CXLTX Style: Transform
 
-*CXLTX Transform* (TF) grew out of my new approach to write formatting
-commands (to select font family, type size and so on) as LaTeX
-commands without text arguments and to indicate applicability ranges
-in the form of groups, similar to how the `\color` command is commonly
-used. In other words, where I would have written
+*CXLTX Transform* (TF) grew out of my new approach to defining formats
+(to select font family, type size and so on) as LaTeX commands without text
+arguments similar to how the `\color` command is commonly used. In other words,
+where I would have written
 
 ```latex
 Foo \fontA{\extraBig{bar}} baz
@@ -422,10 +421,10 @@ before, I now write
 Foo {\fontA\extraBig bar} baz
 ```
 
-instead. Not only do I find this syntax somewhat cleaner; more importantly,
-it helps to avoid problems with the expandability (key word 'robustness') that
-TeX macros are so well known for. Also, using groups instead of arguments
-might cause less interference with line breaking.
+using groups instead of text arguments. Not only do I find this syntax somewhat
+cleaner; more importantly, it helps to avoid problems with the expandability
+(key word 'robustness') that TeX macros are so well known for. Also, using
+groups instead of arguments might cause less interference with line breaking.
 
 One problem, however, is that I use CXLTX PushRaise extensively, mainly
 to correct the placement of Chinese characters; now, PR is implemented
