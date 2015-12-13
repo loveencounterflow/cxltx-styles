@@ -472,26 +472,41 @@ charm up down color strange\\
 ```
 
 When you look into the corresponding PDF, you will find that the three
-occurrances of `charm` and the ones of `strange` all align horizontally and
+occurrences of `charm` and the ones of `strange` all align horizontally and
 vertically; only in the middle line, `up` and `down` are shifted up and down by
 equal amounts; `color` is somewhat shifted to the left, but appears with the
-same baseline shift as `down`.
+same baseline shift as `down`. This has been achieved by using the stack
+facilities provided by
+[`fifo-stack`](https://github.com/diSimplex/latexFifoStack), the floating point
+arithmetic afforded by the venerable [`fp`
+package](https://www.ctan.org/tex-archive/macros/latex/contrib/fp?lang=en), and
+the TeX `\aftergroup` primitive (yes, TeX is one of those languages that gives
+you a single global namespace filled with gazillions of ultra-specific
+predefined words but needs external 3rd-party libraries to do stacks(!) and sane
+multiplication(!!!)).
 
+CXLTX Transform provides the following facilities:
 
-`\aftergroup`
-[fifo-stack](https://github.com/diSimplex/latexFifoStack)
+* `\tfFactorMoveX`, `\tfFactorMoveY`: These are scaling factors that will be
+  applied to translations; they're currently defined as `\FPmul\tfFactorMoveX{1}{5}`
+  and `\FPmul\tfFactorMoveY{1}{10}` (i.e. 5 and 10), respectively, the idea
+  is to make `\tfPush` and `\tfRaise` scale like `\prPush` and `\prRaise`
+  (the may change in the future).
 
+* We've already seen `\tfPush` and `\tfRaise`; additionally, there's
+  `\tfPushRaise` which you have to call with an `x` and a `y` value, analogous
+  to `\prPushRaise`.
 
-```latex
-\FPmul\tfFactorMoveX{1}{5}%
-\FPmul\tfFactorMoveY{1}{10}%
-\newcommand{\tfPush}[1]{\tfPushRaise{#1}{0}}
-\newcommand{\tfRaise}[1]{\tfPushRaise{0}{#1}}
-\newcommand{\tfPushRaise}[2]{%
-\newcommand{\tfScale}[2]{%
-\newcommand{\tfBack}{%
-\newcommand{\tfTransform}[6]{%
-```
+* Scaling can be performed by `\tfScale`, which takes two factors.
+
+* The underlying command for all transformations is `\tfTransform`, which takes
+  six arguments as detailed above, scales the translations, manages the stack,
+  and performs an arbitrary 2D transformation composed of scaling, translation,
+  and shearing.
+
+* `\tfBack`, which takes no arguments, undoes the most recent transformation.
+  You can call it any number of time without causing an 'empty stack'
+  exception; it will be called implicitly when the current group ends.
 
 <!-- =================================================================================================== -->
 ## CXLTX Style: AccentBox
