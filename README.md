@@ -475,15 +475,20 @@ When you look into the corresponding PDF, you will find that the three
 occurrences of `charm` and the ones of `strange` all align horizontally and
 vertically; only in the middle line, `up` and `down` are shifted up and down by
 equal amounts; `color` is somewhat shifted to the left, but appears with the
-same baseline shift as `down`. This has been achieved by using the stack
-facilities provided by
-[`fifo-stack`](https://github.com/diSimplex/latexFifoStack), the floating point
-arithmetic afforded by the venerable [`fp`
-package](https://www.ctan.org/tex-archive/macros/latex/contrib/fp?lang=en), and
-the TeX `\aftergroup` primitive (yes, TeX is one of those languages that gives
-you a single global namespace filled with gazillions of ultra-specific
-predefined words but needs external 3rd-party libraries to do stacks(!) and sane
-multiplication(!!!)).
+same baseline shift as `down`. **Incidentally, this demonstrates that using
+`tfPush` and `\tfRaise` act a lot like CSS `position: relative; right: 0.5em; top: -0.5em;`**
+(except for the y-axis orientation) **in that shifted characters do not shift
+surrounding material**—instead, the whitespace that was allotted for them
+stays in place and their shapes may overlap with other characters.
+
+**Implementation**: The automatic undo facility has been implemented using
+[`fifo-stack`](https://github.com/diSimplex/latexFifoStack) and the TeX
+`\aftergroup` primitive; floating point arithmetic was kindly provided by the
+venerable [`fp`
+package](https://www.ctan.org/tex-archive/macros/latex/contrib/fp?lang=en) (yes,
+TeX is one of those languages that give you a single global namespace filled
+with gazillions of ultra-specific predefined words but needs external 3rd-party
+libraries to do stacks(!) and sane multiplication(!!!)).
 
 CXLTX Transform provides the following facilities:
 
