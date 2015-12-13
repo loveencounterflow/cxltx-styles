@@ -14,6 +14,7 @@
     - [paShow and paHide](#pashow-and-pahide)
   - [CXLTX Style: PushRaise](#cxltx-style-pushraise)
   - [CXLTX Style: Transform](#cxltx-style-transform)
+  - [CXLTX Style: CJK Glue](#cxltx-style-cjk-glue)
   - [CXLTX Style: AccentBox](#cxltx-style-accentbox)
   - [CXLTX Style: SmashBox](#cxltx-style-smashbox)
   - [CXLTX Style: Convert To](#cxltx-style-convert-to)
@@ -512,6 +513,106 @@ CXLTX Transform provides the following facilities:
 * `\tfBack`, which takes no arguments, undoes the most recent transformation.
   You can call it any number of time without causing an 'empty stack'
   exception; it will be called implicitly when the current group ends.
+
+> **Note** Conceivably, CXLTX Transform could be made compatible with LuaTeX
+> by switching between the `pdfliteral` and `special` conventions.
+
+> **Note** People who want to implement more transformations should take
+> a look at ftp://ftp.nsu.ru/mirrors/ftp.dante.de/pub/tex/macros/generic/pdf-trans
+> for examples.
+
+<!-- =================================================================================================== -->
+## CXLTX Style: CJK Glue
+
+*CXLTX CJK Glue* (CJKG) is, if you will, an ultra-minimal re-implementation
+of the East Asian typesetting facilities for XeTeX provided by
+[xeCJK](https://www.ctan.org/pkg/xecjk?lang=en).
+
+> CJK (sometimes also CJKV to include Vietnamese Chữ Nôm 字喃, 𡨸喃, 𡦂喃) is a
+> convenient label under which the characteristics of the Chinese, Japanese
+> and Korean writing systems are commonly discussed.
+
+When typesetting Chinese or Japanese text, it is important to note that
+there are no spaces between the kanji, the kana, or the punctuation—not
+between individual characters, not between words, and not between sentences.
+(Xe)LaTeX is not prepared for that kind of situation; when no measures are
+taken, it will try and set arbitrarily long chains of characters without
+ever detecting any suitable spot for line breaking, leading to ridiculous
+overflows (or huge gaps in your line when a few kanji appear in the middle
+of e.g. Western text). Thus, getting the line breaks right is the prime
+concern when you want to type set Chinese, Japanese, Korean or mixed
+text.
+
+In the past, I have mostly relied on the afore-mentioned xeCJK package; but, as
+I repeatedly went to study [the xeCJK
+manual](http://sunsite.informatik.rwth-aachen.de/ftp/pub/mirror/ctan/macros/xetex/latex/xecjk/xeCJK.pdf)
+I was flabbergasted by the sheer amount of material presented, the astounding
+complexity of the package, and the opaque ways of its implementation. The
+package also introduces quite a few CJK-specific font-related commands,¹ adding
+to the already somewhat overwhelming array of choices in this field.
+
+> ¹) e.g. `\addCJKfontfeatures`, `\CJKfamily`, `\CJKfamilydefault`,
+> `\CJKfontspec`, `\CJKrmdefault`, `\CJKsfdefault`, `\CJKttdefault`,
+> `\defaultCJKfontfeatures`, `\newCJKfontfamily`, `\setCJKfallbackfamilyfont`,
+> `\setCJKfamilyfont`, `\setCJKmainfont`, `\setCJKmathfont`, `\setCJKmonofont`,
+> `\setCJKsansfont`, ...
+
+All told, xeCJK is an ingenious piece of software that can quickly cause
+a mental 'TeX capacity exceeded' syndrome for its dedicated user. If you're
+ready to sacrifice the department store for the thrift shop, load your
+fonts using run-of-the mill `fontspec` commands and mark up your CJK text
+portions yourself (I do it via code generation...), then CXLTX CJK Glue may be your
+cup of tea. From `cjkglue-demo.tex`:
+
+```latex
+\documentclass{article}
+\usepackage{cxltx-style-cjkglue}
+\setlength{\parindent}{0mm}
+
+\usepackage{fontspec}
+\newfontface{\fontSunexta}{sun-exta.ttf}[Path=../../jizura-fonts/fonts/]
+\newfontface{\fontGaramond}{EBGaramond08-Regular.otf}[Path=../../jizura-fonts/fonts/]
+
+\newcommand{\cn}{\fontSunexta\cjkgUseCjkGlue}
+\fontGaramond
+
+\begin{document}
+
+Tea bricks ({\cn 砖茶}, {\cn 磚茶}, zhuān chá) or compressed tea
+({\cn 紧压茶}, {\cn 緊壓茶}, jǐnyā chá) are blocks of whole or finely ground black tea,
+green tea, or post-fermented tea leaves that have been packed in molds and
+pressed into block form. {\cn 紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖
+状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。}
+
+\end{document}
+```
+
+The `\cn` is an 'environmental' command (one that assumes it is placed inside a
+group) that selects a font and instructs LaTeX to use CJK Glue. Specifically, I
+chose Sun-ExtA (available e.g. with the [Jizura Fonts npm
+package](https://github.com/loveencounterflow/jizura-fonts)), which makes for a
+fine default CJK font as it has appealing (and correct!) character
+outlines and a near-100% CJK
+[BMP](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+coverage.
+
+CJK Glue does several things:
+1) It defines a CJK Glue as `\newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}`;
+  feel free to `\renewcommand` that definition any time (I think the dimensions
+  should really be relative to font size, but that is not yet implemented).
+2) It makes it so that spaces and newlines are re-interpreted as that glue, and
+3) it causes all the inter-character spaces to be filled as that glue.
+
+The re-interpretation of spaces and newlines uses a hack that combines, surprisingly,
+an `\obeyspaces\obeylines` with an `\lccode` invocation (`lc` stands for 'lower case'(??wt*??),
+and the original code is utterly unparsable to me; a big Thank You goes out to [egreg](http://tex.stackexchange.com/a/250559/28067) and [Marcin Woliński](http://www.gust.org.pl/projects/pearls/2007p/index_html) who made this
+spell happen).
+
+Some links:
+* ftp://ftp.yzu.edu.tw/CTAN/macros/xetex/latex/interchar proposes macros
+  to make handling XeTeX character classes easier.
+* https://www.ctan.org/pkg/xetexref, the XeTeX reference for developers.
+
 
 <!-- =================================================================================================== -->
 ## CXLTX Style: AccentBox
