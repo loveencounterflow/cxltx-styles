@@ -1,7 +1,6 @@
 
 \documentclass{article}
 \usepackage{cxltx-style-transform}
-\usepackage{cxltx-style-pushraisestacked}
 \setlength{\parindent}{0mm}
 \begin{document}
 
@@ -13,6 +12,11 @@
 % abc\tfPush{0.5}x\tfBack{}def
 
 % abc{\tfScale{1.5}{1}1\tfRaise{-0.5}2\tfBack{}3}def\\
+
+charm up down color strange\\
+charm {\tfRaise{0.5}up} {\tfRaise{-0.5}down \tfPush{-1}color} strange\\
+charm up down color strange\\
+
 
 abc2defghijklmnopqrstuvwxyz\\
 abc{\tfPushRaise{-0.5}{0.5}2}defghijklmnopqrstuvwxyz\\

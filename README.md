@@ -408,7 +408,7 @@ least it's easy now to make the display less offending.
 
 *CXLTX Transform* (TF) grew out of my new approach to defining formats
 (to select font family, type size and so on) as LaTeX commands without text
-arguments similar to how the `\color` command is commonly used. In other words,
+arguments, similar to the `\color` command. In other words,
 where I would have written
 
 ```latex
@@ -430,9 +430,57 @@ One problem, however, is that I use CXLTX PushRaise extensively, mainly to
 correct the placement of Chinese characters; now, PR is implemented using
 commands like `\raisebox`—which of course needs a text argument that it sticks
 in a box to push it around. This was when I asked, on
-(tex.stackexchange.com)[http://tex.stackexchange.com]: Is it [possible to
+[tex.stackexchange.com](http://tex.stackexchange.com): Is it [possible to
 vertically shift the baseline *without* using a
 box](http://tex.stackexchange.com/questions/282342/possible-to-vertically-shift-baseline-without-using-a-box)?
+
+A very helpful Mr. David Carlisle was so friendly to [suggest a solution](http://tex.stackexchange.com/a/282359/28067) using LuaTeX's `\pdfliteral`:
+Writing
+
+```latex
+x\pdfliteral{ 1 0 0 1 0 -2 cm}y
+```
+
+puts some literal PostScript code into the PDF file that will cause the `y` and
+any ensuing material to be lowered by 2 units. Just what I needed!
+
+Delving deeper I found out the six numbers in front of the PDF `cm` command are
+the elements of a 2D transformation matrix; more specifically, they are
+responsible for x-scaling, x-skewing, y-skewing (not so sure about the last
+two), y-scaling, x-translation and y-translation. What's more, this stuff
+can be used in XeLaTeX as well, only the call convention is a bit different:
+
+```latex
+x\special{pdf:literal 1 0 0 1 0 -2 cm}y
+```
+
+Because these PDF literal calls effectively bypass TeX, whatever transformation
+you apply will stay valid indefinitely; in particular, it will *not* get
+automatically undone when a group ends. The main achievement of CXLTX Transform
+lies exactly in this detail: all TF transformations that occur within a group
+will be undone when the group ends. For example, `transform-demo.tex` has
+this code:  
+
+```latex
+\usepackage{cxltx-style-transform}
+
+[...]
+
+charm up down color strange\\
+charm {\tfRaise{0.5}up} {\tfRaise{-0.5}down \tfPush{-1}color} strange\\
+charm up down color strange\\
+```
+
+When you look into the corresponding PDF, you will find that the three
+occurrances of `charm` and the ones of `strange` all align horizontally and
+vertically; only in the middle line, `up` and `down` are shifted up and down by
+equal amounts; `color` is somewhat shifted to the left, but appears with the
+same baseline shift as `down`.
+
+
+`\aftergroup`
+[fifo-stack](https://github.com/diSimplex/latexFifoStack)
+
 
 ```latex
 \FPmul\tfFactorMoveX{1}{5}%
