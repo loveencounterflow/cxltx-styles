@@ -13,7 +13,7 @@
     - [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
     - [paShow and paHide](#pashow-and-pahide)
   - [CXLTX Style: PushRaise](#cxltx-style-pushraise)
-  - [CXLTX Style: PushRaiseStacked](#cxltx-style-pushraisestacked)
+  - [CXLTX Style: Transform](#cxltx-style-transform)
   - [CXLTX Style: AccentBox](#cxltx-style-accentbox)
   - [CXLTX Style: SmashBox](#cxltx-style-smashbox)
   - [CXLTX Style: Convert To](#cxltx-style-convert-to)
@@ -404,9 +404,45 @@ least it's easy now to make the display less offending.
 
 
 <!-- =================================================================================================== -->
-## CXLTX Style: PushRaiseStacked
+## CXLTX Style: Transform
 
-*CXLTX PushRaiseStacked* (PRS) provides
+*CXLTX Transform* (TF) grew out of my new approach to write formatting
+commands (to select font family, type size and so on) as LaTeX
+commands without text arguments and to indicate applicability ranges
+in the form of groups, similar to how the `\color` command is commonly
+used. In other words, where I would have written
+
+```latex
+Foo \fontA{\extraBig{bar}} baz
+```
+
+before, I now write
+
+```latex
+Foo {\fontA\extraBig bar} baz
+```
+
+instead. Not only do I find this syntax somewhat cleaner; more importantly,
+it helps to avoid problems with the expandability (key word 'robustness') that
+TeX macros are so well known for. Also, using groups instead of arguments
+might cause less interference with line breaking.
+
+One problem, however, is that I use CXLTX PushRaise extensively, mainly
+to correct the placement of Chinese characters; now, PR is implemented
+using commands like `\raisebox`—which of course needs a text argument that
+it sticks in a box to push it around. This was when I asked, on   
+(tex.stackexchange.com)[http://tex.stackexchange.com]: Is it [possible to vertically shift the baseline *without* using a box?](http://tex.stackexchange.com/questions/282342/possible-to-vertically-shift-baseline-without-using-a-box)
+
+```latex
+\FPmul\tfFactorMoveX{1}{5}%
+\FPmul\tfFactorMoveY{1}{10}%
+\newcommand{\tfPush}[1]{\tfPushRaise{#1}{0}}
+\newcommand{\tfRaise}[1]{\tfPushRaise{0}{#1}}
+\newcommand{\tfPushRaise}[2]{%
+\newcommand{\tfScale}[2]{%
+\newcommand{\tfBack}{%
+\newcommand{\tfTransform}[6]{%
+```
 
 <!-- =================================================================================================== -->
 ## CXLTX Style: AccentBox
@@ -720,5 +756,3 @@ In addition to the colors and effects listed below, there are some convenience o
 * trmSolBlue
 * trmSolCyan
 * trmSolGreen
-
-
