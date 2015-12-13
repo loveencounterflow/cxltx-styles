@@ -595,15 +595,26 @@ fine default CJK font as it has appealing (and correct!) character
 outlines and a near-100% CJK
 [BMP](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
 coverage. **Observe that it is recommended to leave a space between Western
-and East Asian text, and that that space is located in the Western, not the
+and East Asian text, and that that space should be located in the Western, not the
 East Asian text.**
 
 CJK Glue does several things:
 * It defines a CJK Glue as `\newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}`;
   feel free to `\renewcommand` that definition any time (I think the dimensions
   should really be relative to font size, but that is not yet implemented).
-* It makes it so that spaces and newlines are re-interpreted as that glue, and
-* it causes all the inter-character spaces to be filled with that glue.
+* It makes it so that spaces and newlines are re-interpreted as that glue. This
+  means when you write your CJK text in an editor, you can liberally apply
+  ASCII spaces and newlines without fearing they'll affect the typeset result.
+  The Ideographic Space character (U+3000) remains unaffected and will be treated
+  like any other CJK character.
+* Glue is inserted between all characters.
+
+**Note that these rules will cause *any* characters—not only East Asian ones—to
+behave like Chinese text: Typesetting English with `\cjkgUseCjkGlue` will cause
+all inter-word spaces to vanish; letters will be distributed more or less evenly
+across the lines, and line breaks will occur without hyphens and wherever the
+right margin happens to fall. As such, `\cjkgUseCjkGlue` might in fact prove
+useful outside of CJK typesetting.**
 
 The re-interpretation of spaces and newlines uses a hack that combines, surprisingly,
 an `\obeyspaces\obeylines` with an `\lccode` invocation (`lc` stands for 'lower case'(??wt*??),
