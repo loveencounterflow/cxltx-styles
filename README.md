@@ -448,12 +448,14 @@ any ensuing material to be lowered by 2 units. Just what I needed!
 Delving deeper I found out the six numbers in front of the PDF `cm` command are
 the elements of a 2D transformation matrix; more specifically, they are
 responsible for
+
 * x-scaling,
 * x-skewing,
 * y-skewing (not so sure about the last two),
 * y-scaling,
 * x-translation, and
 * y-translation,
+
 in that order. What's more, this stuff
 can be used in XeLaTeX as well, only the call convention is a bit different:
 
