@@ -426,11 +426,13 @@ cleaner; more importantly, it helps to avoid problems with the expandability
 (key word 'robustness') that TeX macros are so well known for. Also, using
 groups instead of arguments might cause less interference with line breaking.
 
-One problem, however, is that I use CXLTX PushRaise extensively, mainly
-to correct the placement of Chinese characters; now, PR is implemented
-using commands like `\raisebox`—which of course needs a text argument that
-it sticks in a box to push it around. This was when I asked, on   
-(tex.stackexchange.com)[http://tex.stackexchange.com]: Is it [possible to vertically shift the baseline *without* using a box?](http://tex.stackexchange.com/questions/282342/possible-to-vertically-shift-baseline-without-using-a-box)
+One problem, however, is that I use CXLTX PushRaise extensively, mainly to
+correct the placement of Chinese characters; now, PR is implemented using
+commands like `\raisebox`—which of course needs a text argument that it sticks
+in a box to push it around. This was when I asked, on
+(tex.stackexchange.com)[http://tex.stackexchange.com]: Is it [possible to
+vertically shift the baseline *without* using a
+box](http://tex.stackexchange.com/questions/282342/possible-to-vertically-shift-baseline-without-using-a-box)?
 
 ```latex
 \FPmul\tfFactorMoveX{1}{5}%
