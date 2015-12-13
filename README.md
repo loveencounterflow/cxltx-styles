@@ -501,6 +501,14 @@ TeX is one of those languages that give you a single global namespace filled
 with gazillions of ultra-specific predefined words but needs external 3rd-party
 libraries to do stacks(!) and sane multiplication(!!!)).
 
+> To be fair, stacks and floating point arithmetic has rather recently
+> become part of the LaTeX3 interfaces; issue `texdoc l3fp` or `texdoc interface3`
+> from the command line, which should open a PDF viewer with an extensive
+> documentation of the available APIs, or go to http://ctan.mirrorcatalogs.com/macros/latex/contrib/l3kernel/interface3.pdf.
+> I haven't gotten around to using these
+> things though, and, apparently, these features are still so new you rarely
+> see them referred to in StackExchange answers or Google results.
+
 CXLTX Transform provides the following facilities:
 
 * `\tfFactorMoveX`, `\tfFactorMoveY`: These are scaling factors that will be
@@ -557,7 +565,7 @@ In the past, I have mostly relied on the afore-mentioned xeCJK package; but, as
 I repeatedly went to study [the xeCJK
 manual](http://sunsite.informatik.rwth-aachen.de/ftp/pub/mirror/ctan/macros/xetex/latex/xecjk/xeCJK.pdf)
 I was flabbergasted by the sheer amount of material presented, the astounding
-complexity of the package, and the opaque ways of its implementation. The
+complexity of the package. The
 package also introduces quite a few CJK-specific font-related commands,¹ adding
 to the already somewhat overwhelming array of choices in this field.
 
