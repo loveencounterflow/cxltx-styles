@@ -487,9 +487,9 @@ equal amounts; `color` is somewhat shifted to the left, but appears with the
 same baseline shift as `down`.
 
 > Incidentally, this demonstrates that using `tfPush` and `\tfRaise` act a lot
-> like CSS `position: relative; right: 0.5em; top: -0.5em;`** (except for the
-> y-axis orientation) in that shifted characters do not shift surrounding
-> material—instead, the whitespace that was allotted for them stays in place and
+> like CSS `position: relative; right: 0.5em; top: -0.5em;`, except for the
+> y-axis orientation: shifted characters do not affect the positioning of surrounding
+> material; instead, the whitespace that was allotted for them stays in place and
 > their shapes may overlap with other characters.
 
 **Implementation**: The automatic undo facility has been implemented using
