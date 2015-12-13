@@ -540,7 +540,7 @@ taken, it will try and set arbitrarily long chains of characters without
 ever detecting any suitable spot for line breaking, leading to ridiculous
 overflows (or huge gaps in your line when a few kanji appear in the middle
 of e.g. Western text). Thus, getting the line breaks right is the prime
-concern when you want to type set Chinese, Japanese, Korean or mixed
+concern when you want to typeset Chinese, Japanese, Korean or mixed
 text.
 
 In the past, I have mostly relied on the afore-mentioned xeCJK package; but, as
@@ -558,7 +558,7 @@ to the already somewhat overwhelming array of choices in this field.
 > `\setCJKsansfont`, ...
 
 All told, xeCJK is an ingenious piece of software that can quickly cause
-a mental 'TeX capacity exceeded' syndrome for its dedicated user. If you're
+symptoms of a mental 'TeX capacity exceeded' syndrome. If you're
 ready to sacrifice the department store for the thrift shop, load your
 fonts using run-of-the mill `fontspec` commands and mark up your CJK text
 portions yourself (I do it via code generation...), then CXLTX CJK Glue may be your
@@ -594,14 +594,16 @@ package](https://github.com/loveencounterflow/jizura-fonts)), which makes for a
 fine default CJK font as it has appealing (and correct!) character
 outlines and a near-100% CJK
 [BMP](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
-coverage.
+coverage. **Observe that it is recommended to leave a space between Western
+and East Asian text, and that that space is located in the Western, not the
+East Asian text.**
 
 CJK Glue does several things:
-1) It defines a CJK Glue as `\newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}`;
+* It defines a CJK Glue as `\newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}`;
   feel free to `\renewcommand` that definition any time (I think the dimensions
   should really be relative to font size, but that is not yet implemented).
-2) It makes it so that spaces and newlines are re-interpreted as that glue, and
-3) it causes all the inter-character spaces to be filled as that glue.
+* It makes it so that spaces and newlines are re-interpreted as that glue, and
+* it causes all the inter-character spaces to be filled as that glue.
 
 The re-interpretation of spaces and newlines uses a hack that combines, surprisingly,
 an `\obeyspaces\obeylines` with an `\lccode` invocation (`lc` stands for 'lower case'(??wt*??),
