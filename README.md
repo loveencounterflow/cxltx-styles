@@ -603,18 +603,27 @@ CJK Glue does several things:
   feel free to `\renewcommand` that definition any time (I think the dimensions
   should really be relative to font size, but that is not yet implemented).
 * It makes it so that spaces and newlines are re-interpreted as that glue, and
-* it causes all the inter-character spaces to be filled as that glue.
+* it causes all the inter-character spaces to be filled with that glue.
 
 The re-interpretation of spaces and newlines uses a hack that combines, surprisingly,
 an `\obeyspaces\obeylines` with an `\lccode` invocation (`lc` stands for 'lower case'(??wt*??),
 and the original code is utterly unparsable to me; a big Thank You goes out to [egreg](http://tex.stackexchange.com/a/250559/28067) and [Marcin Woliński](http://www.gust.org.pl/projects/pearls/2007p/index_html) who made this
 spell happen).
 
+The handling of inter-character situation takes advantage of XeTeX's
+`\XeTeXinterchartoks` and related commands, as suggested by [Leo
+Liu](http://tex.stackexchange.com/a/10266/28067), incidentally one of the
+authors of the xeCJK package. There [are indications](http://wiki.luatex.org/index.php/Token_filter) that LuaTeX could
+re-implement the mechanism in Lua, so this feature might become LuaTeX-compatible
+at some point in the future.
+
 Some links:
 * ftp://ftp.yzu.edu.tw/CTAN/macros/xetex/latex/interchar proposes macros
   to make handling XeTeX character classes easier.
 * https://www.ctan.org/pkg/xetexref, the XeTeX reference for developers.
-
+* See ftp://ftp.tu-chemnitz.de/pub/tex/macros/xetex/latex/ucharclasses/ucharclasses.pdf
+  for a package that simplifies selecting fonts by Unicode block; this could
+  be a viable alternative to explicit language-by-language markup.
 
 <!-- =================================================================================================== -->
 ## CXLTX Style: AccentBox
