@@ -1,0 +1,78 @@
+
+\documentclass{article}
+\usepackage{cxltx-style-cjkglue}
+\usepackage{multicol}
+\usepackage[factor=1000]{microtype}
+
+\setlength{\parindent}{0mm}
+
+\usepackage{fontspec}
+\newfontface{\mktsFontfileSunexta}{sun-exta.ttf}[Path=../../jizura-fonts/fonts/]
+\newfontface{\mktsFontfileEBGaramondEightRegular}{EBGaramond08-Regular.otf}[Path=../../jizura-fonts/fonts/]
+\newcommand{\sxa}{\mktsFontfileSunexta}
+\newcommand{\cn}{\mktsFontfileSunexta\cjkgUseCjkGlue}
+
+\renewcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
+
+\mktsFontfileEBGaramondEightRegular
+\addfontfeature{WordSpace=0.1}
+
+\begin{document}
+
+\begin{multicols}{3}%
+Tea bricks ({\cn 砖茶}, {\cn 磚茶}, zhuān chá) or compressed tea
+({\cn 紧压茶}, {\cn 緊壓茶}, jǐnyā chá) are blocks of whole or finely ground black tea,
+green tea, or post-fermented tea leaves that have been packed in molds and
+pressed into block form. {\cn 紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖
+状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。
+紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖
+状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。
+紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖
+状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。}
+
+\end{multicols}
+
+No spaces between English and Chinese text:
+\begin{multicols}{3}%
+Tea bricks{\cn 一般紧压茶都是用红茶或黑茶制作}are a traditional wrapping for Chinese tea.
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+\end{multicols}
+
+Spaces within English text:
+\begin{multicols}{3}%
+Tea bricks {\cn 一般紧压茶都是用红茶或黑茶制作} are a traditional wrapping for Chinese tea.
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+\end{multicols}
+
+Spaces within Chinese text:
+\begin{multicols}{3}%
+Tea bricks{\cn{} 一般紧压茶都是用红茶或黑茶制作 }are a traditional wrapping for Chinese tea.
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+\end{multicols}
+
+\begin{multicols}{3}%
+{\cn Tea bricks 一般紧压茶都是用红茶或黑茶制作 are a traditional wrapping for Chinese tea.
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill
+fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill}
+\end{multicols}
+
+
+\begin{multicols}{3}%
+
+{\cn{}紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。}%
+{\cn{}紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。}%
+{\cn{}紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。}
+
+\end{multicols}
+\end{document}

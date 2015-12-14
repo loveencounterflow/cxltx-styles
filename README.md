@@ -13,7 +13,8 @@
     - [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
     - [paShow and paHide](#pashow-and-pahide)
   - [CXLTX Style: PushRaise](#cxltx-style-pushraise)
-  - [CXLTX Style: PushRaiseStacked](#cxltx-style-pushraisestacked)
+  - [CXLTX Style: Transform](#cxltx-style-transform)
+  - [CXLTX Style: CJK Glue](#cxltx-style-cjk-glue)
   - [CXLTX Style: AccentBox](#cxltx-style-accentbox)
   - [CXLTX Style: SmashBox](#cxltx-style-smashbox)
   - [CXLTX Style: Convert To](#cxltx-style-convert-to)
@@ -404,9 +405,254 @@ least it's easy now to make the display less offending.
 
 
 <!-- =================================================================================================== -->
-## CXLTX Style: PushRaiseStacked
+## CXLTX Style: Transform
 
-*CXLTX PushRaiseStacked* (PRS) provides
+*CXLTX Transform* (TF) grew out of my new approach to defining formats
+(to select font family, type size and so on) as LaTeX commands without text
+arguments (call them 'environmental commands'), similar to the `\color`
+command. In other words, where I would have written
+
+```latex
+Foo \fontA{\extraBig{bar}} baz
+```
+
+before, I now write
+
+```latex
+Foo {\fontA\extraBig bar} baz
+```
+
+using groups instead of text arguments. Not only do I find this syntax somewhat
+cleaner; more importantly, it helps to avoid problems with expandability
+(key word 'robustness') glitches that TeX macros are so well known for. Also, using
+groups instead of arguments might cause less interference with line breaking.
+
+One problem, however, is that I use CXLTX PushRaise extensively, mainly to
+correct the placement of Chinese characters; now, PR is implemented using
+commands like `\raisebox`—which of course needs a text argument that it sticks
+in a box to push it around. This was when I asked, on
+[tex.stackexchange.com](http://tex.stackexchange.com): Is it [possible to
+vertically shift the baseline *without* using a
+box](http://tex.stackexchange.com/questions/282342/possible-to-vertically-shift-baseline-without-using-a-box)?
+
+A very helpful Mr. David Carlisle was so friendly as to [suggest a solution](http://tex.stackexchange.com/a/282359/28067) using LuaTeX's `\pdfliteral`:
+Writing
+
+```latex
+x\pdfliteral{ 1 0 0 1 0 -2 cm}y
+```
+
+puts some literal PostScript code into the PDF file that will cause the `y` and
+any ensuing material to be lowered by 2 units. Just what I needed!
+
+Delving deeper I found out the six numbers in front of the PDF `cm` command are
+the elements of a 2D transformation matrix; more specifically, they are
+responsible for
+
+* x-scaling,
+* x-skewing,
+* y-skewing (not so sure about the last two),
+* y-scaling,
+* x-translation, and
+* y-translation,
+
+in that order. What's more, this stuff
+can be used in XeLaTeX as well, only the call convention is a bit different:
+
+```latex
+x\special{pdf:literal 1 0 0 1 0 -2 cm}y
+```
+
+Because these PDF literal calls effectively bypass TeX, whatever transformation
+you apply will stay valid indefinitely; in particular, it will *not* get
+automatically undone when a group ends. The main achievement of CXLTX Transform
+lies exactly in this detail: all TF transformations that occur within a group
+will be undone when the group ends. For example, `transform-demo.tex` has
+this code:  
+
+```latex
+\usepackage{cxltx-style-transform}
+
+[...]
+
+charm up down color strange\\
+charm {\tfRaise{0.5}up} {\tfRaise{-0.5}down \tfPush{-1}color} strange\\
+charm up down color strange\\
+```
+
+When you look into the corresponding PDF, you will find that the three
+occurrences of `charm` and the ones of `strange` all align horizontally and
+vertically; only in the middle line, `up` and `down` are shifted up and down by
+equal amounts; `color` is somewhat shifted to the left, but appears with the
+same baseline shift as `down`.
+
+> Incidentally, this demonstrates that using `tfPush` and `\tfRaise` act a lot
+> like CSS `position: relative; right: 0.5em; top: -0.5em;`, except for the
+> y-axis orientation: shifted characters do not affect the positioning of surrounding
+> material; instead, the whitespace that was allotted for them stays in place and
+> their shapes may overlap with other characters.
+
+**Implementation**: The automatic undo facility has been implemented using
+[`fifo-stack`](https://github.com/diSimplex/latexFifoStack) and the TeX
+`\aftergroup` primitive; floating point arithmetic was kindly provided by the
+venerable [`fp`
+package](https://www.ctan.org/tex-archive/macros/latex/contrib/fp?lang=en) (yes,
+TeX is one of those languages that give you a single global namespace filled
+with gazillions of ultra-specific predefined words but needs external 3rd-party
+libraries to do stacks(!) and sane multiplication(!!!)).
+
+> To be fair, stacks and floating point arithmetic has rather recently
+> become part of the LaTeX3 interfaces; issue `texdoc l3fp` or `texdoc interface3`
+> from the command line, which should open a PDF viewer with an extensive
+> documentation of the available APIs, or go to http://ctan.mirrorcatalogs.com/macros/latex/contrib/l3kernel/interface3.pdf.
+> I haven't gotten around to using these
+> things though, and, apparently, these features are still so new you rarely
+> see them referred to in StackExchange answers or Google results.
+
+CXLTX Transform provides the following facilities:
+
+* `\tfFactorMoveX`, `\tfFactorMoveY`: These are scaling factors that will be
+  applied to translations; they're currently defined as `\FPmul\tfFactorMoveX{1}{5}`
+  and `\FPmul\tfFactorMoveY{1}{10}` (i.e. 5 and 10), respectively, the idea
+  is to make `\tfPush` and `\tfRaise` scale like `\prPush` and `\prRaise`
+  (the may change in the future).
+
+* We've already seen `\tfPush` and `\tfRaise`; additionally, there's
+  `\tfPushRaise` which you have to call with an `x` and a `y` value, analogous
+  to `\prPushRaise`.
+
+* Scaling can be performed by `\tfScale`, which takes two factors.
+
+* The underlying command for all transformations is `\tfTransform`, which takes
+  six arguments as detailed above, scales the translations, manages the stack,
+  and performs an arbitrary 2D transformation composed of scaling, translation,
+  and shearing.
+
+* `\tfBack`, which takes no arguments, undoes the most recent transformation.
+  You can call it any number of time without causing an 'empty stack'
+  exception; it will be called implicitly when the current group ends.
+
+> **Note** Conceivably, CXLTX Transform could be made compatible with LuaTeX
+> by switching between the `pdfliteral` and `special` conventions.
+
+> **Note** People who want to implement more transformations should take
+> a look at ftp://ftp.nsu.ru/mirrors/ftp.dante.de/pub/tex/macros/generic/pdf-trans
+> for examples.
+
+<!-- =================================================================================================== -->
+## CXLTX Style: CJK Glue
+
+*CXLTX CJK Glue* (CJKG) is, if you will, an ultra-minimal re-implementation
+of the East Asian typesetting facilities for XeTeX provided by
+[xeCJK](https://www.ctan.org/pkg/xecjk?lang=en).
+
+> CJK (sometimes also CJKV to include Vietnamese Chữ Nôm 字喃, 𡨸喃, 𡦂喃) is a
+> convenient label under which the characteristics of the Chinese, Japanese
+> and Korean writing systems are commonly discussed.
+
+When typesetting Chinese or Japanese text, it is important to note that
+there are no spaces between the kanji, the kana, or the punctuation—not
+between individual characters, not between words, and not between sentences.
+(Xe)LaTeX is not prepared for that kind of situation; when no measures are
+taken, it will try and set arbitrarily long chains of characters without
+ever detecting any suitable spot for line breaking, leading to ridiculous
+overflows (or huge gaps in your line when a few kanji appear in the middle
+of e.g. Western text). Thus, getting the line breaks right is the prime
+concern when you want to typeset Chinese, Japanese, Korean or mixed
+text.
+
+In the past, I have mostly relied on the afore-mentioned xeCJK package; but, as
+I repeatedly went to study [the xeCJK
+manual](http://sunsite.informatik.rwth-aachen.de/ftp/pub/mirror/ctan/macros/xetex/latex/xecjk/xeCJK.pdf)
+I was flabbergasted by the sheer amount of material presented, the astounding
+complexity of the package. The
+package also introduces quite a few CJK-specific font-related commands,¹ adding
+to the already somewhat overwhelming array of choices in this field.
+
+> ¹) e.g. `\addCJKfontfeatures`, `\CJKfamily`, `\CJKfamilydefault`,
+> `\CJKfontspec`, `\CJKrmdefault`, `\CJKsfdefault`, `\CJKttdefault`,
+> `\defaultCJKfontfeatures`, `\newCJKfontfamily`, `\setCJKfallbackfamilyfont`,
+> `\setCJKfamilyfont`, `\setCJKmainfont`, `\setCJKmathfont`, `\setCJKmonofont`,
+> `\setCJKsansfont`, ...
+
+All told, xeCJK is an ingenious piece of software that can quickly cause
+symptoms of a mental 'TeX capacity exceeded' syndrome. If you're
+ready to sacrifice the department store for the thrift shop, load your
+fonts using run-of-the mill `fontspec` commands and mark up your CJK text
+portions yourself (I do it via code generation...), then CXLTX CJK Glue may be your
+cup of tea. From `cjkglue-demo.tex`:
+
+```latex
+\documentclass{article}
+\usepackage{cxltx-style-cjkglue}
+\setlength{\parindent}{0mm}
+
+\usepackage{fontspec}
+\newfontface{\fontSunexta}{sun-exta.ttf}[Path=../../jizura-fonts/fonts/]
+\newfontface{\fontGaramond}{EBGaramond08-Regular.otf}[Path=../../jizura-fonts/fonts/]
+
+\newcommand{\cn}{\fontSunexta\cjkgUseCjkGlue}
+\fontGaramond
+
+\begin{document}
+
+Tea bricks ({\cn 砖茶}, {\cn 磚茶}, zhuān chá) or compressed tea
+({\cn 紧压茶}, {\cn 緊壓茶}, jǐnyā chá) are blocks of whole or finely ground black tea,
+green tea, or post-fermented tea leaves that have been packed in molds and
+pressed into block form. {\cn 紧压茶是为了长途运输和长时间保存方便，将茶压缩干燥，压成方砖
+状或块状，为了防止途中变质，一般紧压茶都是用红茶或黑茶制作。}
+
+\end{document}
+```
+
+The `\cn` is an 'environmental' command (one that assumes it is placed inside a
+group) that selects a font and instructs LaTeX to use CJK Glue. Specifically, I
+chose Sun-ExtA (available e.g. with the [Jizura Fonts npm
+package](https://github.com/loveencounterflow/jizura-fonts)), which makes for a
+fine default CJK font as it has appealing (and correct!) character
+outlines and a near-100% CJK
+[BMP](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+coverage. **Observe that it is recommended to leave a space between Western
+and East Asian text, and that that space should be located in the Western, not the
+East Asian text.**
+
+CJK Glue does several things:
+* It defines a CJK Glue as `\newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}`;
+  feel free to `\renewcommand` that definition any time (I think the dimensions
+  should really be relative to font size, but that is not yet implemented).
+* It makes it so that spaces and newlines are re-interpreted as that glue. This
+  means when you write your CJK text in an editor, you can liberally apply
+  ASCII spaces and newlines without fearing they'll affect the typeset result.
+  The Ideographic Space character (U+3000) remains unaffected and will be treated
+  like any other CJK character.
+* Glue is inserted between all characters.
+
+**Note that these rules will cause *any* characters—not only East Asian ones—to
+behave like Chinese text: Typesetting English with `\cjkgUseCjkGlue` will cause
+all inter-word spaces to vanish; letters will be distributed more or less evenly
+across the lines, and line breaks will occur without hyphens and wherever the
+right margin happens to fall. As such, `\cjkgUseCjkGlue` might in fact prove
+useful outside of CJK typesetting.**
+
+The re-interpretation of spaces and newlines uses a hack that combines, surprisingly,
+an `\obeyspaces\obeylines` with an `\lccode` invocation (`lc` stands for 'lower case'(??wt*??),
+and the original code is utterly unparsable to me; a big Thank You goes out to [egreg](http://tex.stackexchange.com/a/250559/28067) and [Marcin Woliński](http://www.gust.org.pl/projects/pearls/2007p/index_html) who made this
+spell happen).
+
+The handling of inter-character situation takes advantage of XeTeX's
+`\XeTeXinterchartoks` and related commands, as suggested by [Leo
+Liu](http://tex.stackexchange.com/a/10266/28067), incidentally one of the
+authors of the xeCJK package. There [are indications](http://wiki.luatex.org/index.php/Token_filter) that LuaTeX could
+re-implement the mechanism in Lua, so this feature might become LuaTeX-compatible
+at some point in the future.
+
+Some links:
+* ftp://ftp.yzu.edu.tw/CTAN/macros/xetex/latex/interchar proposes macros
+  to make handling XeTeX character classes easier.
+* https://www.ctan.org/pkg/xetexref, the XeTeX reference for developers.
+* See ftp://ftp.tu-chemnitz.de/pub/tex/macros/xetex/latex/ucharclasses/ucharclasses.pdf
+  for a package that simplifies selecting fonts by Unicode block; this could
+  be a viable alternative to explicit language-by-language markup.
 
 <!-- =================================================================================================== -->
 ## CXLTX Style: AccentBox
@@ -720,5 +966,3 @@ In addition to the colors and effects listed below, there are some convenience o
 * trmSolBlue
 * trmSolCyan
 * trmSolGreen
-
-

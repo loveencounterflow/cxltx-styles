@@ -1,8 +1,14 @@
 
 \documentclass{article}
+\usepackage{cxltx-style-pushraise}
 \usepackage{cxltx-style-transform}
-\usepackage{cxltx-style-pushraisestacked}
+\usepackage{cxltx-style-cjkglue}
+\usepackage{fontspec}
+\newfontface{\mktsFontfileSunexta}{sun-exta.ttf}[Path=../../jizura-fonts/fonts/]
+\newfontface{\mktsFontfileEBGaramondEightRegular}{EBGaramond08-Regular.otf}[Path=../../jizura-fonts/fonts/]
+\newcommand{\cn}{\mktsFontfileSunexta\cjkgUseCjkGlue}
 \setlength{\parindent}{0mm}
+\mktsFontfileEBGaramondEightRegular
 \begin{document}
 
 % xxx\tfPush{0.5}y\tfBack xxx
@@ -13,6 +19,21 @@
 % abc\tfPush{0.5}x\tfBack{}def
 
 % abc{\tfScale{1.5}{1}1\tfRaise{-0.5}2\tfBack{}3}def\\
+
+charm up down color strange\\
+charm {\tfRaise{0.5}up} {\tfRaise{-0.5}down \tfPush{-1}color} strange\\
+charm up down color strange\\
+
+Using CXLTX PushRaise:\\
+{\cn 龍覀龍，龍\prRaise{-0.125}{覀}龍}\\
+{\cn 龍亻龍，龍\prPush{0.5}{亻}龍}\\
+{\cn 龍。龍，龍\prPushRaise{0.5}{0.25}{。}龍}\\
+
+Using CXLTX Transform:\\
+{\cn 龍覀龍，龍{\tfRaise{-0.125}覀}龍}\\
+{\cn 龍亻龍，龍{\tfPush{0.5}亻}龍}\\
+{\cn 龍。龍，龍{\tfPushRaise{0.5}{0.25}。}龍}\\
+
 
 abc2defghijklmnopqrstuvwxyz\\
 abc{\tfPushRaise{-0.5}{0.5}2}defghijklmnopqrstuvwxyz\\
