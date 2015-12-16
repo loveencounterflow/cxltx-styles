@@ -4,8 +4,6 @@
 % CJK INTER-CHARACTER GLUE AND WHITESPACE HANDLING
 % ----------------------------------------------------------------------------------------------------------
 \ProvidesPackage{cxltx-style-cjkglue}
-\usepackage{cxltx-style-trm}
-\newcommand{\xxx}[#1]{\typeout{\trmCrimson{#1}}}
 
 % ----------------------------------------------------------------------------------------------------------
 % \newcommand{\cjkgGlue}{\hskip -0.4pt plus 3pt minus 1pt}%
@@ -35,5 +33,5 @@
   \XeTeXinterchartoks\CharCjk\CharCjkPunctA={\cjkgGlue}%
   \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
   \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
-  \XeTeXinterchartoks\CharCjk\CharCjk={\xxx{chr-chr}\cjkgGlue}%
+  \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
   }
