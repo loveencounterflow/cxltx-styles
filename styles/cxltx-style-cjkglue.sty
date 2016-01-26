@@ -4,10 +4,13 @@
 % CJK INTER-CHARACTER GLUE AND WHITESPACE HANDLING
 % ----------------------------------------------------------------------------------------------------------
 \ProvidesPackage{cxltx-style-cjkglue}
+\usepackage{cxltx-style-equals}
 
 % ----------------------------------------------------------------------------------------------------------
 % \newcommand{\cjkgGlue}{\hskip -0.4pt plus 3pt minus 1pt}%
+% \newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
 \newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
+\def\cjkgKeepLines{false}
 
 % ----------------------------------------------------------------------------------------------------------
 \chardef\CharNormal=0%
@@ -18,20 +21,21 @@
 
 % ----------------------------------------------------------------------------------------------------------
 \newcommand{\cjkgUseCjkGlue}{%
-  \obeyspaces\obeylines%
-  \begingroup\lccode`\~=`\ \lowercase{\endgroup\let~}\cjkgGlue%
-  \begingroup\lccode`\~=`\^^M\lowercase{\endgroup\let~}\cjkgGlue%
-  % http://tex.stackexchange.com/a/10266/28067
-  % ftp://ftp.mpi-sb.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/info/xetexref/xetex-reference.pdf
-  \XeTeXinterchartokenstate=1%
-  \XeTeXinterchartoks\CharNormal\CharNormal={\cjkgGlue}%
-  \XeTeXinterchartoks\CharNormal\CharCjk={\cjkgGlue}%
-  \XeTeXinterchartoks\CharCjk\CharNormal={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharCjk\CharBound={\cjkgGlue}%
-  % \XeTeXinterchartoks\CharBound\CharCjk={\cjkgGlue}%
-  \XeTeXinterchartoks\CharCjkPunctA\CharCjk={\cjkgGlue}%
-  \XeTeXinterchartoks\CharCjk\CharCjkPunctA={\cjkgGlue}%
-  \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
-  \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
-  \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
-  }
+  \eqUnlessTextEqualsThen{\cjkgKeepLines}{true}{%
+    \obeyspaces\obeylines%
+    \begingroup\lccode`\~=`\ \lowercase{\endgroup\let~}\cjkgGlue%
+    \begingroup\lccode`\~=`\^^M\lowercase{\endgroup\let~}\cjkgGlue%
+    % http://tex.stackexchange.com/a/10266/28067
+    % ftp://ftp.mpi-sb.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/info/xetexref/xetex-reference.pdf
+    \XeTeXinterchartokenstate=1%
+    % \XeTeXinterchartoks\CharNormal\CharNormal={\cjkgGlue}%
+    % \XeTeXinterchartoks\CharNormal\CharCjk={>}%
+    % \XeTeXinterchartoks\CharCjk\CharNormal={<}%
+    % \XeTeXinterchartoks\CharBound\CharCjk={>}%
+    % \XeTeXinterchartoks\CharCjk\CharBound={<}%
+    % \XeTeXinterchartoks\CharCjkPunctA\CharCjk={\cjkgGlue}%
+    % \XeTeXinterchartoks\CharCjk\CharCjkPunctA={\cjkgGlue}%
+    % \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
+    % \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
+    % \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
+  }}%
