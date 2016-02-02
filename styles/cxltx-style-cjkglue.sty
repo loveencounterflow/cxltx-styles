@@ -10,7 +10,7 @@
 % \newcommand{\cjkgGlue}{\hskip -0.4pt plus 3pt minus 1pt}%
 % \newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
 \newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
-\def\cjkgKeepLines{false}
+\def\cjkgKeepLines{false}%
 
 % ----------------------------------------------------------------------------------------------------------
 \chardef\CharNormal=0%
@@ -21,13 +21,17 @@
 
 % ----------------------------------------------------------------------------------------------------------
 \newcommand{\cjkgUseCjkGlue}{%
-  \eqUnlessTextEqualsThen{\cjkgKeepLines}{true}{%
+  \eqTextEquals{\cjkgKeepLines}{true}{%
+  % no-op
+  }{%
     \obeyspaces\obeylines%
     \begingroup\lccode`\~=`\ \lowercase{\endgroup\let~}\cjkgGlue%
     \begingroup\lccode`\~=`\^^M\lowercase{\endgroup\let~}\cjkgGlue%
     % http://tex.stackexchange.com/a/10266/28067
     % ftp://ftp.mpi-sb.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/info/xetexref/xetex-reference.pdf
     \XeTeXinterchartokenstate=1%
+    }%
+  }%
     % \XeTeXinterchartoks\CharNormal\CharNormal={\cjkgGlue}%
     % \XeTeXinterchartoks\CharNormal\CharCjk={>}%
     % \XeTeXinterchartoks\CharCjk\CharNormal={<}%
@@ -38,4 +42,3 @@
     % \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
     % \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
     % \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
-  }}%
