@@ -12,16 +12,16 @@
   % ........................................................................................................
   \ifdefmacro{#1}{% #1 is a macro
     \ifdefmacro{#2}{% #1 and #2 are macros
-        \ifdefstrequal{#1}{#2}{#3}{#4}
+        \ifdefstrequal{#1}{#2}{#3}{#4}%
       }{% #1 is a macro, #2 is a literal
-        \ifdefstring{#1}{#2}{#3}{#4}
+        \ifdefstring{#1}{#2}{#3}{#4}%
       }%
   % ........................................................................................................
   }{% #1 is a literal
     \ifdefmacro{#2}{% #1 is a literal, #2 is a macro
-        \ifdefstring{#2}{#1}{#3}{#4}
+        \ifdefstring{#2}{#1}{#3}{#4}%
       }{% #1 and #2 are literals
-        \ifstrequal{#1}{#2}{#3}{#4}
+        \ifstrequal{#1}{#2}{#3}{#4}%
       }%
     }%
   }%
