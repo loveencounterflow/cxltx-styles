@@ -28,31 +28,6 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-
-- [CXLTX Styles](#cxltx-styles)
-	- [Installation](#installation)
-	- [Badges](#badges)
-	- [CXLTX Style: Position Absolute](#cxltx-style-position-absolute)
-		- [paOriginTo, paOriginToPaper, paOriginToText, and paOriginIs](#paoriginto-paorigintopaper-paorigintotext-and-paoriginis)
-		- [paLeft, paCenter, paRight, and paTopLeft](#paleft-pacenter-paright-and-patopleft)
-		- [paGauge](#pagauge)
-		- [paLeftGauge, paCenterGauge, paRightGauge](#paleftgauge-pacentergauge-parightgauge)
-		- [Absolute Positioning and Page Breaks](#absolute-positioning-and-page-breaks)
-		- [paShow and paHide](#pashow-and-pahide)
-	- [CXLTX Style: PushRaise](#cxltx-style-pushraise)
-	- [CXLTX Style: AccentBox](#cxltx-style-accentbox)
-	- [CXLTX Style: SmashBox](#cxltx-style-smashbox)
-	- [CXLTX Style: Convert To](#cxltx-style-convert-to)
-	- [CXLTX Style: Equals](#cxltx-style-equals)
-	- [CXLTX Style: OddEven](#cxltx-style-oddeven)
-	- [CXLTX Style: AbsPos](#cxltx-style-abspos)
-	- [CXLTX Style: TRM](#cxltx-style-trm)
-		- [Effects](#effects)
-		- [Colors](#colors)
-
-> **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
-
-
 # CXLTX Styles
 
 An incipient and hopefully sensible collection of basic X<sub>E</sub>L<sub>A</sub>T<sub>E</sub>X style
@@ -468,7 +443,7 @@ you apply will stay valid indefinitely; in particular, it will *not* get
 automatically undone when a group ends. The main achievement of CXLTX Transform
 lies exactly in this detail: all TF transformations that occur within a group
 will be undone when the group ends. For example, `transform-demo.tex` has
-this code:  
+this code:
 
 ```latex
 \usepackage{cxltx-style-transform}
