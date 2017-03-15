@@ -1,15 +1,31 @@
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Relevant documents:
+%
+% http://mirrors.ibiblio.org/CTAN/macros/xetex/generic/zhspacing/zhs-man.pdf
+% http://vesta.informatik.rwth-aachen.de/ftp/pub/mirror/ctan/macros/xetex/latex/xecjk/xeCJK.pdf
+% https://github.com/CTeX-org/ctex-kit
+% http://ctan.math.utah.edu/ctan/tex-archive/macros/xetex/latex/ucharclasses/ucharclasses.pdf
+% http://ctan.math.washington.edu/tex-archive/macros/xetex/latex/interchar/interchar.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 % ==========================================================================================================
 % CJK INTER-CHARACTER GLUE AND WHITESPACE HANDLING
 % ----------------------------------------------------------------------------------------------------------
 \ProvidesPackage{cxltx-style-cjkglue}
 \usepackage{cxltx-style-equals}
+% \usepackage{xeCJK}
 
 % ----------------------------------------------------------------------------------------------------------
 % \newcommand{\cjkgGlue}{\hskip -0.4pt plus 3pt minus 1pt}%
 % \newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
-\newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
+% \newcommand{\cjkgGlue}{\hskip 0mm plus 0.7mm minus 0.7mm}%
+\newcommand{\cjkgGlue}{\hskip 0mm plus 1.5mm minus 1.5mm}%
 \def\cjkgKeepLines{false}%
 
 % ----------------------------------------------------------------------------------------------------------
@@ -30,15 +46,15 @@
     % http://tex.stackexchange.com/a/10266/28067
     % ftp://ftp.mpi-sb.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/info/xetexref/xetex-reference.pdf
     \XeTeXinterchartokenstate=1%
-    }%
-  }%
-    % \XeTeXinterchartoks\CharNormal\CharNormal={\cjkgGlue}%
-    % \XeTeXinterchartoks\CharNormal\CharCjk={>}%
-    % \XeTeXinterchartoks\CharCjk\CharNormal={<}%
+    \XeTeXinterchartoks\CharNormal\CharNormal={\cjkgGlue}%
+    \XeTeXinterchartoks\CharNormal\CharCjk={\cjkgGlue}%
+    \XeTeXinterchartoks\CharCjk\CharNormal={\cjkgGlue}%
     % \XeTeXinterchartoks\CharBound\CharCjk={>}%
     % \XeTeXinterchartoks\CharCjk\CharBound={<}%
-    % \XeTeXinterchartoks\CharCjkPunctA\CharCjk={\cjkgGlue}%
-    % \XeTeXinterchartoks\CharCjk\CharCjkPunctA={\cjkgGlue}%
-    % \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
-    % \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
-    % \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
+    \XeTeXinterchartoks\CharCjkPunctA\CharCjk={\cjkgGlue}%
+    \XeTeXinterchartoks\CharCjk\CharCjkPunctA={\cjkgGlue}%
+    \XeTeXinterchartoks\CharCjkPunctB\CharCjk={\cjkgGlue}%
+    \XeTeXinterchartoks\CharCjk\CharCjkPunctB={\cjkgGlue}%
+    \XeTeXinterchartoks\CharCjk\CharCjk={\cjkgGlue}%
+    }%
+  }%
