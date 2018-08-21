@@ -8,7 +8,7 @@
 \usepackage{changepage}
 
 % ----------------------------------------------------------------------------------------------------------
-\newcommand{\oeIfOddPage}[2]{
+\newcommand{\oeIfOddPage}[2]{%
   \strictpagecheck\checkoddpage\ifoddpage%
     #1%
   \else%
@@ -17,7 +17,7 @@
   }%
 
 % ----------------------------------------------------------------------------------------------------------
-\newcommand{\oeIfEvenPage}[2]{
+\newcommand{\oeIfEvenPage}[2]{%
   \strictpagecheck\checkoddpage\ifoddpage%
     #2%
   \else%
