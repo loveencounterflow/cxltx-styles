@@ -511,7 +511,7 @@ CXLTX Transform provides the following facilities:
 > by switching between the `pdfliteral` and `special` conventions.
 
 > **Note** People who want to implement more transformations should take
-> a look at ftp://ftp.nsu.ru/mirrors/ftp.dante.de/pub/tex/macros/generic/pdf-trans
+> a look at https://www.ctan.org/pkg/pdf-trans
 > for examples.
 
 <!-- =================================================================================================== -->
